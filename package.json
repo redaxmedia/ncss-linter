@@ -16,5 +16,9 @@
 	"dependencies":
 	{
 		"string.prototype.startswith": "0.2.0"
+	},
+	"scripts":
+	{
+		"test": "URL=https://ncss.io NAMESPACE=rs- node_modules/phantomjs/bin/phantomjs index.js"
 	}
 }
