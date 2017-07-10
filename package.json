@@ -15,6 +15,7 @@
 	},
 	"dependencies":
 	{
+		"phantomjs": "2.1.7",
 		"string.prototype.startswith": "0.2.0"
 	},
 	"scripts":
