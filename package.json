@@ -18,8 +18,13 @@
 		"phantomjs": "2.1.7",
 		"string.prototype.startswith": "0.2.0"
 	},
+	"devDependencies":
+	{
+		"chai": "4.1.0",
+		"mocha": "3.4.2"
+	},
 	"scripts":
 	{
-		"test": "URL=https://ncss.io NAMESPACE=rs- node_modules/phantomjs/bin/phantomjs index.js"
+		"test": "node_modules/mocha/bin/mocha tests/test.js"
 	}
 }

@@ -19,8 +19,9 @@ function getEnv()
 {
 	return env =
 	{
-		URL: system.env.URL || null,
+		HTML: system.env.HTML || null,
 		FILE: system.env.FILE || null,
+		URL: system.env.URL || null,
 		NAMESPACE: system.env.NAMESPACE || null,
 		SELECTOR: system.env.SELECTOR || '*',
 		THRESHOLD: system.env.THRESHOLD || 0
@@ -212,6 +213,9 @@ function printFooter()
 {
 	system.stdout.writeLine(null);
 	system.stdout.writeLine(null);
+
+	/* result message */
+
 	if (issueArray.length > env.THRESHOLD)
 	{
 		system.stdout.writeLine(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + issueArray.length + ' ' + wordingArray.issues_found + ')');
@@ -242,18 +246,31 @@ function printFooter()
 function init()
 {
 	printHeader();
-	page.open(env.URL || env.FILE, function (status)
-	{
-		if (status)
-		{
-			var elementArray = getElement(env.SELECTOR),
-				providerArray = createProvider(env.NAMESPACE);
 
-			validateElement(elementArray, providerArray);
-			printFooter();
-		}
-		phantom.exit();
-	});
+	/* html string */
+
+	if (env.HTML)
+	{
+		page.content = env.HTML;
+		validateElement(getElement(env.SELECTOR), createProvider(env.NAMESPACE));
+		printFooter();
+		phantom.exit(1);
+	}
+
+	/* local file or remote website */
+
+	if (env.FILE || env.URL)
+	{
+		page.open(env.FILE || env.URL, function (status)
+		{
+			if (status)
+			{
+				validateElement(getElement(env.SELECTOR), createProvider(env.NAMESPACE));
+				printFooter();
+			}
+			phantom.exit();
+		});
+	}
 }
 
 init();

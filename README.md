@@ -19,13 +19,20 @@ npm install ncss-linter
 Usage
 =====
 
-Validate a local `HTML` file:
+
+Validate a `HTML` string:
+
+```
+HTML='<div class="foo-box></div>' NAMESPACE=foo- node_modules/phantomjs/bin/phantomjs index.js
+```
+
+Validate a `HTML` file:
 
 ```
 FILE=ncss.html NAMESPACE=foo- node_modules/phantomjs/bin/phantomjs index.js
 ```
 
-Validate a website:
+Validate a remote website:
 
 ```
 URL=https://ncss.io NAMESPACE=rs- node_modules/phantomjs/bin/phantomjs index.js
