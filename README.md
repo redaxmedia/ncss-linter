@@ -26,7 +26,7 @@ Validate a `HTML` string:
 HTML='<div class="foo-box></div>' NAMESPACE=foo- node_modules/phantomjs/bin/phantomjs index.js
 ```
 
-Validate a `HTML` file:
+Validate a local file:
 
 ```
 FILE=ncss.html NAMESPACE=foo- node_modules/phantomjs/bin/phantomjs index.js
