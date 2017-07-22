@@ -1,7 +1,7 @@
 require('string.prototype.startswith');
 
-var page = require('webpage').create(),
-	system = require('system'),
+var phantom = require('phantom'),
+	fs = require('fs'),
 	configArray = require('./config.json'),
 	wordingArray = require('./wording.json'),
 	issueArray = [],
@@ -19,12 +19,12 @@ function getEnv()
 {
 	return env =
 	{
-		HTML: system.env.HTML || null,
-		FILE: system.env.FILE || null,
-		URL: system.env.URL || null,
-		NAMESPACE: system.env.NAMESPACE || null,
-		SELECTOR: system.env.SELECTOR || '*',
-		THRESHOLD: system.env.THRESHOLD || 0
+		HTML: process.env.HTML || null,
+		FILE: process.env.FILE || null,
+		URL: process.env.URL || null,
+		NAMESPACE: process.env.NAMESPACE || null,
+		SELECTOR: process.env.SELECTOR || '*',
+		THRESHOLD: process.env.THRESHOLD || 0
 	};
 }
 
@@ -62,30 +62,31 @@ function createProvider(namespace)
  *
  * @since 1.0.0
  *
+ * @param page object
  * @param selector string
  *
- * @return array
+ * @return promise
  */
 
-function getElement(selector)
+function getElement(page, selector)
 {
-	return page.evaluate(function (selector)
-	{
-		var element = document.querySelectorAll(selector),
-			elementArray = [];
+	return page
+		.invokeMethod('evaluate', function(selector) {
+			var element = document.querySelectorAll(selector),
+				elementArray = [];
 
-		/* process element */
+			/* process element */
 
-		Object.keys(element).forEach(function (elementValue)
-		{
-			elementArray.push(
+			Object.keys(element).forEach(function (elementValue)
 			{
-				tagName: element[elementValue].tagName ? element[elementValue].tagName.toLowerCase() : null,
-				classArray: element[elementValue].className && element[elementValue].className.length ? element[elementValue].className.toLowerCase().split(' ') : []
+				elementArray.push(
+				{
+					tagName: element[elementValue].tagName ? element[elementValue].tagName.toLowerCase() : null,
+					classArray: element[elementValue].className && element[elementValue].className.length ? element[elementValue].className.toLowerCase().split(' ') : []
+				});
 			});
-		});
-		return elementArray;
-	}, selector);
+			return elementArray;
+		}, selector);
 }
 
 /**
@@ -140,7 +141,7 @@ function validateElement(elementArray, providerArray)
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.'),
 					message: wordingArray.invalid_class
 				});
-				system.stdout.write('C');
+				process.stdout.write('C');
 			}
 			else if (!elementValue.validTag)
 			{
@@ -149,11 +150,11 @@ function validateElement(elementArray, providerArray)
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.'),
 					message: wordingArray.invalid_tag
 				});
-				system.stdout.write('T');
+				process.stdout.write('T');
 			}
 			else
 			{
-				system.stdout.write('.');
+				process.stdout.write('.');
 			}
 		}
 
@@ -161,7 +162,7 @@ function validateElement(elementArray, providerArray)
 
 		else
 		{
-			system.stdout.write('.');
+			process.stdout.write('.');
 		}
 		printProcessEnd(++elementCounter, elementTotal);
 	});
@@ -177,8 +178,8 @@ function printHeader()
 {
 	var packageArray = wordingArray._package;
 
-	system.stdout.writeLine(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author + wordingArray.point);
-	system.stdout.writeLine(null);
+	process.stdout.write(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author + wordingArray.point + '\n');
+	process.stdout.write('\n');
 }
 
 /**
@@ -196,10 +197,10 @@ function printProcessEnd(elementCounter, elementTotal)
 	{
 		if (elementCounter === 60)
 		{
-			system.stdout.write(' ');
+			process.stdout.write(' ');
 		}
-		system.stdout.write(' ' + elementCounter + ' / ' + elementTotal + ' (' + Math.ceil(elementCounter / elementTotal * 100) + '%)');
-		system.stdout.writeLine(null);
+		process.stdout.write(' ' + elementCounter + ' / ' + elementTotal + ' (' + Math.ceil(elementCounter / elementTotal * 100) + '%)');
+		process.stdout.write('\n');
 	}
 }
 
@@ -211,28 +212,28 @@ function printProcessEnd(elementCounter, elementTotal)
 
 function printFooter()
 {
-	system.stdout.writeLine(null);
-	system.stdout.writeLine(null);
+	process.stdout.write('\n');
+	process.stdout.write('\n');
 
 	/* result message */
 
 	if (issueArray.length > env.THRESHOLD)
 	{
-		system.stdout.writeLine(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + issueArray.length + ' ' + wordingArray.issues_found + ')');
+		process.stdout.write(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + issueArray.length + ' ' + wordingArray.issues_found + ')\n');
 	}
 	else
 	{
-		system.stdout.writeLine(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark);
+		process.stdout.write(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark + '\n');
 	}
 
 	/* process issue */
 
 	if (issueArray.length)
 	{
-		system.stdout.writeLine(null);
+		process.stdout.write('\n');
 		issueArray.forEach(function (issueValue)
 		{
-			system.stdout.writeLine(issueValue.selector + ' (' + issueValue.message + ')');
+			process.stdout.write(issueValue.selector + ' (' + issueValue.message + ')\n');
 		});
 	}
 }
@@ -245,31 +246,71 @@ function printFooter()
 
 function init()
 {
+	var currentInstance;
+
 	printHeader();
 
 	/* html string */
 
 	if (env.HTML)
 	{
-		page.content = env.HTML;
-		validateElement(getElement(env.SELECTOR), createProvider(env.NAMESPACE));
-		printFooter();
-		phantom.exit(1);
+		phantom
+			.create()
+			.then(function (instance)
+			{
+				currentInstance = instance;
+				return instance.createPage();
+			})
+			.then(function (page)
+			{
+				page
+					.property('content', env.HTML)
+					.then(function ()
+					{
+						getElement(page, env.SELECTOR)
+							.then(function (elementArray)
+							{
+								validateElement(elementArray, createProvider(env.NAMESPACE));
+								printFooter();
+								currentInstance.exit();
+							});
+					});
+			});
 	}
 
 	/* local file or remote website */
 
-	if (env.FILE || env.URL)
+	if (fs.existsSync(env.FILE) || env.URL)
 	{
-		page.open(env.FILE || env.URL, function (status)
-		{
-			if (status)
+		phantom
+			.create()
+			.then(function (instance)
 			{
-				validateElement(getElement(env.SELECTOR), createProvider(env.NAMESPACE));
-				printFooter();
-			}
-			phantom.exit();
-		});
+				currentInstance = instance;
+				return instance.createPage();
+			})
+			.then(function (page)
+			{
+				page
+					.open(env.FILE || env.URL)
+					.then(function (status)
+					{
+						if (status)
+						{
+							getElement(page, env.SELECTOR)
+								.then(function (elementArray)
+								{
+									validateElement(elementArray, createProvider(env.NAMESPACE));
+									printFooter();
+									currentInstance.exit();
+								});
+						}
+						else
+						{
+							currentInstance.exit();
+						}
+					})
+			});
 	}
 }
 

@@ -15,7 +15,7 @@
 	},
 	"dependencies":
 	{
-		"phantomjs": "2.1.7",
+		"phantom": "4.0.5",
 		"string.prototype.startswith": "0.2.0"
 	},
 	"devDependencies":
