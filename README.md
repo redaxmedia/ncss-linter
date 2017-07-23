@@ -23,17 +23,17 @@ Usage
 Validate a `HTML` string:
 
 ```
-HTML='<div class="foo-box></div>' NAMESPACE=foo- nodejs index.js
+HTML='<div class="foo-box></div>' NAMESPACE=foo- node index.js
 ```
 
 Validate a local file:
 
 ```
-FILE=ncss.html NAMESPACE=foo- nodejs index.js
+FILE=ncss.html NAMESPACE=foo- node index.js
 ```
 
 Validate a remote website:
 
 ```
-URL=https://ncss.io NAMESPACE=rs- nodejs index.js
+URL=https://ncss.io NAMESPACE=rs- node index.js
 ```
