@@ -101,12 +101,10 @@ function result(threshold)
 	if (issueArray.length > threshold)
 	{
 		process.stdout.write(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + issueArray.length + ' ' + wordingArray.issues_found + ')\n');
-		process.exit(1);
 	}
 	else
 	{
 		process.stdout.write(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark + '\n');
-		process.exit(0);
 	}
 }
 
