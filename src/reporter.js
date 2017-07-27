@@ -1,5 +1,5 @@
 var wordingArray = require('../wording.json'),
-	packageArray = wordingArray._package,
+	packageArray = require('../package.json'),
 	issueArray = [];
 
 /**
@@ -10,7 +10,7 @@ var wordingArray = require('../wording.json'),
 
 function header()
 {
-	process.stdout.write(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author + wordingArray.point + '\n\n');
+	process.stdout.write(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author.name + wordingArray.point + '\n\n');
 }
 
 /**
@@ -29,24 +29,27 @@ function pass()
  *
  * @since 1.0.0
  *
- * @param options array
+ * @param failArray array
  */
 
-function fail(options)
+function fail(failArray)
 {
-	if (options.type === 'class')
+	if (failArray.type === 'class')
 	{
 		process.stdout.write('C');
 	}
-	if (options.type === 'tag')
+	if (failArray.type === 'tag')
 	{
 		process.stdout.write('T');
 	}
-	issueArray.push(
+	if (failArray.type && failArray.selector)
 	{
-		type: options.type,
-		selector: options.selector
-	});
+		issueArray.push(
+		{
+			type: failArray.type,
+			selector: failArray.selector
+		});
+	}
 }
 
 /**
@@ -81,6 +84,14 @@ function end(counter, total)
 	}
 }
 
+/**
+ * result
+ *
+ * @since 1.0.0
+ *
+ * @param threshold number
+ */
+
 function result(threshold)
 {
 	process.stdout.write('\n\n');
@@ -90,10 +101,12 @@ function result(threshold)
 	if (issueArray.length > threshold)
 	{
 		process.stdout.write(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + issueArray.length + ' ' + wordingArray.issues_found + ')\n');
+		process.exit(1);
 	}
 	else
 	{
 		process.stdout.write(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark + '\n');
+		process.exit(0);
 	}
 }
 

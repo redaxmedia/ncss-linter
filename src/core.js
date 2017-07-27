@@ -1,60 +1,9 @@
 require('string.prototype.startswith');
 
 var phantom = require('phantom'),
-	fs = require('fs'),
-	reporter = require('./reporter'),
-	configArray = require('../config.json'),
-	env = getEnv();
-
-/**
- * get env
- *
- * @since 1.0.0
- *
- * @return array
- */
-
-function getEnv()
-{
-	return env =
-	{
-		HTML: process.env.HTML || null,
-		FILE: process.env.FILE || null,
-		URL: process.env.URL || null,
-		NAMESPACE: process.env.NAMESPACE || null,
-		SELECTOR: process.env.SELECTOR || '*',
-		THRESHOLD: process.env.THRESHOLD || 0
-	};
-}
-
-/**
- * create provider
- *
- * @since 1.0.0
- *
- * @param namespace string
- *
- * @return array
- */
-
-function createProvider(namespace)
-{
-	var namespaceArray = namespace.split(','),
-		providerArray = [],
-		providerKey;
-
-	/* process namespace */
-
-	namespaceArray.forEach(function (namespaceValue)
-	{
-		Object.keys(configArray).forEach(function (configValue, configIndex)
-		{
-			providerKey = namespaceValue + configValue;
-			providerArray[providerKey] = configArray[configIndex];
-		});
-	});
-	return providerArray;
-}
+	optioner = require('./optioner'),
+	provider = require('./provider'),
+	reporter = require('./reporter');
 
 /**
  * get element
@@ -166,83 +115,100 @@ function validateElement(elementArray, providerArray)
 }
 
 /**
+ * open page
+ *
+ * @since 1.0.0
+ *
+ * @param page object
+ * @param instance object
+ */
+
+function openPage(page, instance)
+{
+	page
+		.open(optioner.get('file') || optioner.get('url'))
+		.then(function (status)
+		{
+			if (status)
+			{
+				getElement(page, optioner.get('selector'))
+					.then(function (elementArray)
+					{
+						validateElement(elementArray, provider.get(optioner.get('namespace')));
+						reporter.result(optioner.get('threshold'));
+						reporter.summary();
+						instance.exit();
+					});
+			}
+			else
+			{
+				instance.exit();
+			}
+		});
+}
+
+/**
+ * parse html
+ *
+ * @since 1.0.0
+ *
+ * @param page object
+ * @param instance object
+ */
+
+function parseHTML(page, instance)
+{
+	page
+		.property('content', optioner.get('html'))
+		.then(function ()
+		{
+			getElement(page, optioner.get('selector'))
+				.then(function (elementArray)
+				{
+					validateElement(elementArray, provider.get(optioner.get('namespace')));
+					reporter.result(optioner.get('threshold'));
+					reporter.summary();
+					instance.exit();
+				});
+		});
+}
+
+/**
  * init
  *
  * @since 1.0.0
+ *
+ * @param optionArray array
  */
 
-function init()
+function init(optionArray)
 {
+	var instance;
+
+	optioner.init(optionArray);
 	reporter.header();
-
-	/* html string */
-
-	if (env.HTML)
-	{
-		var currentInstance;
-
-		phantom
-			.create()
-			.then(function (instance)
+	phantom
+		.create()
+		.then(function (currentInstance)
+		{
+			instance = currentInstance;
+			return instance.createPage();
+		})
+		.then(function (page)
+		{
+			if (optioner.get('html'))
 			{
-				currentInstance = instance;
-				return instance.createPage();
-			})
-			.then(function (page)
+				parseHTML(page, instance);
+			}
+			else if (optioner.get('file') || optioner.get('url'))
 			{
-				page
-					.property('content', env.HTML)
-					.then(function ()
-					{
-						getElement(page, env.SELECTOR)
-							.then(function (elementArray)
-							{
-								validateElement(elementArray, createProvider(env.NAMESPACE));
-								reporter.result(env.THRESHOLD);
-								reporter.summary();
-								currentInstance.exit();
-							});
-					});
-			});
-	}
-
-	/* local file or remote website */
-
-	if (fs.existsSync(env.FILE) || env.URL)
-	{
-		var currentInstance;
-
-		phantom
-			.create()
-			.then(function (instance)
+				openPage(page, instance);
+			}
+			else
 			{
-				currentInstance = instance;
-				return instance.createPage();
-			})
-			.then(function (page)
-			{
-				page
-					.open(env.FILE || env.URL)
-					.then(function (status)
-					{
-						if (status)
-						{
-							getElement(page, env.SELECTOR)
-								.then(function (elementArray)
-								{
-									validateElement(elementArray, createProvider(env.NAMESPACE));
-									reporter.result(env.THRESHOLD);
-									reporter.summary();
-									currentInstance.exit();
-								});
-						}
-						else
-						{
-							currentInstance.exit();
-						}
-					})
-			});
-	}
+				instance.exit();
+			}
+		});
 }
 
 module.exports =

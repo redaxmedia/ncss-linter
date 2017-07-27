@@ -1,11 +1,4 @@
 {
-	"_package":
-	{
-		"name": "NCSS Linter",
-		"version": "1.0.0",
-		"homepage": "https://ncss.io",
-		"author": "Henry Ruhs"
-	},
 	"summary": "summary",
 	"invalid_class": "invalid class",
 	"invalid_tag": "invalid tag",
