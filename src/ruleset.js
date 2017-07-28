@@ -1,4 +1,4 @@
-var config = require('../config.json');
+var rulesetArray = require('../ruleset.json');
 
 /**
  * get
@@ -12,7 +12,7 @@ var config = require('../config.json');
 
 function get(namespace)
 {
-	return typeof namespace === 'string' ? create(namespace) : config.providerArray;
+	return typeof namespace === 'string' ? create(namespace) : rulesetArray;
 }
 
 /**
@@ -28,20 +28,20 @@ function get(namespace)
 function create(namespace)
 {
 	var namespaceArray = namespace.split(','),
-		providerArray = [],
-		providerKey;
+		createArray = [],
+		createKey;
 
 	/* process namespace */
 
 	namespaceArray.forEach(function (namespaceValue)
 	{
-		Object.keys(config.providerArray).forEach(function (providerValue, providerIndex)
+		Object.keys(rulesetArray).forEach(function (createValue, createIndex)
 		{
-			providerKey = namespaceValue + providerValue;
-			providerArray[providerKey] = config.providerArray[providerIndex];
+			createKey = namespaceValue + createValue;
+			createArray[createKey] = rulesetArray[createIndex];
 		});
 	});
-	return providerArray;
+	return createArray;
 }
 
 module.exports =

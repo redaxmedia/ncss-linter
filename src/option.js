@@ -1,6 +1,5 @@
 var extend = require('extend'),
-	configArray = require('../config.json'),
-	optionArray = configArray.optionArray;
+	optionArray = require('../option.json');
 
 /**
  * get

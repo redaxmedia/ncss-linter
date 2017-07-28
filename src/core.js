@@ -1,9 +1,9 @@
 require('string.prototype.startswith');
 
 var phantom = require('phantom'),
-	optioner = require('./optioner'),
-	provider = require('./provider'),
-	reporter = require('./reporter');
+	reporter = require('./reporter'),
+	ruleset = require('./ruleset'),
+	option = require('./option');
 
 /**
  * get element
@@ -43,12 +43,12 @@ function getElement(page, selector)
  * @since 1.0.0
  *
  * @param elementArray array
- * @param providerArray array
+ * @param rulesetArray array
  */
 
-function validateElement(elementArray, providerArray)
+function validateElement(elementArray, rulesetArray)
 {
-	var providerTotal = Object.keys(providerArray).length,
+	var rulesetTotal = Object.keys(rulesetArray).length,
 		elementTotal = elementArray.length,
 		elementCounter = 0,
 		invalidCounter = 0;
@@ -65,17 +65,17 @@ function validateElement(elementArray, providerArray)
 			{
 				invalidCounter = 0;
 
-				/* process provider */
+				/* process ruleset */
 
-				Object.keys(providerArray).forEach(function (providerValue, providerIndex)
+				Object.keys(rulesetArray).forEach(function (rulesetValue, rulesetIndex)
 				{
-					if (classValue.startsWith(providerValue))
+					if (classValue.startsWith(rulesetValue))
 					{
-						elementValue.validTag = providerArray[providerIndex] ? providerArray[providerIndex].indexOf(elementValue.tagName) > -1 : true;
+						elementValue.validTag = rulesetArray[rulesetIndex] ? rulesetArray[rulesetIndex].indexOf(elementValue.tagName) > -1 : true;
 					}
 					else
 					{
-						elementValue.validClass = ++invalidCounter < providerTotal;
+						elementValue.validClass = ++invalidCounter < rulesetTotal;
 					}
 				});
 			});
@@ -126,16 +126,16 @@ function validateElement(elementArray, providerArray)
 function openPage(page, instance)
 {
 	page
-		.open(optioner.get('file') || optioner.get('url'))
+		.open(option.get('file') || option.get('url'))
 		.then(function (status)
 		{
 			if (status)
 			{
-				getElement(page, optioner.get('selector'))
+				getElement(page, option.get('selector'))
 					.then(function (elementArray)
 					{
-						validateElement(elementArray, provider.get(optioner.get('namespace')));
-						reporter.result(optioner.get('threshold'));
+						validateElement(elementArray, ruleset.get(option.get('namespace')));
+						reporter.result(option.get('threshold'));
 						reporter.summary();
 						instance.exit();
 					});
@@ -159,14 +159,14 @@ function openPage(page, instance)
 function parseHTML(page, instance)
 {
 	page
-		.property('content', optioner.get('html'))
+		.property('content', option.get('html'))
 		.then(function ()
 		{
-			getElement(page, optioner.get('selector'))
+			getElement(page, option.get('selector'))
 				.then(function (elementArray)
 				{
-					validateElement(elementArray, provider.get(optioner.get('namespace')));
-					reporter.result(optioner.get('threshold'));
+					validateElement(elementArray, ruleset.get(option.get('namespace')));
+					reporter.result(option.get('threshold'));
 					reporter.summary();
 					instance.exit();
 				});
@@ -185,7 +185,7 @@ function init(optionArray)
 {
 	var instance;
 
-	optioner.init(optionArray);
+	option.init(optionArray);
 	reporter.header();
 	phantom
 		.create()
@@ -196,11 +196,11 @@ function init(optionArray)
 		})
 		.then(function (page)
 		{
-			if (optioner.get('html'))
+			if (option.get('html'))
 			{
 				parseHTML(page, instance);
 			}
-			else if (optioner.get('file') || optioner.get('url'))
+			else if (option.get('file') || option.get('url'))
 			{
 				openPage(page, instance);
 			}
