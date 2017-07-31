@@ -4,5 +4,6 @@
 	"url": null,
 	"namespace": null,
 	"selector": "*",
-	"threshold": 0
+	"threshold": 0,
+	"loglevel": "silent"
 }

@@ -1,6 +1,7 @@
 var wordingArray = require('../wording.json'),
 	packageArray = require('../package.json'),
-	issueArray = [];
+	issueArray = [],
+	option;
 
 /**
  * header
@@ -10,7 +11,7 @@ var wordingArray = require('../wording.json'),
 
 function header()
 {
-	process.stdout.write(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author.name + wordingArray.point + '\n\n');
+	_log(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author.name + wordingArray.point + '\n\n');
 }
 
 /**
@@ -21,7 +22,7 @@ function header()
 
 function pass()
 {
-	process.stdout.write('.');
+	_log('.');
 }
 
 /**
@@ -36,11 +37,11 @@ function fail(failArray)
 {
 	if (failArray.type === 'class')
 	{
-		process.stdout.write('C');
+		_log('C');
 	}
 	if (failArray.type === 'tag')
 	{
-		process.stdout.write('T');
+		_log('T');
 	}
 	if (failArray.type && failArray.selector)
 	{
@@ -60,7 +61,7 @@ function fail(failArray)
 
 function skip()
 {
-	process.stdout.write('.');
+	_log('.');
 }
 
 /**
@@ -78,9 +79,9 @@ function end(counter, total)
 	{
 		if (counter === 60)
 		{
-			process.stdout.write(' ');
+			_log(' ');
 		}
-		process.stdout.write(' ' + counter + ' / ' + total + ' (' + Math.ceil(counter / total * 100) + '%)\n');
+		_log(' ' + counter + ' / ' + total + ' (' + Math.ceil(counter / total * 100) + '%)\n');
 	}
 }
 
@@ -94,17 +95,17 @@ function end(counter, total)
 
 function result(threshold)
 {
-	process.stdout.write('\n\n');
+	_log('\n\n');
 
 	/* result message */
 
 	if (issueArray.length > threshold)
 	{
-		process.stdout.write(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + issueArray.length + ' ' + wordingArray.issues_found + ')\n');
+		_log(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + issueArray.length + ' ' + wordingArray.issues_found + ')\n');
 	}
 	else
 	{
-		process.stdout.write(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark + '\n');
+		_log(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark + '\n');
 	}
 }
 
@@ -118,29 +119,69 @@ function summary()
 {
 	if (issueArray.length)
 	{
-		process.stdout.write('\n' + wordingArray.summary.toUpperCase() + wordingArray.colon + '\n');
+		_log('\n' + wordingArray.summary.toUpperCase() + wordingArray.colon + '\n');
 		issueArray.forEach(function (issueValue)
 		{
 			if (issueValue.type === 'class')
 			{
-				process.stdout.write(wordingArray.invalid_class + wordingArray.colon + ' ');
+				_log(wordingArray.invalid_class + wordingArray.colon + ' ');
 			}
 			if (issueValue.type === 'tag')
 			{
-				process.stdout.write(wordingArray.invalid_tag + wordingArray.colon + ' ');
+				_log(wordingArray.invalid_tag + wordingArray.colon + ' ');
 			}
-			process.stdout.write(issueValue.selector + '\n');
+			_log(issueValue.selector + '\n');
 		});
+		process.exit(1);
 	}
 }
 
-module.exports =
+/**
+ * inject
+ *
+ * @since 1.0.0
+ *
+ * @param dependency object
+ */
+
+function inject(dependency)
 {
-	header: header,
-	pass: pass,
-	fail: fail,
-	skip: skip,
-	end: end,
-	result: result,
-	summary: summary
+	if (dependency.option)
+	{
+		option = dependency.option;
+	}
+}
+
+/**
+ * log
+ *
+ * @since 1.0.0
+ *
+ * @param message string
+ */
+
+function _log(message)
+{
+	if (option.get('loglevel') !== 'silent')
+	{
+		process.stdout.write(message);
+	}
+}
+
+module.exports = function (dependency)
+{
+	var exports =
+	{
+		header: header,
+		pass: pass,
+		fail: fail,
+		skip: skip,
+		end: end,
+		result: result,
+		summary: summary,
+		inject: inject
+	};
+
+	inject(dependency);
+	return exports;
 };

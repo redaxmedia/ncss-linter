@@ -1,9 +1,7 @@
-require('string.prototype.startswith');
-
-var phantom = require('phantom'),
-	reporter = require('./reporter'),
-	ruleset = require('./ruleset'),
-	option = require('./option');
+var phantom,
+	reporter,
+	ruleset,
+	option;
 
 /**
  * get element
@@ -174,18 +172,34 @@ function parseHTML(page, instance)
 }
 
 /**
- * init
+ * inject
  *
  * @since 1.0.0
  *
- * @param optionArray array
+ * @param dependency object
  */
 
-function init(optionArray)
+function inject(dependency)
+{
+	if (dependency.phantom && dependency.reporter && dependency.ruleset && dependency.option)
+	{
+		phantom = dependency.phantom;
+		reporter = dependency.reporter;
+		ruleset = dependency.ruleset;
+		option = dependency.option;
+	}
+}
+
+/**
+ * init
+ *
+ * @since 1.0.0
+ */
+
+function init()
 {
 	var instance;
 
-	option.init(optionArray);
 	reporter.header();
 	phantom
 		.create()
@@ -211,7 +225,14 @@ function init(optionArray)
 		});
 }
 
-module.exports =
+module.exports = function (dependency)
 {
-	init: init
+	var exports =
+	{
+		init: init,
+		inject: inject
+	};
+
+	inject(dependency);
+	return exports;
 };
