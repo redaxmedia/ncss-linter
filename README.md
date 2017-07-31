@@ -19,7 +19,6 @@ npm install ncss-linter
 Usage
 =====
 
-
 Validate a `HTML` string:
 
 ```
@@ -35,5 +34,5 @@ bin/cmd.js --file=ncss.html --namespace=foo-
 Validate a remote URL:
 
 ```
-bin/cmd.js --url=https://ncss.io --namespace=rs-
+bin/cmd.js --url=https://ncss.io --namespace=rs- --loglevel=debug
 ```

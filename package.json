@@ -17,8 +17,7 @@
 	{
 		"commander": "2.11.0",
 		"extend": "3.0.1",
-		"phantom": "4.0.5",
-		"string.prototype.startswith": "0.2.0"
+		"phantom": "4.0.5"
 	},
 	"devDependencies":
 	{
@@ -29,6 +28,6 @@
 	"scripts":
 	{
 		"lint": "node_modules/eslint/bin/eslint.js bin src tests",
-		"test": "node_modules/mocha/bin/mocha tests/test.js"
+		"test": "node_modules/mocha/bin/mocha tests --inspect"
 	}
 }

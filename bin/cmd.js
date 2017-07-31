@@ -7,7 +7,8 @@ var command = require('commander'),
 	ruleset = require('../src/ruleset'),
 	option = require('../src/option'),
 	packageArray = require('../package.json'),
-	ncss;
+	CORE,
+	REPORTER;
 
 command
 	.version(packageArray.version)
@@ -32,17 +33,18 @@ if (command.html || command.file || command.url)
 		threshold: command.threshold,
 		loglevel: command.loglevel
 	});
-	ncss = new core(
+	REPORTER = new reporter(
+	{
+		option: option
+	});
+	CORE = new core(
 	{
 		phantom: phantom,
-		reporter: new reporter(
-		{
-			option: option
-		}),
+		reporter: REPORTER,
 		ruleset: ruleset,
 		option: option
 	});
-	ncss.init();
+	CORE.init();
 }
 else
 {

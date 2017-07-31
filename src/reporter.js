@@ -1,7 +1,20 @@
 var wordingArray = require('../wording.json'),
 	packageArray = require('../package.json'),
-	issueArray = [],
+	reportArray = [],
 	option;
+
+/**
+ * get report
+ *
+ * @since 1.0.0
+ *
+ * return array
+ */
+
+function getReport()
+{
+	return reportArray;
+}
 
 /**
  * header
@@ -45,7 +58,7 @@ function fail(failArray)
 	}
 	if (failArray.type && failArray.selector)
 	{
-		issueArray.push(
+		reportArray.push(
 		{
 			type: failArray.type,
 			selector: failArray.selector
@@ -99,9 +112,9 @@ function result(threshold)
 
 	/* result message */
 
-	if (issueArray.length > threshold)
+	if (reportArray.length > threshold)
 	{
-		_log(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + issueArray.length + ' ' + wordingArray.issues_found + ')\n');
+		_log(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + reportArray.length + ' ' + wordingArray.issues_found + ')\n');
 	}
 	else
 	{
@@ -117,20 +130,20 @@ function result(threshold)
 
 function summary()
 {
-	if (issueArray.length)
+	if (reportArray.length)
 	{
 		_log('\n' + wordingArray.summary.toUpperCase() + wordingArray.colon + '\n');
-		issueArray.forEach(function (issueValue)
+		reportArray.forEach(function (reportValue)
 		{
-			if (issueValue.type === 'class')
+			if (reportValue.type === 'class')
 			{
 				_log(wordingArray.invalid_class + wordingArray.colon + ' ');
 			}
-			if (issueValue.type === 'tag')
+			if (reportValue.type === 'tag')
 			{
 				_log(wordingArray.invalid_tag + wordingArray.colon + ' ');
 			}
-			_log(issueValue.selector + '\n');
+			_log(reportValue.selector + '\n');
 		});
 		process.exit(1);
 	}
@@ -172,6 +185,7 @@ module.exports = function (dependency)
 {
 	var exports =
 	{
+		getReport: getReport,
 		header: header,
 		pass: pass,
 		fail: fail,

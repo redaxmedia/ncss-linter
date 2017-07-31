@@ -1,0 +1,29 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div></div>"
+		},
+		"reportArray": []
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"box-valid\"></div>"
+		},
+		"reportArray": []
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"invalid\"></div>"
+		},
+		"reportArray":
+		[
+			{
+				"type": "class",
+				"selector": "div.invalid"
+			}
+		]
+	}
+]

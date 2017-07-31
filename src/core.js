@@ -160,7 +160,7 @@ function parseHTML(page, instance)
 		.property('content', option.get('html'))
 		.then(function ()
 		{
-			getElement(page, option.get('selector'))
+			 getElement(page, option.get('selector'))
 				.then(function (elementArray)
 				{
 					validateElement(elementArray, ruleset.get(option.get('namespace')));
@@ -194,14 +194,15 @@ function inject(dependency)
  * init
  *
  * @since 1.0.0
+ *
+ * @return promise
  */
 
 function init()
 {
 	var instance;
 
-	reporter.header();
-	phantom
+	return phantom
 		.create()
 		.then(function (currentInstance)
 		{
@@ -210,9 +211,10 @@ function init()
 		})
 		.then(function (page)
 		{
+			reporter.header();
 			if (option.get('html'))
 			{
-				parseHTML(page, instance);
+				parseHTML(page, instance)
 			}
 			else if (option.get('file') || option.get('url'))
 			{
