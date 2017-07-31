@@ -23,10 +23,12 @@
 	"devDependencies":
 	{
 		"chai": "4.1.0",
+		"eslint": "4.3.0",
 		"mocha": "3.4.2"
 	},
 	"scripts":
 	{
+		"lint": "node_modules/eslint/bin/eslint.js bin src tests",
 		"test": "node_modules/mocha/bin/mocha tests/test.js"
 	}
 }
