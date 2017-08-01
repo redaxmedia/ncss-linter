@@ -33,11 +33,8 @@ describe('core', function ()
 					.init()
 					.then(function ()
 					{
-						setTimeout(function ()
-						{
-							expect(REPORTER.getReport()).to.deep.equal(coreValue.reportArray);
-							done();
-						}, 10);
+						expect(REPORTER.getReport()).to.deep.equal(coreValue.reportArray);
+						done();
 					});
 			});
 		});

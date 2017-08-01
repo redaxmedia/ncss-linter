@@ -119,9 +119,10 @@ function validateElement(elementArray, rulesetArray)
  *
  * @param page object
  * @param instance object
+ * @param defer object
  */
 
-function openPage(page, instance)
+function openPage(page, instance, defer)
 {
 	page
 		.open(option.get('file') || option.get('url'))
@@ -136,11 +137,13 @@ function openPage(page, instance)
 						reporter.result(option.get('threshold'));
 						reporter.summary();
 						instance.exit();
+						defer.resolve();
 					});
 			}
 			else
 			{
 				instance.exit();
+				defer.reject();
 			}
 		});
 }
@@ -152,9 +155,10 @@ function openPage(page, instance)
  *
  * @param page object
  * @param instance object
+ * @param defer object
  */
 
-function parseHTML(page, instance)
+function parseHTML(page, instance, defer)
 {
 	page
 		.property('content', option.get('html'))
@@ -167,6 +171,7 @@ function parseHTML(page, instance)
 					reporter.result(option.get('threshold'));
 					reporter.summary();
 					instance.exit();
+					defer.resolve();
 				});
 		});
 }
@@ -200,31 +205,41 @@ function inject(dependency)
 
 function init()
 {
-	var instance;
+	var instance,
+		defer;
 
-	return phantom
-		.create()
-		.then(function (currentInstance)
+	return new Promise(function (resolve, reject)
+	{
+		defer =
 		{
-			instance = currentInstance;
-			return instance.createPage();
-		})
-		.then(function (page)
-		{
-			reporter.header();
-			if (option.get('html'))
+			resolve: resolve,
+			reject: reject
+		};
+		phantom
+			.create()
+			.then(function (currentInstance)
 			{
-				parseHTML(page, instance)
-			}
-			else if (option.get('file') || option.get('url'))
+				instance = currentInstance;
+				return instance.createPage();
+			})
+			.then(function (page)
 			{
-				openPage(page, instance);
-			}
-			else
-			{
-				instance.exit();
-			}
-		});
+				reporter.header();
+				if (option.get('html'))
+				{
+					parseHTML(page, instance, defer);
+				}
+				else if (option.get('file') || option.get('url'))
+				{
+					openPage(page, instance, defer);
+				}
+				else
+				{
+					defer.reject();
+					instance.exit();
+				}
+			});
+	});
 }
 
 module.exports = function (dependency)
