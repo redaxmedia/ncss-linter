@@ -47,11 +47,21 @@ function header()
  * pass
  *
  * @since 1.0.0
+ *
+ * @param passArray array
  */
 
-function pass()
+function pass(passArray)
 {
 	_log('.');
+	if (passArray.type && passArray.selector)
+	{
+		reportArray.info.push(
+		{
+			type: passArray.type,
+			selector: passArray.selector
+		});
+	}
 }
 
 /**
@@ -86,11 +96,21 @@ function fail(failArray)
  * skip
  *
  * @since 1.0.0
+ *
+ * @param skipArray array
  */
 
-function skip()
+function skip(skipArray)
 {
 	_log('.');
+	if (skipArray.type && skipArray.selector)
+	{
+		reportArray.info.push(
+		{
+			type: skipArray.type,
+			selector: skipArray.selector
+		});
+	}
 }
 
 /**

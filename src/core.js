@@ -84,7 +84,7 @@ function validateElement(elementArray, rulesetArray)
 			{
 				reporter.fail(
 				{
-					type: 'class',
+					type: 'invalid class',
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
@@ -92,13 +92,17 @@ function validateElement(elementArray, rulesetArray)
 			{
 				reporter.fail(
 				{
-					type: 'tag',
+					type: 'invalid tag',
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
 			else
 			{
-				reporter.pass();
+				reporter.pass(
+				{
+					type: 'valid',
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
+				});
 			}
 		}
 
@@ -106,7 +110,11 @@ function validateElement(elementArray, rulesetArray)
 
 		else
 		{
-			reporter.skip();
+			reporter.skip(
+			{
+				type: 'skip',
+				selector: elementValue.tagName
+			});
 		}
 		reporter.end(++elementCounter, elementTotal);
 	});
@@ -235,8 +243,8 @@ function init()
 				}
 				else
 				{
-					defer.reject();
 					instance.exit();
+					defer.reject();
 				}
 			});
 	});
