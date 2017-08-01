@@ -2,7 +2,7 @@
 	"summary": "summary",
 	"invalid_class": "invalid class",
 	"invalid_tag": "invalid tag",
-	"issues_found": "issues found",
+	"errors_found": "errors found",
 	"by": "by",
 	"passed": "passed",
 	"failed": "failed",

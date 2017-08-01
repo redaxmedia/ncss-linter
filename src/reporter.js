@@ -1,6 +1,11 @@
 var wordingArray = require('../wording.json'),
 	packageArray = require('../package.json'),
-	reportArray = [],
+	reportArray =
+	{
+		info: [],
+		warning: [],
+		error: []
+	},
 	option;
 
 /**
@@ -58,7 +63,7 @@ function fail(failArray)
 	}
 	if (failArray.type && failArray.selector)
 	{
-		reportArray.push(
+		reportArray.error.push(
 		{
 			type: failArray.type,
 			selector: failArray.selector
@@ -112,9 +117,9 @@ function result(threshold)
 
 	/* result message */
 
-	if (reportArray.length > threshold)
+	if (reportArray.error.length > threshold)
 	{
-		_log(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + reportArray.length + ' ' + wordingArray.issues_found + ')\n');
+		_log(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
 	}
 	else
 	{
@@ -130,10 +135,10 @@ function result(threshold)
 
 function summary()
 {
-	if (reportArray.length)
+	if (reportArray.error.length)
 	{
 		_log('\n' + wordingArray.summary.toUpperCase() + wordingArray.colon + '\n');
-		reportArray.forEach(function (reportValue)
+		reportArray.error.forEach(function (reportValue)
 		{
 			if (reportValue.type === 'class')
 			{

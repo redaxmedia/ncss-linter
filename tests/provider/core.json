@@ -4,14 +4,32 @@
 		{
 			"html": "<div></div>"
 		},
-		"reportArray": []
+		"reportArray":
+		{
+			"info":
+			[
+				{
+					"type": "skip",
+					"selector": "div"
+				}
+			]
+		}
 	},
 	{
 		"optionArray":
 		{
 			"html": "<div class=\"box-valid\"></div>"
 		},
-		"reportArray": []
+		"reportArray":
+		{
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.box-valid"
+				}
+			]
+		}
 	},
 	{
 		"optionArray":
@@ -19,11 +37,30 @@
 			"html": "<div class=\"invalid\"></div>"
 		},
 		"reportArray":
-		[
-			{
-				"type": "class",
-				"selector": "div.invalid"
-			}
-		]
+		{
+			"error":
+			[
+				{
+					"type": "class",
+					"selector": "div.invalid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<span class=\"box-invalid\"></span>"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "tag",
+					"selector": "span.box-invalid"
+				}
+			]
+		}
 	}
 ]

@@ -160,7 +160,7 @@ function parseHTML(page, instance)
 		.property('content', option.get('html'))
 		.then(function ()
 		{
-			 getElement(page, option.get('selector'))
+			getElement(page, option.get('selector'))
 				.then(function (elementArray)
 				{
 					validateElement(elementArray, ruleset.get(option.get('namespace')));
