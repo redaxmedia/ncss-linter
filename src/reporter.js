@@ -1,15 +1,10 @@
 var wordingArray = require('../wording.json'),
 	packageArray = require('../package.json'),
-	reportArray =
-	{
-		info: [],
-		warning: [],
-		error: []
-	},
+	reportArray = {},
 	option;
 
 /**
- * get report
+ * get the report
  *
  * @since 1.0.0
  *
@@ -19,6 +14,22 @@ var wordingArray = require('../wording.json'),
 function getReport()
 {
 	return reportArray;
+}
+
+/**
+ * clear the report
+ *
+ * @since 1.0.0
+ */
+
+function clearReport()
+{
+	reportArray =
+	{
+		info: [],
+		warning: [],
+		error: []
+	};
 }
 
 /**
@@ -150,7 +161,6 @@ function summary()
 			}
 			_log(reportValue.selector + '\n');
 		});
-		process.exit(1);
 	}
 }
 
@@ -202,5 +212,6 @@ module.exports = function (dependency)
 	};
 
 	inject(dependency);
+	clearReport();
 	return exports;
 };

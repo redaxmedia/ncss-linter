@@ -1,4 +1,5 @@
 var phantom = require('phantom'),
+	expect = require('chai').expect,
 	core = require('../src/core'),
 	reporter = require('../src/reporter'),
 	ruleset = require('../src/ruleset'),
@@ -32,10 +33,11 @@ describe('core', function ()
 					.init()
 					.then(function ()
 					{
-						if (REPORTER.getReport() === coreValue.reportArray)
+						setTimeout(function ()
 						{
+							expect(REPORTER.getReport()).to.deep.equal(coreValue.reportArray);
 							done();
-						}
+						}, 10);
 					});
 			});
 		});

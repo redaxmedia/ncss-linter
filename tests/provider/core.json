@@ -6,13 +6,9 @@
 		},
 		"reportArray":
 		{
-			"info":
-			[
-				{
-					"type": "skip",
-					"selector": "div"
-				}
-			]
+			"info": [],
+			"warning": [],
+			"error": []
 		}
 	},
 	{
@@ -22,13 +18,9 @@
 		},
 		"reportArray":
 		{
-			"info":
-			[
-				{
-					"type": "pass",
-					"selector": "div.box-valid"
-				}
-			]
+			"info": [],
+			"warning": [],
+			"error": []
 		}
 	},
 	{
@@ -38,27 +30,13 @@
 		},
 		"reportArray":
 		{
+			"info": [],
+			"warning": [],
 			"error":
 			[
 				{
 					"type": "class",
 					"selector": "div.invalid"
-				}
-			]
-		}
-	},
-	{
-		"optionArray":
-		{
-			"html": "<span class=\"box-invalid\"></span>"
-		},
-		"reportArray":
-		{
-			"error":
-			[
-				{
-					"type": "tag",
-					"selector": "span.box-invalid"
 				}
 			]
 		}
