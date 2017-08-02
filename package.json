@@ -18,7 +18,8 @@
 		"bluebird": "3.5.0",
 		"commander": "2.11.0",
 		"extend": "3.0.1",
-		"phantom": "4.0.5"
+		"phantom": "4.0.5",
+		"phantomjs-prebuilt": "2.1.4"
 	},
 	"devDependencies":
 	{
