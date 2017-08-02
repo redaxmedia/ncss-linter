@@ -9,8 +9,6 @@ install:
 - npm install --global ied
 - npm install --global phantomjs-prebuilt
 - ied install
-- cd node_modules/phantomjs-prebuilt
-- node install.js
 
 script:
 - npm run lint
