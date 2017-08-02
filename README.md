@@ -19,6 +19,25 @@ npm install ncss-linter
 Usage
 =====
 
+```
+bin/cmd [options]
+
+-V, --version
+-H, --html <html>
+-F, --file <file>
+-U, --url <url>
+-N, --namespace <namespace>
+-D, --divider <divider>
+-S, --selector <selector>
+-T, --threshold <threshold>
+-L, --loglevel <loglevel>
+-h, --help
+```
+
+
+Examples
+========
+
 Validate a `HTML` string:
 
 ```
