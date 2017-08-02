@@ -67,11 +67,11 @@ function validateElement(elementArray, rulesetArray)
 
 				/* process ruleset */
 
-				Object.keys(rulesetArray).forEach((rulesetValue, rulesetIndex) =>
+				Object.keys(rulesetArray).forEach((rulesetValue) =>
 				{
 					if (classValue.startsWith(rulesetValue))
 					{
-						elementValue.validTag = rulesetArray[rulesetIndex] ? rulesetArray[rulesetIndex].indexOf(elementValue.tagName) > -1 : true;
+						elementValue.validTag = rulesetArray[rulesetValue] ? rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1 : true;
 					}
 					else
 					{
@@ -86,7 +86,7 @@ function validateElement(elementArray, rulesetArray)
 			{
 				reporter.fail(
 				{
-					type: 'invalid class',
+					type: 'invalid-class',
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
@@ -94,7 +94,7 @@ function validateElement(elementArray, rulesetArray)
 			{
 				reporter.fail(
 				{
-					type: 'invalid tag',
+					type: 'invalid-tag',
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
@@ -187,25 +187,6 @@ function parseHTML(page, instance, defer)
 }
 
 /**
- * inject
- *
- * @since 1.0.0
- *
- * @param dependency object
- */
-
-function inject(dependency)
-{
-	if (dependency.phantom && dependency.reporter && dependency.ruleset && dependency.option)
-	{
-		phantom = dependency.phantom;
-		reporter = dependency.reporter;
-		ruleset = dependency.ruleset;
-		option = dependency.option;
-	}
-}
-
-/**
  * init
  *
  * @since 1.0.0
@@ -252,14 +233,33 @@ function init()
 	});
 }
 
-module.exports = function (dependency)
+/**
+ * construct
+ *
+ * @since 1.0.0
+ *
+ * @param dependency object
+ *
+ * @return object
+ */
+
+function construct(dependency)
 {
 	const exports =
 	{
-		init: init,
-		inject: inject
+		init: init
 	};
 
-	inject(dependency);
+	/* inject dependency */
+
+	if (dependency.phantom && dependency.reporter && dependency.ruleset && dependency.option)
+	{
+		phantom = dependency.phantom;
+		reporter = dependency.reporter;
+		ruleset = dependency.ruleset;
+		option = dependency.option;
+	}
 	return exports;
-};
+}
+
+module.exports = construct;

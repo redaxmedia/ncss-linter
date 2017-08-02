@@ -75,11 +75,11 @@ function pass(passArray)
 
 function fail(failArray)
 {
-	if (failArray.type === 'class')
+	if (failArray.type === 'invalid-class')
 	{
 		_log('C');
 	}
-	if (failArray.type === 'tag')
+	if (failArray.type === 'invalid-tag')
 	{
 		_log('T');
 	}
@@ -172,32 +172,19 @@ function summary()
 		_log('\n' + wordingArray.summary.toUpperCase() + wordingArray.colon + '\n');
 		reportArray.error.forEach(function (reportValue)
 		{
-			if (reportValue.type === 'class')
+			if (reportValue.type === 'invalid-class')
 			{
-				_log(wordingArray.invalid_class + wordingArray.colon + ' ');
+				_log(wordingArray.invalid_class);
 			}
-			if (reportValue.type === 'tag')
+			if (reportValue.type === 'invalid-tag')
 			{
-				_log(wordingArray.invalid_tag + wordingArray.colon + ' ');
+				_log(wordingArray.invalid_tag);
 			}
-			_log(reportValue.selector + '\n');
+			if (reportValue.selector)
+			{
+				_log(' ' + wordingArray.divider + ' ' + reportValue.selector + '\n');
+			}
 		});
-	}
-}
-
-/**
- * inject
- *
- * @since 1.0.0
- *
- * @param dependency object
- */
-
-function inject(dependency)
-{
-	if (dependency.option)
-	{
-		option = dependency.option;
 	}
 }
 
@@ -217,7 +204,17 @@ function _log(message)
 	}
 }
 
-module.exports = function (dependency)
+/**
+ * construct
+ *
+ * @since 1.0.0
+ *
+ * @param dependency object
+ *
+ * @return object
+ */
+
+function construct(dependency)
 {
 	const exports =
 	{
@@ -228,11 +225,18 @@ module.exports = function (dependency)
 		skip: skip,
 		end: end,
 		result: result,
-		summary: summary,
-		inject: inject
+		summary: summary
 	};
 
-	inject(dependency);
 	clearReport();
+
+	/* inject dependency */
+
+	if (dependency.option)
+	{
+		option = dependency.option;
+	}
 	return exports;
-};
+}
+
+module.exports = construct;

@@ -85,8 +85,40 @@
 			"error":
 			[
 				{
-					"type": "invalid class",
+					"type": "invalid-class",
 					"selector": "div.invalid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<span class=\"box-invalid\"></span>"
+		},
+		"reportArray":
+		{
+			"info":
+			[
+				{
+					"type": "skip",
+					"selector": "html"
+				},
+				{
+					"type": "skip",
+					"selector": "head"
+				},
+				{
+					"type": "skip",
+					"selector": "body"
+				}
+			],
+			"warning": [],
+			"error":
+			[
+				{
+					"type": "invalid-tag",
+					"selector": "span.box-invalid"
 				}
 			]
 		}
