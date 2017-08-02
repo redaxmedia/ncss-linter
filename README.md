@@ -28,11 +28,11 @@ bin/cmd.js --html='<div class="box></div>'
 Validate a local file:
 
 ```
-bin/cmd.js --file=ncss.html --namespace=foo- 
+bin/cmd.js --file=ncss.html --namespace=foo
 ```
 
 Validate a remote URL:
 
 ```
-bin/cmd.js --url=https://ncss.io --namespace=rs- --loglevel=debug
+bin/cmd.js --url=https://ncss.io --namespace=rs --loglevel=debug
 ```

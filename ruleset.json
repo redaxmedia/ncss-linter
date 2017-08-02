@@ -176,10 +176,10 @@
 		"object",
 		"video"
 	],
-	"is-": null,
-	"has-": null,
-	"no-": null,
-	"fn-": null,
-	"js-": null,
+	"is": null,
+	"has": null,
+	"no": null,
+	"fn": null,
+	"js": null,
 	"wrapper": null
 }

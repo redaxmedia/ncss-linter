@@ -29,7 +29,7 @@ function getElement(page, selector)
 				elementArray.push(
 				{
 					tagName: element[elementValue].tagName ? element[elementValue].tagName.toLowerCase() : null,
-					classArray: element[elementValue].className && element[elementValue].className.length ? element[elementValue].className.toLowerCase().split(' ') : []
+					classArray: element[elementValue].className && element[elementValue].className.length ? element[elementValue].className.toLowerCase().match(/\S+/g) : []
 				});
 			});
 			return elementArray;
@@ -49,7 +49,10 @@ function validateElement(elementArray, rulesetArray)
 {
 	const rulesetTotal = Object.keys(rulesetArray).length;
 	const elementTotal = elementArray.length;
+	const namespace = option.get('namespace');
+	const divider = option.get('divider');
 
+	let fragmentArray = [];
 	let elementCounter = 0;
 	let	invalidCounter = 0;
 
@@ -64,25 +67,35 @@ function validateElement(elementArray, rulesetArray)
 			elementValue.classArray.forEach(classValue =>
 			{
 				invalidCounter = 0;
+				fragmentArray = classValue.split(divider);
 
 				/* process ruleset */
 
 				Object.keys(rulesetArray).forEach((rulesetValue) =>
 				{
-					if (classValue.startsWith(rulesetValue))
-					{
-						elementValue.validTag = rulesetArray[rulesetValue] ? rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1 : true;
-					}
-					else
+					elementValue.validNamespace = namespace ? namespace === fragmentArray[0] : true;
+					if (fragmentArray[0] === rulesetValue || fragmentArray[1] === rulesetValue)
 					{
 						elementValue.validClass = ++invalidCounter < rulesetTotal;
+						if (rulesetArray[rulesetValue])
+						{
+							elementValue.validTag = rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1;
+						}
 					}
 				});
 			});
 
 			/* collect and print */
 
-			if (!elementValue.validClass)
+			if (!elementValue.validNamespace)
+			{
+				reporter.fail(
+				{
+					type: 'invalid-namespace',
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
+				});
+			}
+			else if (!elementValue.validClass)
 			{
 				reporter.fail(
 				{
@@ -102,7 +115,7 @@ function validateElement(elementArray, rulesetArray)
 			{
 				reporter.pass(
 				{
-					type: 'valid',
+					type: 'pass',
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}

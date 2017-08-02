@@ -1,5 +1,6 @@
 {
 	"summary": "summary",
+	"invalid_namespace": "invalid namespace",
 	"invalid_class": "invalid class",
 	"invalid_tag": "invalid tag",
 	"errors_found": "errors found",

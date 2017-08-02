@@ -2,24 +2,14 @@
 	{
 		"optionArray":
 		{
-			"html": "<div></div>"
+			"html": "<div>{{ empty class && empty namespace }}</div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)"
 		},
 		"reportArray":
 		{
 			"info":
 			[
-				{
-					"type": "skip",
-					"selector": "html"
-				},
-				{
-					"type": "skip",
-					"selector": "head"
-				},
-				{
-					"type": "skip",
-					"selector": "body"
-				},
 				{
 					"type": "skip",
 					"selector": "div"
@@ -32,26 +22,56 @@
 	{
 		"optionArray":
 		{
-			"html": "<div class=\"box-valid\"></div>"
+			"html": "<div class=\"foo\">{{ empty class && valid namespace }}</div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)"
+		},
+		"reportArray":
+		{
+			"info": [],
+			"warning": [],
+			"error":
+			[
+				{
+					"type": "invalid-class",
+					"selector": "div.foo"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"bar\">{{ empty class && invalid namespace }}</div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)"
+		},
+		"reportArray":
+		{
+			"info": [],
+			"warning": [],
+			"error":
+			[
+				{
+					"type": "invalid-namespace",
+					"selector": "div.bar"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"box-valid\">{{ valid class && empty namespace }}</div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)"
 		},
 		"reportArray":
 		{
 			"info":
 			[
 				{
-					"type": "skip",
-					"selector": "html"
-				},
-				{
-					"type": "skip",
-					"selector": "head"
-				},
-				{
-					"type": "skip",
-					"selector": "body"
-				},
-				{
-					"type": "valid",
+					"type": "pass",
 					"selector": "div.box-valid"
 				}
 			],
@@ -62,25 +82,53 @@
 	{
 		"optionArray":
 		{
-			"html": "<div class=\"invalid\"></div>"
+			"html": "<div class=\"foo-box-valid\">{{ valid class && valid namespace }}</div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)"
 		},
 		"reportArray":
 		{
 			"info":
 			[
 				{
-					"type": "skip",
-					"selector": "html"
-				},
-				{
-					"type": "skip",
-					"selector": "head"
-				},
-				{
-					"type": "skip",
-					"selector": "body"
+					"type": "pass",
+					"selector": "div.foo-box-valid"
 				}
 			],
+			"warning": [],
+			"error": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"bar-box-invalid\">{{ valid class && invalid namespace }}</div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)"
+		},
+		"reportArray":
+		{
+			"info": [],
+			"warning": [],
+			"error":
+			[
+				{
+					"type": "invalid-namespace",
+					"selector": "div.bar-box-invalid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"invalid\">{{ invalid class && empty namespace }}</div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)"
+		},
+		"reportArray":
+		{
+			"info": [],
 			"warning": [],
 			"error":
 			[
@@ -94,31 +142,99 @@
 	{
 		"optionArray":
 		{
-			"html": "<span class=\"box-invalid\"></span>"
+			"html": "<div class=\"foo-invalid\">{{ invalid class && valid namespace }}</div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)"
 		},
 		"reportArray":
 		{
-			"info":
+			"info": [],
+			"warning": [],
+			"error":
 			[
 				{
-					"type": "skip",
-					"selector": "html"
-				},
-				{
-					"type": "skip",
-					"selector": "head"
-				},
-				{
-					"type": "skip",
-					"selector": "body"
+					"type": "invalid-class",
+					"selector": "div.foo-invalid"
 				}
-			],
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"bar-invalid\">{{ invalid class && invalid namespace }}</div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)"
+		},
+		"reportArray":
+		{
+			"info": [],
+			"warning": [],
+			"error":
+			[
+				{
+					"type": "invalid-namespace",
+					"selector": "div.bar-invalid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<span class=\"box-invalid\">{{ invalid tag && valid class && empty namespace }}</span>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)"
+		},
+		"reportArray":
+		{
+			"info": [],
 			"warning": [],
 			"error":
 			[
 				{
 					"type": "invalid-tag",
 					"selector": "span.box-invalid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<span class=\"foo-box-invalid\">{{ invalid tag && valid class && valid namespace }}</span>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)"
+		},
+		"reportArray":
+		{
+			"info": [],
+			"warning": [],
+			"error":
+			[
+				{
+					"type": "invalid-tag",
+					"selector": "span.foo-box-invalid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<span class=\"bar-box-invalid\">{{ invalid tag && valid class && invalid namespace }}</span>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)"
+		},
+		"reportArray":
+		{
+			"info": [],
+			"warning": [],
+			"error":
+			[
+				{
+					"type": "invalid-namespace",
+					"selector": "span.bar-box-invalid"
 				}
 			]
 		}

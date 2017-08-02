@@ -75,6 +75,10 @@ function pass(passArray)
 
 function fail(failArray)
 {
+	if (failArray.type === 'invalid-namespace')
+	{
+		_log('N');
+	}
 	if (failArray.type === 'invalid-class')
 	{
 		_log('C');
@@ -172,6 +176,10 @@ function summary()
 		_log('\n' + wordingArray.summary.toUpperCase() + wordingArray.colon + '\n');
 		reportArray.error.forEach(function (reportValue)
 		{
+			if (reportValue.type === 'invalid-namespace')
+			{
+				_log(wordingArray.invalid_namespace);
+			}
 			if (reportValue.type === 'invalid-class')
 			{
 				_log(wordingArray.invalid_class);

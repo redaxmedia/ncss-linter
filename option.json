@@ -3,6 +3,7 @@
 	"file": null,
 	"url": null,
 	"namespace": null,
+	"divider": "-",
 	"selector": "*",
 	"threshold": 0,
 	"loglevel": "silent"

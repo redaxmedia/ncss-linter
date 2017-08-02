@@ -17,6 +17,7 @@ command
 	.option('-F, --file <file>')
 	.option('-U, --url <url>')
 	.option('-N, --namespace <namespace>')
+	.option('-D, --divider <divider>')
 	.option('-S, --selector <selector>')
 	.option('-T, --threshold <threshold>')
 	.option('-L, --loglevel <loglevel>')
@@ -30,6 +31,7 @@ if (command.html || command.file || command.url)
 		file: command.file,
 		url: command.url,
 		namespace: command.namespace,
+		divider: command.divider,
 		selector: command.selector,
 		threshold: command.threshold,
 		loglevel: command.loglevel
