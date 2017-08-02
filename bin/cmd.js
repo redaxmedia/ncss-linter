@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-var command = require('commander'),
-	phantom = require('phantom'),
-	promise = require('bluebird'),
-	core = require('../src/core'),
-	reporter = require('../src/reporter'),
-	ruleset = require('../src/ruleset'),
-	option = require('../src/option'),
-	packageArray = require('../package.json'),
-	CORE,
-	REPORTER;
+const command = require('commander');
+const phantom = require('phantom');
+const core = require('../src/core');
+const reporter = require('../src/reporter');
+const ruleset = require('../src/ruleset');
+const option = require('../src/option');
+const packageArray = require('../package.json');
+
+let REPORTER;
+let CORE;
 
 command
 	.version(packageArray.version)
@@ -41,7 +41,6 @@ if (command.html || command.file || command.url)
 	CORE = new core(
 	{
 		phantom: phantom,
-		promise: promise,
 		reporter: REPORTER,
 		ruleset: ruleset,
 		option: option

@@ -1,1 +1,1 @@
-require('src/core');
+module.exports = require('src/core');

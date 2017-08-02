@@ -1,4 +1,4 @@
-var rulesetArray = require('../ruleset.json');
+const rulesetArray = require('../ruleset.json');
 
 /**
  * get
@@ -27,9 +27,10 @@ function get(namespace)
 
 function create(namespace)
 {
-	var namespaceArray = namespace.split(','),
-		createArray = [],
-		createKey;
+	const namespaceArray = namespace.split(',');
+	const createArray = [];
+
+	let	createKey;
 
 	/* process namespace */
 

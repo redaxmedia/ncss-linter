@@ -1,7 +1,8 @@
-var wordingArray = require('../wording.json'),
-	packageArray = require('../package.json'),
-	reportArray = {},
-	option;
+const wordingArray = require('../wording.json');
+const packageArray = require('../package.json');
+
+let reportArray = {};
+let option;
 
 /**
  * get the report
@@ -218,7 +219,7 @@ function _log(message)
 
 module.exports = function (dependency)
 {
-	var exports =
+	const exports =
 	{
 		getReport: getReport,
 		header: header,

@@ -1,22 +1,22 @@
-var phantom = require('phantom'),
-	promise = require('bluebird'),
-	expect = require('chai').expect,
-	core = require('../src/core'),
-	reporter = require('../src/reporter'),
-	ruleset = require('../src/ruleset'),
-	option = require('../src/option'),
-	CORE,
-	REPORTER;
+const phantom = require('phantom');
+const expect = require('chai').expect;
+const core = require('../src/core');
+const reporter = require('../src/reporter');
+const ruleset = require('../src/ruleset');
+const option = require('../src/option');
 
-describe('core', function ()
+let REPORTER;
+let CORE;
+
+describe('core', () =>
 {
-	describe('validate html', function ()
+	describe('validate html', () =>
 	{
-		var coreArray = require('./provider/core.json');
+		const coreArray = require('./provider/core.json');
 
-		coreArray.forEach(function (coreValue)
+		coreArray.forEach(coreValue =>
 		{
-			it(coreValue.optionArray.html, function (done)
+			it(coreValue.optionArray.html, done =>
 			{
 				option.init(coreValue.optionArray);
 				REPORTER = new reporter(
@@ -26,14 +26,13 @@ describe('core', function ()
 				CORE = new core(
 				{
 					phantom: phantom,
-					promise: promise,
 					reporter: REPORTER,
 					ruleset: ruleset,
 					option: option
 				});
 				CORE
 					.init()
-					.then(function ()
+					.then(() =>
 					{
 						expect(REPORTER.getReport()).to.deep.equal(coreValue.reportArray);
 						done();

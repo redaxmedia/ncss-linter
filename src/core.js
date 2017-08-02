@@ -1,8 +1,7 @@
-var phantom,
-	promise,
-	reporter,
-	ruleset,
-	option;
+let phantom;
+let reporter;
+let ruleset;
+let option;
 
 /**
  * get element
@@ -18,9 +17,10 @@ var phantom,
 function getElement(page, selector)
 {
 	return page
-		.invokeMethod('evaluate', function(selector) {
-			var element = document.querySelectorAll(selector),
-				elementArray = [];
+		.invokeMethod('evaluate', function(selector)
+		{
+			const element = document.querySelectorAll(selector);
+			const elementArray = [];
 
 			/* process element */
 
@@ -47,26 +47,27 @@ function getElement(page, selector)
 
 function validateElement(elementArray, rulesetArray)
 {
-	var rulesetTotal = Object.keys(rulesetArray).length,
-		elementTotal = elementArray.length,
-		elementCounter = 0,
-		invalidCounter = 0;
+	const rulesetTotal = Object.keys(rulesetArray).length;
+	const elementTotal = elementArray.length;
+
+	let elementCounter = 0;
+	let	invalidCounter = 0;
 
 	/* process element */
 
-	elementArray.forEach(function (elementValue)
+	elementArray.forEach(elementValue =>
 	{
 		/* process class */
 
 		if (elementValue.classArray.length)
 		{
-			elementValue.classArray.forEach(function (classValue)
+			elementValue.classArray.forEach(classValue =>
 			{
 				invalidCounter = 0;
 
 				/* process ruleset */
 
-				Object.keys(rulesetArray).forEach(function (rulesetValue, rulesetIndex)
+				Object.keys(rulesetArray).forEach((rulesetValue, rulesetIndex) =>
 				{
 					if (classValue.startsWith(rulesetValue))
 					{
@@ -135,12 +136,12 @@ function openPage(page, instance, defer)
 {
 	page
 		.open(option.get('file') || option.get('url'))
-		.then(function (status)
+		.then(status =>
 		{
 			if (status)
 			{
 				getElement(page, option.get('selector'))
-					.then(function (elementArray)
+					.then(elementArray =>
 					{
 						validateElement(elementArray, ruleset.get(option.get('namespace')));
 						reporter.result(option.get('threshold'));
@@ -171,10 +172,10 @@ function parseHTML(page, instance, defer)
 {
 	page
 		.property('content', option.get('html'))
-		.then(function ()
+		.then(() =>
 		{
 			getElement(page, option.get('selector'))
-				.then(function (elementArray)
+				.then(elementArray =>
 				{
 					validateElement(elementArray, ruleset.get(option.get('namespace')));
 					reporter.result(option.get('threshold'));
@@ -195,10 +196,9 @@ function parseHTML(page, instance, defer)
 
 function inject(dependency)
 {
-	if (dependency.phantom && dependency.promise && dependency.reporter && dependency.ruleset && dependency.option)
+	if (dependency.phantom && dependency.reporter && dependency.ruleset && dependency.option)
 	{
 		phantom = dependency.phantom;
-		promise = dependency.promise;
 		reporter = dependency.reporter;
 		ruleset = dependency.ruleset;
 		option = dependency.option;
@@ -215,10 +215,10 @@ function inject(dependency)
 
 function init()
 {
-	var instance,
-		defer;
+	let instance;
+	let defer;
 
-	return new promise(function (resolve, reject)
+	return new Promise((resolve, reject) =>
 	{
 		defer =
 		{
@@ -227,12 +227,12 @@ function init()
 		};
 		phantom
 			.create()
-			.then(function (currentInstance)
+			.then(currentInstance =>
 			{
 				instance = currentInstance;
 				return instance.createPage();
 			})
-			.then(function (page)
+			.then(page =>
 			{
 				reporter.header();
 				if (option.get('html'))
@@ -254,7 +254,7 @@ function init()
 
 module.exports = function (dependency)
 {
-	var exports =
+	const exports =
 	{
 		init: init,
 		inject: inject
