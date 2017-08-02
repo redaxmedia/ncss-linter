@@ -1,4 +1,5 @@
 var phantom = require('phantom'),
+	promise = require('bluebird'),
 	expect = require('chai').expect,
 	core = require('../src/core'),
 	reporter = require('../src/reporter'),
@@ -25,6 +26,7 @@ describe('core', function ()
 				CORE = new core(
 				{
 					phantom: phantom,
+					promise: promise,
 					reporter: REPORTER,
 					ruleset: ruleset,
 					option: option

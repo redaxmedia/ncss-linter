@@ -2,6 +2,7 @@
 
 var command = require('commander'),
 	phantom = require('phantom'),
+	promise = require('bluebird'),
 	core = require('../src/core'),
 	reporter = require('../src/reporter'),
 	ruleset = require('../src/ruleset'),
@@ -40,6 +41,7 @@ if (command.html || command.file || command.url)
 	CORE = new core(
 	{
 		phantom: phantom,
+		promise: promise,
 		reporter: REPORTER,
 		ruleset: ruleset,
 		option: option

@@ -1,4 +1,5 @@
 var phantom,
+	promise,
 	reporter,
 	ruleset,
 	option;
@@ -194,9 +195,10 @@ function parseHTML(page, instance, defer)
 
 function inject(dependency)
 {
-	if (dependency.phantom && dependency.reporter && dependency.ruleset && dependency.option)
+	if (dependency.phantom && dependency.promise && dependency.reporter && dependency.ruleset && dependency.option)
 	{
 		phantom = dependency.phantom;
+		promise = dependency.promise;
 		reporter = dependency.reporter;
 		ruleset = dependency.ruleset;
 		option = dependency.option;
@@ -216,7 +218,7 @@ function init()
 	var instance,
 		defer;
 
-	return new Promise(function (resolve, reject)
+	return new promise(function (resolve, reject)
 	{
 		defer =
 		{
