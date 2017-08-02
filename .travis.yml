@@ -7,8 +7,9 @@ node_js:
 
 install:
 - npm install --global ied
+- npm install --global phantomjs-prebuilt
 - ied install
 
 script:
 - npm run lint
-- DEBUG=true npm test
+- npm test

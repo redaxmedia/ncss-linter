@@ -77,10 +77,7 @@ function validateElement(elementArray, rulesetArray)
 					if (fragmentArray[0] === rulesetValue || fragmentArray[1] === rulesetValue)
 					{
 						elementValue.validClass = ++invalidCounter < rulesetTotal;
-						if (rulesetArray[rulesetValue])
-						{
-							elementValue.validTag = rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1;
-						}
+						elementValue.validTag = rulesetArray[rulesetValue] ? rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1 : true
 					}
 				});
 			});
@@ -220,7 +217,10 @@ function init()
 			reject: reject
 		};
 		phantom
-			.create()
+			.create([],
+			{
+				logLevel: option.get('loglevel')
+			})
 			.then(currentInstance =>
 			{
 				instance = currentInstance;
