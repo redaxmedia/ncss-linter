@@ -8,7 +8,8 @@ node_js:
 - 8
 
 install:
-- npm install --global ied phantomjs
+- npm install --global ied
+- npm install --global phantomjs-prebuilt
 - ied install
 
 script:
