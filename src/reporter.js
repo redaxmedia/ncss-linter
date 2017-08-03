@@ -1,4 +1,5 @@
-const colors = require('colors');
+require('colors');
+
 const wordingArray = require('../wording.json');
 const packageArray = require('../package.json');
 
