@@ -1,3 +1,4 @@
+const colors = require('colors');
 const wordingArray = require('../wording.json');
 const packageArray = require('../package.json');
 
@@ -156,15 +157,15 @@ function result(threshold)
 {
 	if (reportArray.error.length === 0 && reportArray.warn.length === 0 && reportArray.info.length === 3)
 	{
-		_log('\n' + wordingArray.something_wrong.toUpperCase() + wordingArray.exclamation_mark + '\n');
+		_log('\n' + wordingArray.something_wrong.toUpperCase().yellow + wordingArray.exclamation_mark.yellow + '\n');
 	}
 	else if (reportArray.error.length > threshold)
 	{
-		_log('\n' + wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
+		_log('\n' + wordingArray.failed.toUpperCase().red + wordingArray.exclamation_mark.red + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
 	}
 	else
 	{
-		_log('\n' + wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark + '\n');
+		_log('\n' + wordingArray.passed.toUpperCase().green + wordingArray.exclamation_mark.green + '\n');
 	}
 }
 
@@ -178,20 +179,20 @@ function summary()
 {
 	if (reportArray.error.length)
 	{
-		_logError('\n' + wordingArray.errors.toUpperCase() + wordingArray.colon + '\n');
+		_logError('\n');
 		reportArray.error.forEach(function (reportValue)
 		{
 			if (reportValue.type === 'invalid-namespace')
 			{
-				_logError(wordingArray.invalid_namespace);
+				_logError(wordingArray.error.red + wordingArray.colon + ' ' + wordingArray.invalid_namespace);
 			}
 			if (reportValue.type === 'invalid-class')
 			{
-				_logError(wordingArray.invalid_class);
+				_logError(wordingArray.error.red + wordingArray.colon + ' ' + wordingArray.invalid_class);
 			}
 			if (reportValue.type === 'invalid-tag')
 			{
-				_logError(wordingArray.invalid_tag);
+				_logError(wordingArray.error.red + wordingArray.colon + ' ' + wordingArray.invalid_tag);
 			}
 			if (reportValue.selector)
 			{

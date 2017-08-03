@@ -15,6 +15,7 @@
 	},
 	"dependencies":
 	{
+		"colors": "1.1.2",
 		"commander": "2.11.0",
 		"extend": "3.0.1",
 		"phantom": "4.0.5"

@@ -2,7 +2,7 @@
 	"invalid_namespace": "invalid namespace",
 	"invalid_class": "invalid class",
 	"invalid_tag": "invalid tag",
-	"errors": "errors",
+	"error": "error",
 	"errors_found": "errors found",
 	"by": "by",
 	"something_wrong": "something went wrong",
