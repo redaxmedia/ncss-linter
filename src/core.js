@@ -54,7 +54,7 @@ function validateElement(elementArray, rulesetArray)
 
 	let fragmentArray = [];
 	let elementCounter = 0;
-	let	invalidCounter = 0;
+	let invalidCounter = 0;
 
 	/* process element */
 
