@@ -35,7 +35,7 @@
 	[
 		"aside"
 	],
-	"component-": null,
+	"component": null,
 	"audio":
 	[
 		"audio",
@@ -89,6 +89,7 @@
 	"image":
 	[
 		"img",
+		"canvas",
 		"object",
 		"picture",
 		"svg"
