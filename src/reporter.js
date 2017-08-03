@@ -1,10 +1,9 @@
-require('colors');
-
+const colors = require('colors');
 const wordingArray = require('../wording.json');
 const packageArray = require('../package.json');
 
-let reportArray = {};
 let option;
+let reportArray = {};
 
 /**
  * get the report
@@ -158,15 +157,15 @@ function result(threshold)
 {
 	if (reportArray.error.length === 0 && reportArray.warn.length === 0 && reportArray.info.length === 3)
 	{
-		_log('\n' + wordingArray.something_wrong.toUpperCase().yellow + wordingArray.exclamation_mark.yellow + '\n');
+		_log('\n' + colors.yellow(wordingArray.something_wrong.toUpperCase() + wordingArray.exclamation_mark) + '\n');
 	}
 	else if (reportArray.error.length > threshold)
 	{
-		_log('\n' + wordingArray.failed.toUpperCase().red + wordingArray.exclamation_mark.red + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
+		_log('\n' + colors.red(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark) + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
 	}
 	else
 	{
-		_log('\n' + wordingArray.passed.toUpperCase().green + wordingArray.exclamation_mark.green + '\n');
+		_log('\n' + colors.green(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark) + '\n');
 	}
 }
 
@@ -185,15 +184,15 @@ function summary()
 		{
 			if (reportValue.type === 'invalid-namespace')
 			{
-				_logError(wordingArray.error.red + wordingArray.colon + ' ' + wordingArray.invalid_namespace);
+				_logError(colors.red(wordingArray.error) + wordingArray.colon + ' ' + wordingArray.invalid_namespace);
 			}
 			if (reportValue.type === 'invalid-class')
 			{
-				_logError(wordingArray.error.red + wordingArray.colon + ' ' + wordingArray.invalid_class);
+				_logError(colors.red(wordingArray.error) + wordingArray.colon + ' ' + wordingArray.invalid_class);
 			}
 			if (reportValue.type === 'invalid-tag')
 			{
-				_logError(wordingArray.error.red + wordingArray.colon + ' ' + wordingArray.invalid_tag);
+				_logError(colors.red(wordingArray.error) + wordingArray.colon + ' ' + wordingArray.invalid_tag);
 			}
 			if (reportValue.selector)
 			{

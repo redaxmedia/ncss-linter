@@ -1,4 +1,5 @@
-let phantom;
+const phantom = require('phantom');
+
 let reporter;
 let ruleset;
 let option;
@@ -74,7 +75,7 @@ function validateElement(elementArray, rulesetArray)
 				Object.keys(rulesetArray).forEach((rulesetValue) =>
 				{
 					elementValue.validNamespace = namespace ? namespace === fragmentArray[0] : true;
-					if (fragmentArray[0] === rulesetValue || fragmentArray[1] === rulesetValue)
+					if (!namespace && fragmentArray[0] === rulesetValue || namespace && fragmentArray[1] === rulesetValue)
 					{
 						elementValue.validClass = ++invalidCounter < rulesetTotal;
 						elementValue.validTag = rulesetArray[rulesetValue] ? rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1 : true
@@ -265,9 +266,8 @@ function construct(dependency)
 
 	/* inject dependency */
 
-	if (dependency.phantom && dependency.reporter && dependency.ruleset && dependency.option)
+	if (dependency.reporter && dependency.ruleset && dependency.option)
 	{
-		phantom = dependency.phantom;
 		reporter = dependency.reporter;
 		ruleset = dependency.ruleset;
 		option = dependency.option;

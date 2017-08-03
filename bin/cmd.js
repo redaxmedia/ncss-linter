@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const command = require('commander');
-const phantom = require('phantom');
 const core = require('../src/core');
 const reporter = require('../src/reporter');
 const ruleset = require('../src/ruleset');
@@ -46,7 +45,6 @@ if (command.html || command.file || command.url)
 	});
 	CORE = new core(
 	{
-		phantom: phantom,
 		reporter: REPORTER,
 		ruleset: ruleset,
 		option: option

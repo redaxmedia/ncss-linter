@@ -1,4 +1,3 @@
-const phantom = require('phantom');
 const expect = require('chai').expect;
 const core = require('../src/core');
 const reporter = require('../src/reporter');
@@ -25,7 +24,6 @@ describe('core', () =>
 				});
 				CORE = new core(
 				{
-					phantom: phantom,
 					reporter: REPORTER,
 					ruleset: ruleset,
 					option: option
