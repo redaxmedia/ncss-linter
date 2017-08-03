@@ -10,7 +10,7 @@ NCSS Linter
 
 
 Installation
-============
+------------
 
 ```
 npm install ncss-linter
@@ -18,7 +18,7 @@ npm install ncss-linter
 
 
 Usage
-=====
+-----
 
 ```
 bin/cmd [options]
@@ -37,7 +37,7 @@ bin/cmd [options]
 
 
 Examples
-========
+--------
 
 Validate a `HTML` string:
 
