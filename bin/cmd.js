@@ -21,6 +21,8 @@ command
 	.option('-S, --selector <selector>')
 	.option('-T, --threshold <threshold>')
 	.option('-L, --loglevel <loglevel>')
+	.option('-Y, --haltonerror')
+	.option('-Z, --haltonwarn')
 	.parse(process.argv);
 
 if (command.html || command.file || command.url)
@@ -34,7 +36,9 @@ if (command.html || command.file || command.url)
 		divider: command.divider,
 		selector: command.selector,
 		threshold: command.threshold,
-		loglevel: command.loglevel
+		loglevel: command.loglevel,
+		haltonerror: command.haltonerror,
+		haltonwarn: command.haltonwarn
 	});
 	REPORTER = new reporter(
 	{

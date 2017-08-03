@@ -4,7 +4,8 @@
 		{
 			"html": "<div>{{ empty class && empty namespace }}</div>",
 			"namespace": null,
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
@@ -15,7 +16,7 @@
 					"selector": "div"
 				}
 			],
-			"warning": [],
+			"warn": [],
 			"error": []
 		}
 	},
@@ -24,12 +25,13 @@
 		{
 			"html": "<div class=\"foo\">{{ empty class && valid namespace }}</div>",
 			"namespace": "foo",
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
 			"info": [],
-			"warning": [],
+			"warn": [],
 			"error":
 			[
 				{
@@ -44,12 +46,13 @@
 		{
 			"html": "<div class=\"bar\">{{ empty class && invalid namespace }}</div>",
 			"namespace": "foo",
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
 			"info": [],
-			"warning": [],
+			"warn": [],
 			"error":
 			[
 				{
@@ -64,7 +67,8 @@
 		{
 			"html": "<div class=\"box-valid\">{{ valid class && empty namespace }}</div>",
 			"namespace": null,
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
@@ -75,7 +79,7 @@
 					"selector": "div.box-valid"
 				}
 			],
-			"warning": [],
+			"warn": [],
 			"error": []
 		}
 	},
@@ -84,7 +88,8 @@
 		{
 			"html": "<div class=\"foo-box-valid\">{{ valid class && valid namespace }}</div>",
 			"namespace": "foo",
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
@@ -95,7 +100,7 @@
 					"selector": "div.foo-box-valid"
 				}
 			],
-			"warning": [],
+			"warn": [],
 			"error": []
 		}
 	},
@@ -104,12 +109,13 @@
 		{
 			"html": "<div class=\"bar-box-invalid\">{{ valid class && invalid namespace }}</div>",
 			"namespace": "foo",
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
 			"info": [],
-			"warning": [],
+			"warn": [],
 			"error":
 			[
 				{
@@ -124,12 +130,13 @@
 		{
 			"html": "<div class=\"invalid\">{{ invalid class && empty namespace }}</div>",
 			"namespace": null,
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
 			"info": [],
-			"warning": [],
+			"warn": [],
 			"error":
 			[
 				{
@@ -144,12 +151,13 @@
 		{
 			"html": "<div class=\"foo-invalid\">{{ invalid class && valid namespace }}</div>",
 			"namespace": "foo",
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
 			"info": [],
-			"warning": [],
+			"warn": [],
 			"error":
 			[
 				{
@@ -164,12 +172,13 @@
 		{
 			"html": "<div class=\"bar-invalid\">{{ invalid class && invalid namespace }}</div>",
 			"namespace": "foo",
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
 			"info": [],
-			"warning": [],
+			"warn": [],
 			"error":
 			[
 				{
@@ -184,12 +193,13 @@
 		{
 			"html": "<span class=\"box-invalid\">{{ invalid tag && valid class && empty namespace }}</span>",
 			"namespace": null,
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
 			"info": [],
-			"warning": [],
+			"warn": [],
 			"error":
 			[
 				{
@@ -204,12 +214,13 @@
 		{
 			"html": "<span class=\"foo-box-invalid\">{{ invalid tag && valid class && valid namespace }}</span>",
 			"namespace": "foo",
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
 			"info": [],
-			"warning": [],
+			"warn": [],
 			"error":
 			[
 				{
@@ -224,12 +235,13 @@
 		{
 			"html": "<span class=\"bar-box-invalid\">{{ invalid tag && valid class && invalid namespace }}</span>",
 			"namespace": "foo",
-			"selector": "*:not(html):not(head):not(body)"
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
 		},
 		"reportArray":
 		{
 			"info": [],
-			"warning": [],
+			"warn": [],
 			"error":
 			[
 				{

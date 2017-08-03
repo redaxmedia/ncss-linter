@@ -6,5 +6,7 @@
 	"divider": "-",
 	"selector": "*",
 	"threshold": 0,
-	"loglevel": "silent"
+	"loglevel": "warn",
+	"haltonerror": false,
+	"haltonwarn": false
 }

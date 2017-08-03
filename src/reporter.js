@@ -28,7 +28,7 @@ function clearReport()
 	reportArray =
 	{
 		info: [],
-		warning: [],
+		warn: [],
 		error: []
 	};
 }
@@ -41,7 +41,8 @@ function clearReport()
 
 function header()
 {
-	_log(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author.name + wordingArray.point + '\n\n');
+	_log(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author.name + wordingArray.point + '\n');
+	_logInfo('\n')
 }
 
 /**
@@ -54,7 +55,7 @@ function header()
 
 function pass(passArray)
 {
-	_log('.');
+	_logInfo('.');
 	if (passArray.type && passArray.selector)
 	{
 		reportArray.info.push(
@@ -77,15 +78,15 @@ function fail(failArray)
 {
 	if (failArray.type === 'invalid-namespace')
 	{
-		_log('N');
+		_logInfo('N');
 	}
 	if (failArray.type === 'invalid-class')
 	{
-		_log('C');
+		_logInfo('C');
 	}
 	if (failArray.type === 'invalid-tag')
 	{
-		_log('T');
+		_logInfo('T');
 	}
 	if (failArray.type && failArray.selector)
 	{
@@ -107,7 +108,7 @@ function fail(failArray)
 
 function skip(skipArray)
 {
-	_log('.');
+	_logInfo('.');
 	if (skipArray.type && skipArray.selector)
 	{
 		reportArray.info.push(
@@ -133,9 +134,13 @@ function end(counter, total)
 	{
 		if (counter === 60)
 		{
-			_log(' ');
+			_logInfo(' ');
 		}
-		_log(' ' + counter + ' / ' + total + ' (' + Math.ceil(counter / total * 100) + '%)\n');
+		_logInfo(' ' + counter + ' / ' + total + ' (' + Math.ceil(counter / total * 100) + '%)\n');
+	}
+	if (counter === total)
+	{
+		_logInfo('\n');
 	}
 }
 
@@ -149,17 +154,17 @@ function end(counter, total)
 
 function result(threshold)
 {
-	_log('\n\n');
-
-	/* result message */
-
-	if (reportArray.error.length > threshold)
+	if (reportArray.error.length === 0 && reportArray.warn.length === 0 && reportArray.info.length === 3)
 	{
-		_log(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
+		_log('\n' + wordingArray.something_wrong.toUpperCase() + wordingArray.exclamation_mark + '\n');
+	}
+	else if (reportArray.error.length > threshold)
+	{
+		_log('\n' + wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
 	}
 	else
 	{
-		_log(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark + '\n');
+		_log('\n' + wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark + '\n');
 	}
 }
 
@@ -173,24 +178,24 @@ function summary()
 {
 	if (reportArray.error.length)
 	{
-		_log('\n' + wordingArray.summary.toUpperCase() + wordingArray.colon + '\n');
+		_logError('\n' + wordingArray.errors.toUpperCase() + wordingArray.colon + '\n');
 		reportArray.error.forEach(function (reportValue)
 		{
 			if (reportValue.type === 'invalid-namespace')
 			{
-				_log(wordingArray.invalid_namespace);
+				_logError(wordingArray.invalid_namespace);
 			}
 			if (reportValue.type === 'invalid-class')
 			{
-				_log(wordingArray.invalid_class);
+				_logError(wordingArray.invalid_class);
 			}
 			if (reportValue.type === 'invalid-tag')
 			{
-				_log(wordingArray.invalid_tag);
+				_logError(wordingArray.invalid_tag);
 			}
 			if (reportValue.selector)
 			{
-				_log(' ' + wordingArray.divider + ' ' + reportValue.selector + '\n');
+				_logError(' ' + wordingArray.divider + ' ' + reportValue.selector + '\n');
 			}
 		});
 	}
@@ -206,7 +211,50 @@ function summary()
 
 function _log(message)
 {
-	if (option.get('loglevel') !== 'silent')
+	const loglevel = option.get('loglevel');
+
+	if (loglevel !== 'silent')
+	{
+		process.stdout.write(message);
+	}
+}
+
+/**
+ * log error
+ *
+ * @since 1.0.0
+ *
+ * @param message string
+ */
+
+function _logError(message)
+{
+	const loglevel = option.get('loglevel');
+	const haltonerror = option.get('haltonerror');
+
+	if (loglevel === 'error' || loglevel === 'warn' || loglevel === 'info' || loglevel === 'debug')
+	{
+		if (haltonerror)
+		{
+			process.exit(1);
+		}
+		process.stderr.write(message);
+	}
+}
+
+/**
+ * log info
+ *
+ * @since 1.0.0
+ *
+ * @param message string
+ */
+
+function _logInfo(message)
+{
+	const loglevel = option.get('loglevel');
+
+	if (loglevel === 'info' || loglevel === 'debug')
 	{
 		process.stdout.write(message);
 	}

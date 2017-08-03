@@ -1,10 +1,11 @@
 {
-	"summary": "summary",
 	"invalid_namespace": "invalid namespace",
 	"invalid_class": "invalid class",
 	"invalid_tag": "invalid tag",
+	"errors": "errors",
 	"errors_found": "errors found",
 	"by": "by",
+	"something_wrong": "something went wrong",
 	"passed": "passed",
 	"failed": "failed",
 	"divider": ">",

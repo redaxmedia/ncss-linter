@@ -32,6 +32,8 @@ bin/cmd [options]
 -S, --selector <selector>
 -T, --threshold <threshold>
 -L, --loglevel <loglevel>
+-Y, --haltonerror
+-Z, --haltonwarn
 -h, --help
 ```
 
