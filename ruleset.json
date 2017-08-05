@@ -3,10 +3,6 @@
 	[
 		"article"
 	],
-	"address":
-	[
-		"address"
-	],
 	"body":
 	[
 		"body"
@@ -36,6 +32,10 @@
 		"aside"
 	],
 	"component": null,
+	"address":
+	[
+		"address"
+	],
 	"audio":
 	[
 		"audio",
