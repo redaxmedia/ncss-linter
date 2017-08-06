@@ -51,6 +51,7 @@ function validateElement(elementArray, rulesetArray)
 	const rulesetTotal = Object.keys(rulesetArray).length;
 	const elementTotal = elementArray.length;
 	const namespace = option.get('namespace');
+	const namespaceArray = namespace ? namespace.split(',') : [];
 	const divider = option.get('divider');
 
 	let fragmentArray = [];
@@ -74,11 +75,11 @@ function validateElement(elementArray, rulesetArray)
 
 				Object.keys(rulesetArray).forEach((rulesetValue) =>
 				{
-					elementValue.validNamespace = namespace ? namespace === fragmentArray[0] : true;
+					elementValue.validNamespace = namespace ? namespaceArray.indexOf(fragmentArray[0]) > -1 : true;
 					if (!namespace && fragmentArray[0] === rulesetValue || namespace && fragmentArray[1] === rulesetValue)
 					{
 						elementValue.validClass = ++invalidCounter < rulesetTotal;
-						elementValue.validTag = rulesetArray[rulesetValue] ? rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1 : true
+						elementValue.validTag = rulesetArray[rulesetValue] ? rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1 : true;
 					}
 				});
 			});
