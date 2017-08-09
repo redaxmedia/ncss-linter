@@ -1,4 +1,5 @@
 const phantom = require('phantom');
+const fs = require('fs');
 
 let reporter;
 let ruleset;
@@ -52,7 +53,7 @@ function validateElement(elementArray, rulesetArray)
 	const elementTotal = elementArray.length;
 	const namespace = option.get('namespace');
 	const namespaceArray = namespace ? namespace.split(',') : [];
-	const divider = option.get('divider');
+	const separator = option.get('separator');
 
 	let fragmentArray = [];
 	let elementCounter = 0;
@@ -69,7 +70,7 @@ function validateElement(elementArray, rulesetArray)
 			elementValue.classArray.forEach(classValue =>
 			{
 				invalidCounter = 0;
-				fragmentArray = classValue.split(divider);
+				fragmentArray = classValue.split(separator);
 
 				/* process ruleset */
 
@@ -135,36 +136,73 @@ function validateElement(elementArray, rulesetArray)
 }
 
 /**
+ * read path
+ *
+ * @since 1.3.0
+ *
+ * @para, path string
+ *
+ * @return promise object
+ */
+
+function readPath(path)
+{
+	let content;
+
+	return new Promise(resolve =>
+	{
+		const statSync = fs.statSync(path);
+
+		if (statSync.isDirectory())
+		{
+			fs.readdir(path, (error, directoryArray) =>
+			{
+				directoryArray.forEach((children, childrenIndex, childrenArray) =>
+				{
+					readPath(path + '/' + children)
+						.then(fileContent =>
+						{
+							content += fileContent;
+							if (childrenIndex === childrenArray.length - 1)
+							{
+								resolve(content);
+							}
+						});
+				});
+			});
+		}
+		else if (statSync.isFile())
+		{
+			fs.readFile(path, 'utf-8', (error, fileContent) =>
+			{
+				resolve(fileContent);
+			});
+		}
+	});
+}
+
+/**
  * open page
  *
  * @since 1.0.0
  *
+ * @param url string
  * @param page object
- * @param instance object
  * @param defer object
  */
 
-function openPage(page, instance, defer)
+function openPage(url, page, defer)
 {
 	page
-		.open(option.get('file') || option.get('url'))
+		.open(url)
 		.then(status =>
 		{
 			if (status)
 			{
-				getElement(page, option.get('selector'))
-					.then(elementArray =>
-					{
-						validateElement(elementArray, ruleset.get(option.get('namespace')));
-						reporter.result(option.get('threshold'));
-						reporter.summary();
-						instance.exit();
-						defer.resolve();
-					});
+				_processPage(page, defer);
 			}
 			else
 			{
-				instance.exit();
 				defer.reject();
 			}
 		});
@@ -175,26 +213,40 @@ function openPage(page, instance, defer)
  *
  * @since 1.0.0
  *
+ * @param content string
  * @param page object
- * @param instance object
  * @param defer object
  */
 
-function parseHTML(page, instance, defer)
+function parseHTML(content, page, defer)
 {
 	page
-		.property('content', option.get('html'))
+		.property('content', content)
 		.then(() =>
 		{
-			getElement(page, option.get('selector'))
-				.then(elementArray =>
-				{
-					validateElement(elementArray, ruleset.get(option.get('namespace')));
-					reporter.result(option.get('threshold'));
-					reporter.summary();
-					instance.exit();
-					defer.resolve();
-				});
+			_processPage(page, defer);
+		});
+}
+
+/**
+ * process page
+ *
+ * @since 1.3.0
+ *
+ * @param page object
+ * @param defer object
+ */
+
+function _processPage(page, defer)
+{
+	const threshold = option.get('threshold');
+
+	getElement(page, option.get('selector'))
+		.then(elementArray => {
+			validateElement(elementArray, ruleset.get(option.get('namespace')));
+			reporter.result(threshold);
+			reporter.summary(threshold);
+			defer.resolve();
 		});
 }
 
@@ -233,18 +285,37 @@ function init()
 				reporter.header();
 				if (option.get('html'))
 				{
-					parseHTML(page, instance, defer);
+					parseHTML(option.get('html'), page, defer);
 				}
-				else if (option.get('file') || option.get('url'))
+				else if (option.get('path'))
 				{
-					openPage(page, instance, defer);
+					readPath(option.get('path'))
+						.then(content =>
+						{
+							parseHTML(content, page, defer);
+						})
+						.catch(() =>
+						{
+							defer.reject();
+						});
+				}
+				else if (option.get('url'))
+				{
+					openPage(option.get('url'), page, defer);
 				}
 				else
 				{
-					instance.exit();
 					defer.reject();
 				}
 			});
+	})
+	.then(() =>
+	{
+		instance.exit();
+	})
+	.catch(() =>
+	{
+		instance.exit();
 	});
 }
 

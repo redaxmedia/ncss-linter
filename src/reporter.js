@@ -173,11 +173,13 @@ function result(threshold)
  * summary
  *
  * @since 1.0.0
+ *
+ * @param threshold number
  */
 
-function summary()
+function summary(threshold)
 {
-	if (reportArray.error.length)
+	if (reportArray.error.length > threshold)
 	{
 		_logError('\n');
 		reportArray.error.forEach(function (reportValue)

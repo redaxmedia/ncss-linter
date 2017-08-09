@@ -1,9 +1,9 @@
 {
 	"html": null,
-	"file": null,
+	"path": null,
 	"url": null,
 	"namespace": null,
-	"divider": "-",
+	"separator": "-",
 	"selector": "*",
 	"threshold": 0,
 	"loglevel": "warn",

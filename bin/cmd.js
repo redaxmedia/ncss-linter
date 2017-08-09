@@ -13,10 +13,10 @@ let CORE;
 command
 	.version(packageArray.version)
 	.option('-H, --html <html>')
-	.option('-F, --file <file>')
+	.option('-P, --path <path>')
 	.option('-U, --url <url>')
 	.option('-N, --namespace <namespace>')
-	.option('-D, --divider <divider>')
+	.option('-E, --separator <separator>')
 	.option('-S, --selector <selector>')
 	.option('-T, --threshold <threshold>')
 	.option('-L, --loglevel <loglevel>')
@@ -24,15 +24,15 @@ command
 	.option('-Z, --haltonwarn')
 	.parse(process.argv);
 
-if (command.html || command.file || command.url)
+if (command.html || command.path || command.url)
 {
 	option.init(
 	{
 		html: command.html,
-		file: command.file,
+		path: command.path,
 		url: command.url,
 		namespace: command.namespace,
-		divider: command.divider,
+		separator: command.separator,
 		selector: command.selector,
 		threshold: command.threshold,
 		loglevel: command.loglevel,
