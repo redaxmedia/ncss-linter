@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 const command = require('commander');
-const core = require('../src/core');
-const reporter = require('../src/reporter');
-const ruleset = require('../src/ruleset');
-const option = require('../src/option');
+const ncss = require('../');
+const core = ncss.core;
+const reporter = ncss.reporter;
+const ruleset = ncss.ruleset;
+const option = ncss.option;
 const packageArray = require('../package.json');
 
 let REPORTER;

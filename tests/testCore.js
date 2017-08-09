@@ -1,8 +1,9 @@
 const expect = require('chai').expect;
-const core = require('../src/core');
-const reporter = require('../src/reporter');
-const ruleset = require('../src/ruleset');
-const option = require('../src/option');
+const ncss = require('../');
+const core = ncss.core;
+const reporter = ncss.reporter;
+const ruleset = ncss.ruleset;
+const option = ncss.option;
 
 let REPORTER;
 let CORE;
