@@ -271,7 +271,10 @@ function init()
 			reject: reject
 		};
 		phantom
-			.create([],
+			.create(
+			[
+				'--load-images=no'
+			],
 			{
 				logLevel: option.get('loglevel')
 			})
