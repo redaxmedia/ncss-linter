@@ -25,7 +25,7 @@ bin/cmd [options]
 
 -V, --version
 -H, --html <html>
--P, --path <pth>
+-P, --path <path>
 -U, --url <url>
 -N, --namespace <namespace>
 -E, --separator <separator>
