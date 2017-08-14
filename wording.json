@@ -1,9 +1,12 @@
 {
+	"invalid_character": "invalid character",
 	"invalid_namespace": "invalid namespace",
 	"invalid_class": "invalid class",
 	"invalid_tag": "invalid tag",
 	"error": "error",
 	"errors_found": "errors found",
+	"warning": "warning",
+	"warnings_found": "warnings found",
 	"by": "by",
 	"something_wrong": "something went wrong",
 	"passed": "passed",

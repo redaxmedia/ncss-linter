@@ -76,6 +76,7 @@ function validateElement(elementArray, rulesetArray)
 
 				Object.keys(rulesetArray).forEach((rulesetValue) =>
 				{
+					elementValue.validCharacter = !classValue.match(/[^\w-_]/g);
 					elementValue.validNamespace = namespace ? namespaceArray.indexOf(fragmentArray[0]) > -1 : true;
 					if (!namespace && fragmentArray[0] === rulesetValue || namespace && fragmentArray[1] === rulesetValue)
 					{
@@ -87,7 +88,15 @@ function validateElement(elementArray, rulesetArray)
 
 			/* collect and print */
 
-			if (!elementValue.validNamespace)
+			if (!elementValue.validCharacter)
+			{
+				reporter.warn(
+				{
+					type: 'invalid-character',
+					selector: elementValue.tagName
+				});
+			}
+			else if (!elementValue.validNamespace)
 			{
 				reporter.fail(
 				{
