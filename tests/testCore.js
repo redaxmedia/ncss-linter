@@ -37,7 +37,7 @@ describe('core', () =>
 						done();
 					});
 			})
-			.timeout(500);
+			.timeout(1000);
 		});
 	});
 });
