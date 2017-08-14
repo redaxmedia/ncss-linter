@@ -167,17 +167,18 @@ function _validateElement(elementValue)
 function _readPath(path)
 {
 	let content;
+	let readCounter = 0;
 
 	return new Promise(resolve =>
 	{
 		glob(path, (error, pathArray) =>
 		{
-			pathArray.forEach((fileValue, fileIndex) =>
+			pathArray.forEach(fileValue =>
 			{
 				fs.readFile(fileValue, 'utf-8', (fileError, fileContent) =>
 				{
 					content += fileContent;
-					if (fileIndex === pathArray.length - 1)
+					if (++readCounter === pathArray.length)
 					{
 						resolve(content);
 					}
