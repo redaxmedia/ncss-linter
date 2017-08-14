@@ -324,7 +324,7 @@ function _logInfo(message)
 }
 
 /**
- * get loglevel
+ * get the loglevel
  *
  * @since 1.4.0
  *
@@ -369,6 +369,7 @@ function construct(dependency)
 	const exports =
 	{
 		getReport: getReport,
+		clearReport: clearReport(),
 		header: header,
 		pass: pass,
 		warn: warn,

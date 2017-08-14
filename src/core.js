@@ -7,7 +7,7 @@ let ruleset;
 let option;
 
 /**
- * get element
+ * get the element
  *
  * @since 1.0.0
  *
@@ -17,7 +17,7 @@ let option;
  * @return promise
  */
 
-function getElement(page, selector)
+function _getElement(page, selector)
 {
 	return page
 		.invokeMethod('evaluate', function(selector)
@@ -40,56 +40,24 @@ function getElement(page, selector)
 }
 
 /**
- * validate element
+ * process the element
  *
- * @since 1.0.0
+ * @since 1.4.0
  *
  * @param elementArray array
- * @param rulesetArray array
  */
 
-function validateElement(elementArray, rulesetArray)
+function _processElement(elementArray)
 {
-	const rulesetTotal = Object.keys(rulesetArray).length;
-	const elementTotal = elementArray.length;
-	const namespace = option.get('namespace');
-	const namespaceArray = namespace ? namespace.split(',') : [];
-	const separator = option.get('separator');
-
-	let fragmentArray = [];
-	let elementCounter = 0;
-	let invalidCounter = 0;
-
-	/* process element */
-
-	elementArray.forEach(elementValue =>
+	elementArray.forEach((elementValue, elementIndex) =>
 	{
-		/* process class */
-
 		if (elementValue.classArray.length)
 		{
-			elementValue.classArray.forEach(classValue =>
-			{
-				invalidCounter = 0;
-				fragmentArray = classValue.split(separator);
+			const validateArray = _validateElement(elementValue);
 
-				/* process ruleset */
+			/* report as needed */
 
-				Object.keys(rulesetArray).forEach(rulesetValue =>
-				{
-					elementValue.validCharacter = !classValue.match(/[^\w-_]/g);
-					elementValue.validNamespace = namespace ? namespaceArray.indexOf(fragmentArray[0]) > -1 : true;
-					if (!namespace && fragmentArray[0] === rulesetValue || namespace && fragmentArray[1] === rulesetValue)
-					{
-						elementValue.validClass = ++invalidCounter < rulesetTotal;
-						elementValue.validTag = rulesetArray[rulesetValue] ? rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1 : true;
-					}
-				});
-			});
-
-			/* collect and print */
-
-			if (!elementValue.validCharacter)
+			if (!validateArray.character)
 			{
 				reporter.warn(
 				{
@@ -97,7 +65,7 @@ function validateElement(elementArray, rulesetArray)
 					selector: elementValue.tagName
 				});
 			}
-			else if (!elementValue.validNamespace)
+			else if (!validateArray.namespace)
 			{
 				reporter.fail(
 				{
@@ -105,7 +73,7 @@ function validateElement(elementArray, rulesetArray)
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
-			else if (!elementValue.validClass)
+			else if (!validateArray.class)
 			{
 				reporter.fail(
 				{
@@ -113,7 +81,7 @@ function validateElement(elementArray, rulesetArray)
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
-			else if (!elementValue.validTag)
+			else if (!validateArray.tag)
 			{
 				reporter.fail(
 				{
@@ -141,12 +109,53 @@ function validateElement(elementArray, rulesetArray)
 				selector: elementValue.tagName
 			});
 		}
-		reporter.end(++elementCounter, elementTotal);
+		reporter.end(elementIndex + 1, elementArray.length);
 	});
 }
 
 /**
- * read path
+ * validate the element
+ *
+ * @since 1.4.0
+ *
+ * @param elementValue array
+ *
+ * @return array
+ */
+
+function _validateElement(elementValue)
+{
+	const rulesetArray = ruleset.get();
+	const namespace = option.get('namespace');
+	const namespaceArray = namespace ? namespace.split(',') : [];
+	const separator = option.get('separator');
+
+	let validateArray = [];
+
+	/* process class */
+
+	elementValue.classArray.forEach(classValue =>
+	{
+		const fragmentArray = classValue.split(separator);
+
+		/* process ruleset */
+
+		Object.keys(rulesetArray).forEach(rulesetValue =>
+		{
+			validateArray.character = !classValue.match(/[^\w-_]/g);
+			validateArray.namespace = namespace ? namespaceArray.indexOf(fragmentArray[0]) > -1 : true;
+			if (!namespace && fragmentArray[0] === rulesetValue || namespace && fragmentArray[1] === rulesetValue)
+			{
+				validateArray.class = true;
+				validateArray.tag = rulesetArray[rulesetValue] ? rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1 : true;
+			}
+		});
+	});
+	return validateArray;
+}
+
+/**
+ * read the path
  *
  * @since 1.3.0
  *
@@ -155,7 +164,7 @@ function validateElement(elementArray, rulesetArray)
  * @return promise object
  */
 
-function readPath(path)
+function _readPath(path)
 {
 	let content;
 
@@ -179,7 +188,7 @@ function readPath(path)
 }
 
 /**
- * open page
+ * open the page
  *
  * @since 1.0.0
  *
@@ -188,7 +197,7 @@ function readPath(path)
  * @param defer object
  */
 
-function openPage(url, page, defer)
+function _openPage(url, page, defer)
 {
 	page
 		.open(url)
@@ -206,7 +215,7 @@ function openPage(url, page, defer)
 }
 
 /**
- * parse html
+ * parse the html
  *
  * @since 1.0.0
  *
@@ -215,7 +224,7 @@ function openPage(url, page, defer)
  * @param defer object
  */
 
-function parseHTML(content, page, defer)
+function _parseHTML(content, page, defer)
 {
 	page
 		.property('content', content)
@@ -226,7 +235,7 @@ function parseHTML(content, page, defer)
 }
 
 /**
- * process page
+ * process the page
  *
  * @since 1.3.0
  *
@@ -236,11 +245,13 @@ function parseHTML(content, page, defer)
 
 function _processPage(page, defer)
 {
+	const selector = option.get('selector');
 	const threshold = option.get('threshold');
 
-	getElement(page, option.get('selector'))
-		.then(elementArray => {
-			validateElement(elementArray, ruleset.get(option.get('namespace')));
+	_getElement(page, selector)
+		.then(elementArray =>
+		{
+			_processElement(elementArray);
 			reporter.result(threshold);
 			reporter.summary(threshold);
 			defer.resolve();
@@ -285,14 +296,14 @@ function init()
 				reporter.header();
 				if (option.get('html'))
 				{
-					parseHTML(option.get('html'), page, defer);
+					_parseHTML(option.get('html'), page, defer);
 				}
 				else if (option.get('path'))
 				{
-					readPath(option.get('path'))
+					_readPath(option.get('path'))
 						.then(content =>
 						{
-							parseHTML(content, page, defer);
+							_parseHTML(content, page, defer);
 						})
 						.catch(() =>
 						{
@@ -301,7 +312,7 @@ function init()
 				}
 				else if (option.get('url'))
 				{
-					openPage(option.get('url'), page, defer);
+					_openPage(option.get('url'), page, defer);
 				}
 				else
 				{

@@ -36,8 +36,7 @@ describe('core', () =>
 						expect(REPORTER.getReport()).to.deep.equal(coreValue.reportArray);
 						done();
 					});
-			})
-			.timeout(1000);
+			});
 		});
 	});
 });
