@@ -149,7 +149,7 @@ function validateElement(elementArray, rulesetArray)
  *
  * @since 1.3.0
  *
- * @para, path string
+ * @param path string
  *
  * @return promise object
  */
