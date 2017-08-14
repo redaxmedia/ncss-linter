@@ -50,7 +50,7 @@ bin/cmd.js --html='<div class="box-content"></div>'
 Validate a local path:
 
 ```
-bin/cmd.js --path=ncss.html --namespace=foo
+bin/cmd.js --path=templates/**/*.html --namespace=foo
 ```
 
 Validate a remote URL:

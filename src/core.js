@@ -1,4 +1,5 @@
 const phantom = require('phantom');
+const glob = require('glob');
 const fs = require('fs');
 
 let reporter;
@@ -74,7 +75,7 @@ function validateElement(elementArray, rulesetArray)
 
 				/* process ruleset */
 
-				Object.keys(rulesetArray).forEach((rulesetValue) =>
+				Object.keys(rulesetArray).forEach(rulesetValue =>
 				{
 					elementValue.validCharacter = !classValue.match(/[^\w-_]/g);
 					elementValue.validNamespace = namespace ? namespaceArray.indexOf(fragmentArray[0]) > -1 : true;
@@ -160,33 +161,20 @@ function readPath(path)
 
 	return new Promise(resolve =>
 	{
-		const statSync = fs.statSync(path);
-
-		if (statSync.isDirectory())
+		glob(path, (error, pathArray) =>
 		{
-			fs.readdir(path, (error, directoryArray) =>
+			pathArray.forEach((fileValue, fileIndex) =>
 			{
-				directoryArray.forEach((children, childrenIndex, childrenArray) =>
+				fs.readFile(fileValue, 'utf-8', (fileError, fileContent) =>
 				{
-					readPath(path + '/' + children)
-						.then(fileContent =>
-						{
-							content += fileContent;
-							if (childrenIndex === childrenArray.length - 1)
-							{
-								resolve(content);
-							}
-						});
+					content += fileContent;
+					if (fileIndex === pathArray.length - 1)
+					{
+						resolve(content);
+					}
 				});
 			});
-		}
-		else if (statSync.isFile())
-		{
-			fs.readFile(path, 'utf-8', (error, fileContent) =>
-			{
-				resolve(fileContent);
-			});
-		}
+		});
 	});
 }
 
