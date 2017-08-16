@@ -371,6 +371,10 @@ function init()
 				{
 					_openPage(option.get('url'), page, defer);
 				}
+				else
+				{
+					defer.reject();
+				}
 			});
 	})
 	.then(() =>
