@@ -1,0 +1,44 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"fn-fn\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "div.fn-fn"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"fn-wrapper\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "div.fn-wrapper"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	}
+]

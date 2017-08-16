@@ -1,0 +1,44 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"{{ class }}\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn":
+			[
+				{
+					"type": "invalid-character",
+					"selector": "div"
+				}
+			],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"<?php echo $class; ?>\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn":
+			[
+				{
+					"type": "invalid-character",
+					"selector": "div"
+				}
+			],
+			"info": []
+		}
+	}
+]

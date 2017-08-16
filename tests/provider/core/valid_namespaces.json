@@ -1,0 +1,65 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"foo-box\"></div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.foo-box"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"foo-box-valid\"></div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.foo-box-valid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"foo-box-valid bar-box-valid\"></div>",
+			"namespace": "foo,bar",
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.foo-box-valid.bar-box-valid"
+				}
+			]
+		}
+	}
+]

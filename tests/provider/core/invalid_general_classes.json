@@ -1,0 +1,44 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"invalid\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-class",
+					"selector": "div.invalid"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"foo\"></div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-class",
+					"selector": "div.foo"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	}
+]

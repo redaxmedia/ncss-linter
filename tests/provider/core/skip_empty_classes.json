@@ -1,0 +1,44 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "skip",
+					"selector": "div"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "skip",
+					"selector": "div"
+				}
+			]
+		}
+	}
+]

@@ -101,7 +101,7 @@ function warn(warnArray)
 
 function fail(failArray)
 {
-	if (failArray.type === 'invalid-namespace' || failArray.type === 'invalid-class' || failArray.type === 'invalid-tag')
+	if (failArray.type === 'invalid-namespace' || failArray.type === 'invalid-class' || failArray.type === 'invalid-variation' || failArray.type === 'invalid-tag')
 	{
 		_logInfo('E');
 	}
@@ -213,6 +213,10 @@ function summary(threshold)
 			if (reportValue.type === 'invalid-class')
 			{
 				_logError(colors.red(wordingArray.error) + wordingArray.colon + ' ' + wordingArray.invalid_class);
+			}
+			if (reportValue.type === 'invalid-variation')
+			{
+				_logError(colors.red(wordingArray.error) + wordingArray.colon + ' ' + wordingArray.invalid_variation);
 			}
 			if (reportValue.type === 'invalid-tag')
 			{

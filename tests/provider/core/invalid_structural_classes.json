@@ -1,0 +1,107 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"header-footer\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "header.header-footer"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"header-component\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "header.header-component"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"header-box\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "header.header-box"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"header-fn\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "header.header-fn"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"header-wrapper\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "header.header-wrapper"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	}
+]

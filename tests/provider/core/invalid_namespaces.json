@@ -1,0 +1,44 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"box\"></div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-namespace",
+					"selector": "div.box"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"invalid-box\"></div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-namespace",
+					"selector": "div.invalid-box"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	}
+]

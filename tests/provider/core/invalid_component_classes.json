@@ -1,0 +1,86 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"component-component\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "div.component-component"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"component-box\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "div.component-box"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"component-fn\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "div.component-fn"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"component-wrapper\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "div.component-wrapper"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	}
+]

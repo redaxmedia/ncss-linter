@@ -2,6 +2,7 @@
 	"invalid_character": "invalid character",
 	"invalid_namespace": "invalid namespace",
 	"invalid_class": "invalid class",
+	"invalid_variation": "invalid variation",
 	"invalid_tag": "invalid tag",
 	"error": "error",
 	"errors_found": "errors found",

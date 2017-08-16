@@ -1,0 +1,44 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<span class=\"box-invalid\"></span>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-tag",
+					"selector": "span.box-invalid"
+				}
+			],
+			"info": [],
+			"warn": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<footer class=\"header-invalid\"></footer>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-tag",
+					"selector": "footer.header-invalid"
+				}
+			],
+			"info": [],
+			"warn": []
+		}
+	}
+]

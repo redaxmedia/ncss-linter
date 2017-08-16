@@ -81,6 +81,14 @@ function _processElement(elementArray)
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
+			else if (!validateArray.variation)
+			{
+				reporter.fail(
+				{
+					type: 'invalid-variation',
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
+				});
+			}
 			else if (!validateArray.tag)
 			{
 				reporter.fail(
@@ -136,19 +144,60 @@ function _validateElement(elementValue)
 
 	elementValue.classArray.forEach(classValue =>
 	{
-		const fragmentArray = classValue.split(separator);
+		const splitArray = classValue.split(separator);
+		const fragmentArray =
+		{
+			namespace: namespace ? splitArray[0] : null,
+			root: namespace ? splitArray[1] : splitArray[0],
+			variation: namespace ? splitArray[2] : splitArray[1]
+		};
+
+		/* validate character */
+
+		validateArray.character = classValue.match(/[\w-_]/g);
+
+		/* validate namespace */
+
+		validateArray.namespace = true;
+		if (namespaceArray.length)
+		{
+			validateArray.namespace = namespaceArray.indexOf(fragmentArray.namespace) > -1;
+		}
+
+		/* validate variation */
+
+		validateArray.variation = Object.keys(rulesetArray.functional).indexOf(fragmentArray.variation) === -1 && Object.keys(rulesetArray.exception).indexOf(fragmentArray.variation) === -1;
+		if (rulesetArray.structural[fragmentArray.root])
+		{
+			validateArray.variation &= Object.keys(rulesetArray.structural).indexOf(fragmentArray.variation) === -1;
+		}
+		if (!rulesetArray.exception[fragmentArray.root])
+		{
+			validateArray.variation &= Object.keys(rulesetArray.component).indexOf(fragmentArray.variation) === -1;
+			if (!rulesetArray.functional[fragmentArray.root])
+			{
+				validateArray.variation &= Object.keys(rulesetArray.type).indexOf(fragmentArray.variation) === -1;
+			}
+		}
 
 		/* process ruleset */
 
 		Object.keys(rulesetArray).forEach(rulesetValue =>
 		{
-			validateArray.character = !classValue.match(/[^\w-_]/g);
-			validateArray.namespace = namespace ? namespaceArray.indexOf(fragmentArray[0]) > -1 : true;
-			if (!namespace && fragmentArray[0] === rulesetValue || namespace && fragmentArray[1] === rulesetValue)
+			Object.keys(rulesetArray[rulesetValue]).forEach(childrenValue =>
 			{
-				validateArray.class = true;
-				validateArray.tag = rulesetArray[rulesetValue] ? rulesetArray[rulesetValue].indexOf(elementValue.tagName) > -1 : true;
-			}
+				/* validate class and tag */
+
+				if (fragmentArray.root === childrenValue)
+				{
+					validateArray.class = true;
+					validateArray.tag = true;
+					if (rulesetArray[rulesetValue][childrenValue] !== '*')
+					{
+						validateArray.tag = rulesetArray[rulesetValue][childrenValue].indexOf(elementValue.tagName) > -1;
+					}
+				}
+			});
 		});
 	});
 	return validateArray;
@@ -314,10 +363,6 @@ function init()
 				else if (option.get('url'))
 				{
 					_openPage(option.get('url'), page, defer);
-				}
-				else
-				{
-					defer.reject();
 				}
 			});
 	})

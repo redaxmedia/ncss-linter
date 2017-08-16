@@ -1,7 +1,7 @@
 {
 	"name": "ncss-linter",
 	"description": "Linter for NCSS",
-	"version": "1.4.2",
+	"version": "2.0.0",
 	"homepage": "https://ncss.io",
 	"license": "GPL-3.0",
 	"author":
@@ -30,6 +30,6 @@
 	"scripts":
 	{
 		"lint": "node_modules/eslint/bin/eslint.js bin src tests",
-		"test": "node_modules/mocha/bin/mocha tests"
+		"test": "node_modules/mocha/bin/mocha tests/*Test.js"
 	}
 }

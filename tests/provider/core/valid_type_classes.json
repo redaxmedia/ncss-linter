@@ -1,0 +1,65 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"box\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.box"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"box-valid\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.box-valid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"box-header\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.box-header"
+				}
+			]
+		}
+	}
+]

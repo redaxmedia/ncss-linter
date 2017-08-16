@@ -1,0 +1,107 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"wrapper\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.wrapper"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"wrapper-valid\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.wrapper-valid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"wrapper-header\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.wrapper-header"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"wrapper-component\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.wrapper-component"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"wrapper-box\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.wrapper-box"
+				}
+			]
+		}
+	}
+]

@@ -1,0 +1,44 @@
+[
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"header\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "header.header"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"header-valid\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "header.header-valid"
+				}
+			]
+		}
+	}
+]
