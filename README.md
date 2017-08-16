@@ -44,17 +44,17 @@ Examples
 Validate a `HTML` string:
 
 ```
-bin/cmd.js --html='<div class="box-content"></div>'
+bin/ncss-linter --html='<div class="box-content"></div>'
 ```
 
 Validate a local path:
 
 ```
-bin/cmd.js --path=templates/**/*.html --namespace=foo
+bin/ncss-linter --path=templates/**/*.html --namespace=foo
 ```
 
 Validate a remote URL:
 
 ```
-bin/cmd.js --url=https://redaxmedia.com --namespace=rs --loglevel=info
+bin/ncss-linter --url=https://redaxmedia.com --namespace=rs --loglevel=info
 ```

@@ -218,21 +218,28 @@ function _readPath(path)
 	let content;
 	let readCounter = 0;
 
-	return new Promise(resolve =>
+	return new Promise((resolve, reject) =>
 	{
 		glob(path, (error, pathArray) =>
 		{
-			pathArray.forEach(fileValue =>
+			if (pathArray.length)
 			{
-				fs.readFile(fileValue, 'utf-8', (fileError, fileContent) =>
+				pathArray.forEach(fileValue =>
 				{
-					content += fileContent;
-					if (++readCounter === pathArray.length)
+					fs.readFile(fileValue, 'utf-8', (fileError, fileContent) =>
 					{
-						resolve(content);
-					}
+						content += fileContent;
+						if (++readCounter === pathArray.length)
+						{
+							resolve(content);
+						}
+					});
 				});
-			});
+			}
+			else
+			{
+				reject();
+			}
 		});
 	});
 }
