@@ -61,5 +61,47 @@
 				}
 			]
 		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"foo-bar-box-valid\"></div>",
+			"namespace": "foo-bar",
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.foo-bar-box-valid"
+				}
+			]
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"foo-bar-box-valid bar-foo-box-valid\"></div>",
+			"namespace": "foo-bar,bar-foo",
+			"selector": "*:not(html):not(head):not(body)",
+			"loglevel": "silent"
+		},
+		"reportArray":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "div.foo-bar-box-valid.bar-foo-box-valid"
+				}
+			]
+		}
 	}
 ]

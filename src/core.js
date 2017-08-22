@@ -134,9 +134,10 @@ function _processElement(elementArray)
 function _validateElement(elementValue)
 {
 	const rulesetArray = ruleset.get();
-	const namespace = option.get('namespace');
-	const namespaceArray = namespace ? namespace.split(',') : [];
 	const separator = option.get('separator');
+	const separatorRegex = new RegExp(separator, 'g');
+	const namespace = option.get('namespace') ? option.get('namespace').replace(separatorRegex, '@@@') : null;
+	const namespaceArray = namespace ? namespace.split(',') : [];
 
 	let validateArray = [];
 
@@ -144,7 +145,7 @@ function _validateElement(elementValue)
 
 	elementValue.classArray.forEach(classValue =>
 	{
-		const splitArray = classValue.split(separator);
+		const splitArray = _getSplitArray(classValue);
 		const fragmentArray =
 		{
 			namespace: namespace ? splitArray[0] : null,
@@ -204,13 +205,38 @@ function _validateElement(elementValue)
 }
 
 /**
+ * get the split array
+ *
+ * @since 1.3.0
+ *
+ * @param classValue string
+ *
+ * @return array
+ */
+
+function _getSplitArray(classValue)
+{
+	const separator = option.get('separator');
+	const namespace = option.get('namespace');
+	const namespaceArray = namespace ? namespace.split(',') : [];
+
+	/* process namespace */
+
+	namespaceArray.forEach(namespaceValue =>
+	{
+		classValue = classValue.replace(namespaceValue, namespaceValue.replace(separator, '@@@'));
+	});
+	return classValue.split(separator);
+}
+
+/**
  * read the path
  *
  * @since 1.3.0
  *
  * @param path string
  *
- * @return promise object
+ * @return promise
  */
 
 function _readPath(path)
