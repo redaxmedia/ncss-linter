@@ -21,7 +21,7 @@ Usage
 -----
 
 ```
-bin/cmd [options]
+bin/ncss-linter [options]
 
 -V, --version
 -H, --html <html>
