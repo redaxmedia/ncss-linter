@@ -14,7 +14,7 @@ let option;
  * @param page object
  * @param selector string
  *
- * @return promise
+ * @return Promise
  */
 
 function _getElement(page, selector)
@@ -236,7 +236,7 @@ function _getSplitArray(classValue)
  *
  * @param path string
  *
- * @return promise
+ * @return Promise
  */
 
 function _readPath(path)
@@ -346,7 +346,7 @@ function _processPage(page, defer)
  *
  * @since 1.0.0
  *
- * @return promise
+ * @return Promise
  */
 
 function init()
