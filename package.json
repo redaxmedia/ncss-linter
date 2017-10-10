@@ -1,9 +1,14 @@
 {
 	"name": "ncss-linter",
 	"description": "Linter for NCSS",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"homepage": "https://ncss.io",
 	"license": "GPL-3.0",
+	"keywords":
+	[
+		"css",
+		"linter"
+	],
 	"author":
 	{
 		"name": "Henry Ruhs",
@@ -12,6 +17,11 @@
 	"bugs":
 	{
 		"url": "https://github.com/redaxmedia/ncss-linter/issues"
+	},
+	"repository":
+	{
+		"type": "git",
+		"url": "https://github.com/redaxmedia/ncss-linter.git"
 	},
 	"dependencies":
 	{
