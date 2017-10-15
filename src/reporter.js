@@ -373,7 +373,7 @@ function construct(dependency)
 	const exports =
 	{
 		getReport: getReport,
-		clearReport: clearReport(),
+		clearReport: clearReport,
 		header: header,
 		pass: pass,
 		warn: warn,
