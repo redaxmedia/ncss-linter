@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const command = require('commander');
+const program = require('commander');
 const ncss = require('../');
 const core = ncss.core;
 const reporter = ncss.reporter;
@@ -11,7 +11,7 @@ const packageArray = require('../package.json');
 let REPORTER;
 let CORE;
 
-command
+program
 	.version(packageArray.version)
 	.option('-H, --html <html>')
 	.option('-P, --path <path>')
@@ -25,20 +25,20 @@ command
 	.option('-Z, --haltonwarn')
 	.parse(process.argv);
 
-if (command.html || command.path || command.url)
+if (program.html || program.path || program.url)
 {
 	option.init(
 	{
-		html: command.html,
-		path: command.path,
-		url: command.url,
-		namespace: command.namespace,
-		separator: command.separator,
-		selector: command.selector,
-		threshold: command.threshold,
-		loglevel: command.loglevel,
-		haltonerror: command.haltonerror,
-		haltonwarn: command.haltonwarn
+		html: program.html,
+		path: program.path,
+		url: program.url,
+		namespace: program.namespace,
+		separator: program.separator,
+		selector: program.selector,
+		threshold: program.threshold,
+		loglevel: program.loglevel,
+		haltonerror: program.haltonerror,
+		haltonwarn: program.haltonwarn
 	});
 	REPORTER = new reporter(
 	{
