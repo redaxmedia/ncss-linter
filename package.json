@@ -4,38 +4,46 @@
 	"version": "2.2.2",
 	"homepage": "https://ncss.io",
 	"license": "GPL-3.0",
-	"keywords": [
+	"keywords":
+	[
 		"css",
 		"linter"
 	],
-	"author": {
+	"author":
+	{
 		"name": "Henry Ruhs",
 		"url": "https://redaxmedia.com"
 	},
-	"bugs": {
+	"bugs":
+	{
 		"url": "https://github.com/redaxmedia/ncss-linter/issues"
 	},
-	"repository": {
+	"repository":
+	{
 		"type": "git",
 		"url": "https://github.com/redaxmedia/ncss-linter.git"
 	},
-	"dependencies": {
+	"dependencies":
+	{
 		"colors": "1.1.2",
 		"commander": "2.11.0",
 		"extend": "3.0.1",
 		"glob": "7.1.2",
 		"phantom": "4.0.5"
 	},
-	"devDependencies": {
+	"devDependencies":
+	{
 		"chai": "4.1.2",
 		"eslint": "4.10.0",
 		"mocha": "4.0.1"
 	},
-	"scripts": {
-		"lint": "node_modules/eslint/bin/eslint.js bin src tests",
-		"test": "node_modules/mocha/bin/mocha tests/*Test.js"
+	"scripts":
+	{
+		"lint": "eslint bin src tests",
+		"test": "mocha tests/*Test.js"
 	},
-	"bin": {
+	"bin":
+	{
 		"ncss-linter": "./bin/ncss-linter"
 	}
 }
