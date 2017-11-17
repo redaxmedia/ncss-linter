@@ -5,7 +5,7 @@
 			"html": "<div class=\"box\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{
@@ -26,7 +26,7 @@
 			"html": "<div class=\"box-valid\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{
@@ -47,7 +47,7 @@
 			"html": "<div class=\"box-header\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{

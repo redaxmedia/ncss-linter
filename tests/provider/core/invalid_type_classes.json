@@ -5,7 +5,7 @@
 			"html": "<div class=\"box-component\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{
@@ -26,7 +26,7 @@
 			"html": "<div class=\"box-form\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{
@@ -47,7 +47,7 @@
 			"html": "<div class=\"box-fn\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{
@@ -68,7 +68,7 @@
 			"html": "<div class=\"box-wrapper\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{
