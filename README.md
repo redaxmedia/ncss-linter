@@ -42,19 +42,19 @@ bin/ncss-linter [options]
 Options
 -------
 
-| Name           | Type    | Default | Mandatory | Example                           |
-|----------------|---------|---------|-----------|-----------------------------------|
-| html           | string  | null    | required  | `<div class="box-content"></div>` |
-| path           | string  | null    | required  | templates/**/*.html               |
-| url            | string  | null    | required  | https://redaxmedia.com            |
-| namespace      | string  | null    | optional  | rs                                |
-| separator      | string  | -       | optional  |                                   |
-| selector       | string  | *       | optional  | *:not(div.invalid)                |
-| logLevel       | string  | warn    | optional  | debug / info / warn / error       |
-| thresholdError | number  | 0       | optional  |                                   |
-| thresholdWarn  | number  | 0       | optional  |                                   |
-| haltOnError    | boolean | false   | optional  |                                   |
-| haltOnWarn     | boolean | false   | optional  |                                   |
+| Name           | Type    | Default | Mandatory |
+|----------------|---------|---------|-----------|
+| html           | string  | null    | required  |
+| path           | string  | null    | required  |
+| url            | string  | null    | required  |
+| namespace      | string  | null    | optional  |
+| separator      | string  | -       | optional  |
+| selector       | string  | *       | optional  |
+| logLevel       | string  | warn    | optional  |
+| thresholdError | number  | 0       | optional  |
+| thresholdWarn  | number  | 0       | optional  |
+| haltOnError    | boolean | false   | optional  |
+| haltOnWarn     | boolean | false   | optional  |
 
 
 Examples
