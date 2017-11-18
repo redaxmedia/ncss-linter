@@ -172,7 +172,7 @@ function end(counter, total)
 
 function result(thresholdError, thresholdWarn)
 {
-	const logLevel = _getlogLevel();
+	const logLevel = _getLogLevel();
 
 	if (reportArray.error.length === 0 && reportArray.warn.length === 0 && reportArray.info.length === 3)
 	{
@@ -257,7 +257,7 @@ function summary(thresholdError, thresholdWarn)
 
 function _log(message)
 {
-	const logLevel = _getlogLevel();
+	const logLevel = _getLogLevel();
 
 	if (logLevel !== 0)
 	{
@@ -275,7 +275,7 @@ function _log(message)
 
 function _logError(message)
 {
-	const logLevel = _getlogLevel();
+	const logLevel = _getLogLevel();
 	const haltOnError = option.get('haltOnError');
 
 	if (logLevel > 0)
@@ -298,7 +298,7 @@ function _logError(message)
 
 function _logWarn(message)
 {
-	const logLevel = _getlogLevel();
+	const logLevel = _getLogLevel();
 	const haltOnWarn = option.get('haltOnWarn');
 
 	if (logLevel > 1)
@@ -321,7 +321,7 @@ function _logWarn(message)
 
 function _logInfo(message)
 {
-	const logLevel = _getlogLevel();
+	const logLevel = _getLogLevel();
 
 	if (logLevel > 2)
 	{
@@ -337,7 +337,7 @@ function _logInfo(message)
  * @return number
  */
 
-function _getlogLevel()
+function _getLogLevel()
 {
 	const logLevel = option.get('logLevel');
 
