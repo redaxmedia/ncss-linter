@@ -75,5 +75,5 @@ bin/ncss-linter --path=templates/**/*.html --namespace=foo
 Validate a remote URL:
 
 ```
-bin/ncss-linter --url= --namespace=rs --log-level=info
+bin/ncss-linter --url=https://redaxmedia.com --namespace=rs --log-level=info
 ```

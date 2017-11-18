@@ -1,7 +1,7 @@
 {
 	"name": "ncss-linter",
 	"description": "Linter for NCSS",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"homepage": "https://ncss.io",
 	"license": "GPL-3.0",
 	"keywords":
