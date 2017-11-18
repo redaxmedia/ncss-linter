@@ -166,28 +166,38 @@ function end(counter, total)
  *
  * @since 1.0.0
  *
- * @param threshold number
+ * @param thresholdError number
+ * @param thresholdWarn number
  */
 
-function result(threshold)
+function result(thresholdError, thresholdWarn)
 {
-	const loglevel = _getLoglevel();
+	const logLevel = _getLogLevel();
 
 	if (reportArray.error.length === 0 && reportArray.warn.length === 0 && reportArray.info.length === 3)
 	{
 		_log('\n' + colors.yellow(wordingArray.something_wrong.toUpperCase() + wordingArray.exclamation_mark) + '\n');
 	}
-	else if (reportArray.error.length > threshold && loglevel > 0)
+	else if (reportArray.error.length > thresholdError && logLevel > 0)
 	{
 		_log('\n' + colors.red(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark) + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
 	}
-	else if (reportArray.warn.length > threshold && loglevel > 1)
+	else if (reportArray.warn.length > thresholdWarn && logLevel > 1)
 	{
 		_log('\n' + colors.yellow(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark) + ' (' + reportArray.warn.length + ' ' + wordingArray.warnings_found + ')\n');
 	}
 	else
 	{
-		_log('\n' + colors.green(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark) + '\n');
+		_log('\n' + colors.green(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark));
+		if (reportArray.error.length && logLevel > 0)
+		{
+			_log(' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')');
+		}
+		else if (reportArray.warn.length && logLevel > 1)
+		{
+			_log(' (' + reportArray.warn.length + ' ' + wordingArray.warnings_found + ')');
+		}
+		_log('\n');
 	}
 }
 
@@ -196,12 +206,13 @@ function result(threshold)
  *
  * @since 1.0.0
  *
- * @param threshold number
+ * @param thresholdError number
+ * @param thresholdWarn number
  */
 
-function summary(threshold)
+function summary(thresholdError, thresholdWarn)
 {
-	if (reportArray.error.length > threshold)
+	if (reportArray.error.length > thresholdError)
 	{
 		_logError('\n');
 		reportArray.error.forEach(function (reportValue)
@@ -228,7 +239,7 @@ function summary(threshold)
 			}
 		});
 	}
-	if (reportArray.warn.length > threshold)
+	if (reportArray.warn.length > thresholdWarn)
 	{
 		_logWarn('\n');
 		reportArray.warn.forEach(function (reportValue)
@@ -255,9 +266,9 @@ function summary(threshold)
 
 function _log(message)
 {
-	const loglevel = _getLoglevel();
+	const logLevel = _getLogLevel();
 
-	if (loglevel !== 0)
+	if (logLevel !== 0)
 	{
 		process.stdout.write(message);
 	}
@@ -273,12 +284,12 @@ function _log(message)
 
 function _logError(message)
 {
-	const loglevel = _getLoglevel();
-	const haltonerror = option.get('haltonerror');
+	const logLevel = _getLogLevel();
+	const haltOnError = option.get('haltOnError');
 
-	if (loglevel > 0)
+	if (logLevel > 0)
 	{
-		if (haltonerror)
+		if (haltOnError)
 		{
 			process.exit(1);
 		}
@@ -296,12 +307,12 @@ function _logError(message)
 
 function _logWarn(message)
 {
-	const loglevel = _getLoglevel();
-	const haltonwarn = option.get('haltonwarn');
+	const logLevel = _getLogLevel();
+	const haltOnWarn = option.get('haltOnWarn');
 
-	if (loglevel > 1)
+	if (logLevel > 1)
 	{
-		if (haltonwarn)
+		if (haltOnWarn)
 		{
 			process.exit(1);
 		}
@@ -319,39 +330,39 @@ function _logWarn(message)
 
 function _logInfo(message)
 {
-	const loglevel = _getLoglevel();
+	const logLevel = _getLogLevel();
 
-	if (loglevel > 2)
+	if (logLevel > 2)
 	{
 		process.stdout.write(message);
 	}
 }
 
 /**
- * get the loglevel
+ * get the logLevel
  *
  * @since 1.4.0
  *
  * @return number
  */
 
-function _getLoglevel()
+function _getLogLevel()
 {
-	const loglevel = option.get('loglevel');
+	const logLevel = option.get('logLevel');
 
-	if (loglevel === 'debug')
+	if (logLevel === 'debug')
 	{
 		return 4;
 	}
-	if (loglevel === 'info')
+	if (logLevel === 'info')
 	{
 		return 3;
 	}
-	if (loglevel === 'warn')
+	if (logLevel === 'warn')
 	{
 		return 2;
 	}
-	if (loglevel === 'error')
+	if (logLevel === 'error')
 	{
 		return 1;
 	}

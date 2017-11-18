@@ -1,7 +1,7 @@
 NCSS Linter
 ===========
 
-> Linter for NCSS.
+> Linter for [NCSS](https://ncss.io).
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/ncss-linter.svg)](https://travis-ci.org/redaxmedia/ncss-linter)
 [![Dependency Status](https://gemnasium.com/badges/github.com/redaxmedia/ncss-linter.svg)](https://gemnasium.com/github.com/redaxmedia/ncss-linter)
@@ -30,12 +30,31 @@ bin/ncss-linter [options]
 -N, --namespace <namespace>
 -E, --separator <separator>
 -S, --selector <selector>
--T, --threshold <threshold>
--L, --loglevel <loglevel>
--Y, --haltonerror
--Z, --haltonwarn
+-L, --log-level <log-level>
+-V, --threshold-error <threshold-error>
+-W, --threshold-warn <threshold-warn>
+-Y, --halt-on-error   
+-Z, --halt-on-warn
 -h, --help
 ```
+
+
+Options
+-------
+
+| Name           | Type    | Default | Mandatory |
+|----------------|---------|---------|-----------|
+| html           | string  | null    | required  |
+| path           | string  | null    | required  |
+| url            | string  | null    | required  |
+| namespace      | string  | null    | optional  |
+| separator      | string  | -       | optional  |
+| selector       | string  | *       | optional  |
+| logLevel       | string  | warn    | optional  |
+| thresholdError | number  | 0       | optional  |
+| thresholdWarn  | number  | 0       | optional  |
+| haltOnError    | boolean | false   | optional  |
+| haltOnWarn     | boolean | false   | optional  |
 
 
 Examples
@@ -56,5 +75,5 @@ bin/ncss-linter --path=templates/**/*.html --namespace=foo
 Validate a remote URL:
 
 ```
-bin/ncss-linter --url=https://redaxmedia.com --namespace=rs --loglevel=info
+bin/ncss-linter --url= --namespace=rs --log-level=info
 ```

@@ -19,10 +19,11 @@ program
 	.option('-N, --namespace <namespace>')
 	.option('-E, --separator <separator>')
 	.option('-S, --selector <selector>')
-	.option('-T, --threshold <threshold>')
-	.option('-L, --loglevel <loglevel>')
-	.option('-Y, --haltonerror')
-	.option('-Z, --haltonwarn')
+	.option('-L, --log-level <log-level>')
+	.option('-V, --threshold-error <threshold-error>')
+	.option('-W, --threshold-warn <threshold-warn>')
+	.option('-Y, --halt-on-error')
+	.option('-Z, --halt-on-warn')
 	.parse(process.argv);
 
 if (program.html || program.path || program.url)
@@ -35,10 +36,11 @@ if (program.html || program.path || program.url)
 		namespace: program.namespace,
 		separator: program.separator,
 		selector: program.selector,
-		threshold: program.threshold,
-		loglevel: program.loglevel,
-		haltonerror: program.haltonerror,
-		haltonwarn: program.haltonwarn
+		logLevel: program.logLevel,
+		thresholdError: program.thresholdError,
+		thresholdWarn: program.thresholdWarn,
+		haltOnError: program.haltOnError,
+		haltOnWarn: program.haltOnWarn
 	});
 	REPORTER = new reporter(
 	{

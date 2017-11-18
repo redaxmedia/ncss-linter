@@ -329,14 +329,15 @@ function _parseHTML(content, page, defer)
 function _processPage(page, defer)
 {
 	const selector = option.get('selector');
-	const threshold = option.get('threshold');
+	const thresholdError = option.get('thresholdError');
+	const thresholdWarn = option.get('thresholdWarn');
 
 	_getElement(page, selector)
 		.then(elementArray =>
 		{
 			_processElement(elementArray);
-			reporter.result(threshold);
-			reporter.summary(threshold);
+			reporter.result(thresholdError, thresholdWarn);
+			reporter.summary(thresholdError, thresholdWarn);
 			defer.resolve();
 		});
 }
@@ -367,7 +368,7 @@ function init()
 				'--load-images=no'
 			],
 			{
-				logLevel: option.get('loglevel')
+				logLevel: option.get('logLevel')
 			})
 			.then(currentInstance =>
 			{

@@ -5,7 +5,7 @@
 			"html": "<span class=\"box-invalid\"></span>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{
@@ -26,7 +26,7 @@
 			"html": "<footer class=\"header-invalid\"></footer>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{

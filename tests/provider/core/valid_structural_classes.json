@@ -5,7 +5,7 @@
 			"html": "<header class=\"header\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{
@@ -26,7 +26,7 @@
 			"html": "<header class=\"header-valid\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
-			"loglevel": "silent"
+			"logLevel": "silent"
 		},
 		"reportArray":
 		{
