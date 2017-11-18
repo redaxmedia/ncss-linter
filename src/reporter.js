@@ -188,7 +188,16 @@ function result(thresholdError, thresholdWarn)
 	}
 	else
 	{
-		_log('\n' + colors.green(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark) + '\n');
+		_log('\n' + colors.green(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark));
+		if (reportArray.error.length)
+		{
+			_log(' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')');
+		}
+		else if (reportArray.warn.length)
+		{
+			_log(' (' + reportArray.warn.length + ' ' + wordingArray.warnings_found + ')');
+		}
+		_log('\n');
 	}
 }
 
