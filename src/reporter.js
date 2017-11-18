@@ -189,11 +189,11 @@ function result(thresholdError, thresholdWarn)
 	else
 	{
 		_log('\n' + colors.green(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark));
-		if (reportArray.error.length)
+		if (reportArray.error.length && logLevel > 0)
 		{
 			_log(' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')');
 		}
-		else if (reportArray.warn.length)
+		else if (reportArray.warn.length && logLevel > 1)
 		{
 			_log(' (' + reportArray.warn.length + ' ' + wordingArray.warnings_found + ')');
 		}
