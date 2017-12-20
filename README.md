@@ -24,6 +24,7 @@ Usage
 bin/ncss-linter [options]
 
 -V, --version
+-C, --config <config>
 -H, --html <html>
 -P, --path <path>
 -U, --url <url>
@@ -42,23 +43,30 @@ bin/ncss-linter [options]
 Options
 -------
 
-| Name           | Type    | Default | Mandatory |
-|----------------|---------|---------|-----------|
-| html           | string  | null    | required  |
-| path           | string  | null    | required  |
-| url            | string  | null    | required  |
-| namespace      | string  | null    | optional  |
-| separator      | string  | -       | optional  |
-| selector       | string  | *       | optional  |
-| logLevel       | string  | warn    | optional  |
-| thresholdError | number  | 0       | optional  |
-| thresholdWarn  | number  | 0       | optional  |
-| haltOnError    | boolean | false   | optional  |
-| haltOnWarn     | boolean | false   | optional  |
+| Name           | Type    | Default     | Mandatory |
+|----------------|---------|-------------|-----------|
+| config         | string  | .ncsslintrc | optional  |
+| html           | string  | null        | required  |
+| path           | string  | null        | required  |
+| url            | string  | null        | required  |
+| namespace      | string  | null        | optional  |
+| separator      | string  | -           | optional  |
+| selector       | string  | *           | optional  |
+| logLevel       | string  | warn        | optional  |
+| thresholdError | number  | 0           | optional  |
+| thresholdWarn  | number  | 0           | optional  |
+| haltOnError    | boolean | false       | optional  |
+| haltOnWarn     | boolean | false       | optional  |
 
 
 Examples
 --------
+
+Validate using a configuration file:
+
+```
+bin/ncss-linter --config=.ncsslintrc
+```
 
 Validate a `HTML` string:
 
