@@ -13,6 +13,7 @@ let CORE;
 
 program
 	.version(packageArray.version)
+	.option('-C, --config <config>')
 	.option('-H, --html <html>')
 	.option('-P, --path <path>')
 	.option('-U, --url <url>')
@@ -26,35 +27,29 @@ program
 	.option('-Z, --halt-on-warn')
 	.parse(process.argv);
 
-if (program.html || program.path || program.url)
+option.init(
 {
-	option.init(
-	{
-		html: program.html,
-		path: program.path,
-		url: program.url,
-		namespace: program.namespace,
-		separator: program.separator,
-		selector: program.selector,
-		logLevel: program.logLevel,
-		thresholdError: program.thresholdError,
-		thresholdWarn: program.thresholdWarn,
-		haltOnError: program.haltOnError,
-		haltOnWarn: program.haltOnWarn
-	});
-	REPORTER = new reporter(
-	{
-		option: option
-	});
-	CORE = new core(
-	{
-		reporter: REPORTER,
-		ruleset: ruleset,
-		option: option
-	});
-	CORE.init();
-}
-else
+	config: program.config,
+	html: program.html,
+	path: program.path,
+	url: program.url,
+	namespace: program.namespace,
+	separator: program.separator,
+	selector: program.selector,
+	logLevel: program.logLevel,
+	thresholdError: program.thresholdError,
+	thresholdWarn: program.thresholdWarn,
+	haltOnError: program.haltOnError,
+	haltOnWarn: program.haltOnWarn
+});
+REPORTER = new reporter(
 {
-	process.exit(1);
-}
+	option: option
+});
+CORE = new core(
+{
+	reporter: REPORTER,
+	ruleset: ruleset,
+	option: option
+});
+CORE.init();
