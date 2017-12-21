@@ -377,13 +377,14 @@ function init()
 			})
 			.then(page =>
 			{
-				reporter.header();
 				if (option.get('html'))
 				{
+					reporter.header();
 					_parseHTML(option.get('html'), page, defer);
 				}
 				else if (option.get('path'))
 				{
+					reporter.header();
 					_readPath(option.get('path'))
 						.then(content =>
 						{
@@ -396,6 +397,7 @@ function init()
 				}
 				else if (option.get('url'))
 				{
+					reporter.header();
 					_openPage(option.get('url'), page, defer);
 				}
 				else
