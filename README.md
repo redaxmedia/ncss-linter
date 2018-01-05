@@ -85,3 +85,15 @@ Validate a remote URL:
 ```
 bin/ncss-linter --url=https://redaxmedia.com --namespace=rs --log-level=info
 ```
+
+
+Loggers
+-------
+
+| Name    | Level | Value |
+|---------|-------|-------|
+| Silent  | 0     | null  |
+| Error   | 1     | error |
+| Warning | 2     | warn  |
+| Info    | 3     | info  |
+| Debug   | 4     | debug |
