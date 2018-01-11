@@ -365,7 +365,8 @@ function init()
 		phantom
 			.create(
 			[
-				'--load-images=no'
+				'--load-images=no',
+				'--ignore-ssl-errors=yes'
 			],
 			{
 				logLevel: option.get('logLevel')
