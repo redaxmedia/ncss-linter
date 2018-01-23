@@ -5,8 +5,8 @@ NCSS Linter
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/ncss-linter.svg)](https://travis-ci.org/redaxmedia/ncss-linter)
 [![Dependency Status](https://gemnasium.com/badges/github.com/redaxmedia/ncss-linter.svg)](https://gemnasium.com/github.com/redaxmedia/ncss-linter)
-[![NPM Version](https://img.shields.io/npm/v/ncss-linter.svg)](https://www.npmjs.com/package/ncss-linter)
-[![GitHub Stats](https://img.shields.io/badge/github-stats-ff5500.svg)](http://githubstats.com/redaxmedia/ncss-linter)
+[![NPM Version](https://img.shields.io/npm/v/ncss-linter.svg)](https://npmjs.com/package/ncss-linter)
+[![License](https://img.shields.io/npm/l/ncss-linter.svg)](https://npmjs.com/package/ncss-linter)
 
 
 Installation
