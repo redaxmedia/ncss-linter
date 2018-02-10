@@ -1,7 +1,7 @@
 {
 	"name": "ncss-linter",
 	"description": "Linter for NCSS",
-	"version": "3.1.2",
+	"version": "3.1.3",
 	"homepage": "https://ncss.io",
 	"license": "GPL-3.0",
 	"keywords":
@@ -26,7 +26,7 @@
 	"dependencies":
 	{
 		"colors": "1.1.2",
-		"commander": "2.12.2",
+		"commander": "2.14.1",
 		"extend": "3.0.1",
 		"glob": "7.1.2",
 		"phantom": "4.0.12"
@@ -34,8 +34,8 @@
 	"devDependencies":
 	{
 		"chai": "4.1.2",
-		"eslint": "4.14.0",
-		"mocha": "4.0.1"
+		"eslint": "4.17.0",
+		"mocha": "5.0.0"
 	},
 	"scripts":
 	{

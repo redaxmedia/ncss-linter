@@ -8,6 +8,12 @@ NCSS Linter
 [![License](https://img.shields.io/npm/l/ncss-linter.svg)](https://npmjs.com/package/ncss-linter)
 
 
+Preview
+-------
+
+![Terminal Session](https://cdn.rawgit.com/redaxmedia/media/master/ncss-linter/terminal-session.svg)
+
+
 Installation
 ------------
 
