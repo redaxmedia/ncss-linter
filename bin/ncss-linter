@@ -12,7 +12,7 @@ let REPORTER;
 let CORE;
 
 program
-	.version(packageArray.version)
+	.version(packageArray.name + ' ' + packageArray.version)
 	.option('-C, --config <config>')
 	.option('-H, --html <html>')
 	.option('-P, --path <path>')
