@@ -42,6 +42,6 @@ function init(initArray)
 
 module.exports =
 {
-	get: get,
-	init: init
+	get,
+	init
 };

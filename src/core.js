@@ -359,8 +359,8 @@ function init()
 	{
 		defer =
 		{
-			resolve: resolve,
-			reject: reject
+			resolve,
+			reject
 		};
 		phantom
 			.create(
@@ -431,7 +431,7 @@ function construct(dependency)
 {
 	const exports =
 	{
-		init: init
+		init
 	};
 
 	/* inject dependency */

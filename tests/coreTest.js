@@ -91,13 +91,13 @@ function test(optionArray, reportArray)
 		option.init(optionArray);
 		REPORTER = new reporter(
 		{
-			option: option
+			option
 		});
 		CORE = new core(
 		{
 			reporter: REPORTER,
-			ruleset: ruleset,
-			option: option
+			ruleset,
+			option
 		});
 		CORE
 			.init()

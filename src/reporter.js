@@ -383,16 +383,16 @@ function construct(dependency)
 {
 	const exports =
 	{
-		getReport: getReport,
-		clearReport: clearReport,
-		header: header,
-		pass: pass,
-		warn: warn,
-		fail: fail,
-		skip: skip,
-		end: end,
-		result: result,
-		summary: summary
+		getReport,
+		clearReport,
+		header,
+		pass,
+		warn,
+		fail,
+		skip,
+		end,
+		result,
+		summary
 	};
 
 	/* clear */

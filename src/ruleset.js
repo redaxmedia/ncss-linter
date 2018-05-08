@@ -15,5 +15,5 @@ function get()
 
 module.exports =
 {
-	get: get
+	get
 };
