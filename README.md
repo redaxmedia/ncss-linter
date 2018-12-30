@@ -17,8 +17,16 @@ Preview
 Installation
 ------------
 
+Clone the repository:
+
 ```
-npm install ncss-linter
+git clone https://github.com/redaxmedia/ncss-linter.git
+```
+
+Install the dependencies:
+
+```
+npm install
 ```
 
 
