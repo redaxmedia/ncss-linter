@@ -1,4 +1,4 @@
-const phantom = require('phantom');
+const puppeteer = require('puppeteer');
 const glob = require('glob');
 const fs = require('fs');
 
@@ -9,7 +9,7 @@ let option;
 /**
  * get the element
  *
- * @since 1.0.0
+ * @since 4.0.0
  *
  * @param page object
  * @param selector string
@@ -17,26 +17,18 @@ let option;
  * @return Promise
  */
 
-function _getElement(page, selector)
+async function _getElement(page, selector)
 {
-	return page
-		.invokeMethod('evaluate', function(selector)
+	return await page.$$eval(selector, element => element.map(elementValue =>
+	{
+		const elementFragment =
 		{
-			const element = document.querySelectorAll(selector);
-			const elementArray = [];
+			tagName: elementValue.tagName.toLowerCase(),
+			classArray: elementValue.className.toLowerCase().split(' ').filter(value => value)
+		};
 
-			/* process element */
-
-			Object.keys(element).forEach(function (elementValue)
-			{
-				elementArray.push(
-				{
-					tagName: element[elementValue].tagName ? element[elementValue].tagName.toLowerCase() : null,
-					classArray: element[elementValue].className && element[elementValue].className.length ? element[elementValue].className.toLowerCase().match(/\S+/g) : []
-				});
-			});
-			return elementArray;
-		}, selector);
+		return elementFragment;
+	}));
 }
 
 /**
@@ -273,7 +265,7 @@ function _readPath(path)
 /**
  * open the page
  *
- * @since 1.0.0
+ * @since 4.0.0
  *
  * @param url string
  * @param page object
@@ -282,25 +274,15 @@ function _readPath(path)
 
 function _openPage(url, page, defer)
 {
-	page
-		.open(url)
-		.then(status =>
-		{
-			if (status)
-			{
-				_processPage(page, defer);
-			}
-			else
-			{
-				defer.reject();
-			}
-		});
+	page.goto(url)
+		.then(() => _processPage(page, defer))
+		.catch(() => defer.reject());
 }
 
 /**
  * parse the html
  *
- * @since 1.0.0
+ * @since 4.0.0
  *
  * @param content string
  * @param page object
@@ -309,12 +291,9 @@ function _openPage(url, page, defer)
 
 function _parseHTML(content, page, defer)
 {
-	page
-		.property('content', content)
-		.then(() =>
-		{
-			_processPage(page, defer);
-		});
+	page.setContent(content)
+		.then(() => _processPage(page, defer))
+		.catch(() => defer.reject());
 }
 
 /**
@@ -339,20 +318,25 @@ function _processPage(page, defer)
 			reporter.result(thresholdError, thresholdWarn);
 			reporter.summary(thresholdError, thresholdWarn);
 			defer.resolve();
-		});
+		})
+		.catch(() => defer.reject());
 }
 
 /**
  * init
  *
- * @since 1.0.0
+ * @since 4.0.0
  *
  * @return Promise
  */
 
-function init()
+async function init()
 {
-	let instance;
+	const browser = await puppeteer.launch(
+	{
+		ignoreHTTPSErrors: true
+	});
+	const page = await browser.newPage();
 	let defer;
 
 	return new Promise((resolve, reject) =>
@@ -362,59 +346,33 @@ function init()
 			resolve,
 			reject
 		};
-		phantom
-			.create(
-			[
-				'--ignore-ssl-errors=yes',
-				'--load-images=no'
-			],
-			{
-				logLevel: option.get('logLevel')
-			})
-			.then(currentInstance =>
-			{
-				instance = currentInstance;
-				return instance.createPage();
-			})
-			.then(page =>
-			{
-				if (option.get('html'))
+		if (option.get('html'))
+		{
+			reporter.header();
+			_parseHTML(option.get('html'), page, defer);
+		}
+		else if (option.get('path'))
+		{
+			reporter.header();
+			_readPath(option.get('path'))
+				.then(content =>
 				{
-					reporter.header();
-					_parseHTML(option.get('html'), page, defer);
-				}
-				else if (option.get('path'))
-				{
-					reporter.header();
-					_readPath(option.get('path'))
-						.then(content =>
-						{
-							_parseHTML(content, page, defer);
-						})
-						.catch(() =>
-						{
-							defer.reject();
-						});
-				}
-				else if (option.get('url'))
-				{
-					reporter.header();
-					_openPage(option.get('url'), page, defer);
-				}
-				else
-				{
-					defer.reject();
-				}
-			});
+					_parseHTML(content, page, defer);
+				})
+				.catch(() => defer.reject());
+		}
+		else if (option.get('url'))
+		{
+			reporter.header();
+			_openPage(option.get('url'), page, defer);
+		}
+		else
+		{
+			defer.reject();
+		}
 	})
-	.then(() =>
-	{
-		instance.exit();
-	})
-	.catch(() =>
-	{
-		instance.exit();
-	});
+	.then(async () => await browser.close())
+	.catch(async () => await browser.close());
 }
 
 /**
