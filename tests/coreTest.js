@@ -1,5 +1,4 @@
 const expect = require('chai').expect;
-const events = require('events');
 const ncss = require('../');
 const core = ncss.core;
 const reporter = ncss.reporter;
@@ -87,7 +86,6 @@ let CORE;
 
 function test(optionArray, reportArray)
 {
-	events.EventEmitter.defaultMaxListeners++;
 	it(optionArray.html, done =>
 	{
 		option.init(optionArray);
