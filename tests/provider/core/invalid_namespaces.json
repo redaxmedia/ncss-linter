@@ -40,5 +40,26 @@
 			"warn": [],
 			"info": []
 		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<div class=\"foo-box invalid-box\"></div>",
+			"namespace": "foo",
+			"selector": "*:not(html):not(head):not(body)",
+			"logLevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-namespace",
+					"selector": "div.foo-box.invalid-box"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
 	}
 ]
