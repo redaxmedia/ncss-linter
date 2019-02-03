@@ -374,12 +374,12 @@ function _getLogLevel()
  *
  * @since 1.0.0
  *
- * @param dependency object
+ * @param injector object
  *
  * @return object
  */
 
-function construct(dependency)
+function construct(injector)
 {
 	const exports =
 	{
@@ -399,11 +399,11 @@ function construct(dependency)
 
 	clearReport();
 
-	/* inject dependency */
+	/* handle injector */
 
-	if (dependency.option)
+	if (injector.option)
 	{
-		option = dependency.option;
+		option = injector.option;
 	}
 	return exports;
 }

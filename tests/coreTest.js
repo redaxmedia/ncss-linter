@@ -3,6 +3,7 @@ const events = require('events');
 const ncss = require('../');
 const core = ncss.core;
 const reporter = ncss.reporter;
+const validator = ncss.validator;
 const helper = ncss.helper;
 const ruleset = ncss.ruleset;
 const option = ncss.option;
@@ -75,6 +76,7 @@ const providerArray =
 ];
 
 let REPORTER;
+let VALIDATOR;
 let CORE;
 
 /**
@@ -96,11 +98,16 @@ function test(optionArray, reportArray)
 		{
 			option
 		});
+		VALIDATOR = new validator(
+		{
+			ruleset,
+			option
+		});
 		CORE = new core(
 		{
 			reporter: REPORTER,
+			validator: VALIDATOR,
 			helper,
-			ruleset,
 			option
 		});
 		CORE
