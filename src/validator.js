@@ -6,32 +6,24 @@ let option;
  *
  * @since 4.0.9
  *
- * @param elementFragment array
+ * @param elementValue array
  *
  * @return array
  */
 
-function getValidateArray(elementFragment)
+function getValidateArray(elementValue)
 {
 	const rulesetArray = ruleset.get();
-	const separator = option.get('separator');
-	const separatorRegex = new RegExp(separator, 'g');
-	const namespace = option.get('namespace') ? option.get('namespace').replace(separatorRegex, '@@@') : null;
+	const namespace = option.get('namespace') ? _maskSeparator(option.get('namespace')) : null;
 	const namespaceArray = namespace ? namespace.split(',') : [];
 
 	let validateArray = [];
 
 	/* process class */
 
-	elementFragment.classArray.forEach(classValue =>
+	elementValue.classArray.forEach(classValue =>
 	{
-		const splitArray = _getSplitArray(classValue);
-		const fragmentArray =
-		{
-			namespace: namespace ? splitArray[0] : null,
-			root: namespace ? splitArray[1] : splitArray[0],
-			variation: namespace ? splitArray[2] : splitArray[1]
-		};
+		const fragmentArray = _getFragmentArray(classValue);
 
 		/* validate character */
 
@@ -39,25 +31,21 @@ function getValidateArray(elementFragment)
 
 		/* validate namespace */
 
-		validateArray.namespace = true;
-		if (namespaceArray.length)
-		{
-			validateArray.namespace = namespaceArray.indexOf(fragmentArray.namespace) > -1;
-		}
+		validateArray.namespace = namespaceArray.length ? namespaceArray.includes(fragmentArray.namespace) : true;
 
 		/* validate variation */
 
-		validateArray.variation = Object.keys(rulesetArray.functional).indexOf(fragmentArray.variation) === -1 && Object.keys(rulesetArray.exception).indexOf(fragmentArray.variation) === -1;
+		validateArray.variation = !rulesetArray.functional.hasOwnProperty(fragmentArray.variation) && !rulesetArray.exception.hasOwnProperty(fragmentArray.variation);
 		if (rulesetArray.structural[fragmentArray.root])
 		{
-			validateArray.variation &= Object.keys(rulesetArray.structural).indexOf(fragmentArray.variation) === -1;
+			validateArray.variation &= !rulesetArray.structural.hasOwnProperty(fragmentArray.variation);
 		}
 		if (!rulesetArray.exception[fragmentArray.root])
 		{
-			validateArray.variation &= Object.keys(rulesetArray.component).indexOf(fragmentArray.variation) === -1;
+			validateArray.variation &= !rulesetArray.component.hasOwnProperty(fragmentArray.variation);
 			if (!rulesetArray.functional[fragmentArray.root])
 			{
-				validateArray.variation &= Object.keys(rulesetArray.type).indexOf(fragmentArray.variation) === -1;
+				validateArray.variation &= !rulesetArray.type.hasOwnProperty(fragmentArray.variation);
 			}
 		}
 
@@ -75,7 +63,7 @@ function getValidateArray(elementFragment)
 					validateArray.tag = true;
 					if (rulesetArray[rulesetValue][childrenValue] !== '*')
 					{
-						validateArray.tag = rulesetArray[rulesetValue][childrenValue].indexOf(elementFragment.tagName) > -1;
+						validateArray.tag = rulesetArray[rulesetValue][childrenValue].includes(elementValue.tagName);
 					}
 				}
 			});
@@ -85,7 +73,7 @@ function getValidateArray(elementFragment)
 }
 
 /**
- * get the split array
+ * get the fragment array
  *
  * @since 4.0.0
  *
@@ -94,7 +82,7 @@ function getValidateArray(elementFragment)
  * @return array
  */
 
-function _getSplitArray(classValue)
+function _getFragmentArray(classValue)
 {
 	const separator = option.get('separator');
 	const namespace = option.get('namespace');
@@ -104,9 +92,38 @@ function _getSplitArray(classValue)
 
 	namespaceArray.forEach(namespaceValue =>
 	{
-		classValue = classValue.replace(namespaceValue, namespaceValue.replace(separator, '@@@'));
+		classValue = classValue.replace(namespaceValue, _maskSeparator(namespaceValue));
 	});
-	return classValue.split(separator);
+
+	/* split into fragment */
+
+	const splitArray = classValue.split(separator);
+	const fragmentArray =
+	{
+		namespace: namespace ? splitArray[0] : null,
+		root: namespace ? splitArray[1] : splitArray[0],
+		variation: namespace ? splitArray[2] : splitArray[1]
+	};
+
+	return fragmentArray;
+}
+
+/**
+ * mask the separator
+ *
+ * @since 4.0.0
+ *
+ * @param value string
+ *
+ * @return array
+ */
+
+function _maskSeparator(value)
+{
+	const separator = option.get('separator');
+	const separatorRegex = new RegExp(separator, 'g');
+
+	return value.replace(separatorRegex, '@@@');
 }
 
 /**

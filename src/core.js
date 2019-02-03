@@ -20,13 +20,13 @@ async function _getElement(page, selector)
 {
 	return await page.$$eval(selector, element => element.map(elementValue =>
 	{
-		const elementFragment =
+		const element =
 		{
 			tagName: elementValue.tagName.toLowerCase(),
 			classArray: elementValue.className.toLowerCase().split(' ').filter(value => value)
 		};
 
-		return elementFragment;
+		return element;
 	}));
 }
 
@@ -40,11 +40,11 @@ async function _getElement(page, selector)
 
 function _processElement(elementArray)
 {
-	elementArray.forEach((elementFragment, elementIndex) =>
+	elementArray.forEach((elementValue, elementIndex) =>
 	{
-		if (elementFragment.classArray.length)
+		if (elementValue.classArray.length)
 		{
-			const validateArray = validator.getValidateArray(elementFragment);
+			const validateArray = validator.getValidateArray(elementValue);
 
 			/* report as needed */
 
@@ -53,7 +53,7 @@ function _processElement(elementArray)
 				reporter.warn(
 				{
 					type: 'invalid-character',
-					selector: elementFragment.tagName
+					selector: elementValue.tagName
 				});
 			}
 			else if (!validateArray.namespace)
@@ -61,7 +61,7 @@ function _processElement(elementArray)
 				reporter.fail(
 				{
 					type: 'invalid-namespace',
-					selector: elementFragment.tagName + '.' + elementFragment.classArray.join('.')
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
 			else if (!validateArray.class)
@@ -69,7 +69,7 @@ function _processElement(elementArray)
 				reporter.fail(
 				{
 					type: 'invalid-class',
-					selector: elementFragment.tagName + '.' + elementFragment.classArray.join('.')
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
 			else if (!validateArray.variation)
@@ -77,7 +77,7 @@ function _processElement(elementArray)
 				reporter.fail(
 				{
 					type: 'invalid-variation',
-					selector: elementFragment.tagName + '.' + elementFragment.classArray.join('.')
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
 			else if (!validateArray.tag)
@@ -85,7 +85,7 @@ function _processElement(elementArray)
 				reporter.fail(
 				{
 					type: 'invalid-tag',
-					selector: elementFragment.tagName + '.' + elementFragment.classArray.join('.')
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
 			else
@@ -93,7 +93,7 @@ function _processElement(elementArray)
 				reporter.pass(
 				{
 					type: 'pass',
-					selector: elementFragment.tagName + '.' + elementFragment.classArray.join('.')
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
 		}
@@ -105,7 +105,7 @@ function _processElement(elementArray)
 			reporter.skip(
 			{
 				type: 'skip',
-				selector: elementFragment.tagName
+				selector: elementValue.tagName
 			});
 		}
 		reporter.end(elementIndex + 1, elementArray.length);
