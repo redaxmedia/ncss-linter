@@ -317,9 +317,9 @@ async function init()
 		{
 			reporter.header();
 			helper.walkPath(option.get('path'))
-				.then(content =>
+				.then(contentArray =>
 				{
-					_setContent(content, page, defer);
+					_setContent(contentArray.map(item => item.content), page, defer);
 				})
 				.catch(() => defer.reject());
 		}
