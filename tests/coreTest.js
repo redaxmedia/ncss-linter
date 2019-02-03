@@ -3,6 +3,7 @@ const events = require('events');
 const ncss = require('../');
 const core = ncss.core;
 const reporter = ncss.reporter;
+const helper = ncss.helper;
 const ruleset = ncss.ruleset;
 const option = ncss.option;
 const providerArray =
@@ -98,6 +99,7 @@ function test(optionArray, reportArray)
 		CORE = new core(
 		{
 			reporter: REPORTER,
+			helper,
 			ruleset,
 			option
 		});

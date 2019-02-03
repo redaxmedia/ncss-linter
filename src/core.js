@@ -1,8 +1,7 @@
 const puppeteer = require('puppeteer');
-const glob = require('glob');
-const fs = require('fs');
 
 let reporter;
+let helper;
 let ruleset;
 let option;
 
@@ -222,48 +221,7 @@ function _getSplitArray(classValue)
 }
 
 /**
- * read the path
- *
- * @since 1.3.0
- *
- * @param path string
- *
- * @return Promise
- */
-
-function _readPath(path)
-{
-	let content;
-	let readCounter = 0;
-
-	return new Promise((resolve, reject) =>
-	{
-		glob(path, (error, pathArray) =>
-		{
-			if (pathArray.length)
-			{
-				pathArray.forEach(fileValue =>
-				{
-					fs.readFile(fileValue, 'utf-8', (fileError, fileContent) =>
-					{
-						content += fileContent;
-						if (++readCounter === pathArray.length)
-						{
-							resolve(content);
-						}
-					});
-				});
-			}
-			else
-			{
-				reject();
-			}
-		});
-	});
-}
-
-/**
- * open the page
+ * set the url
  *
  * @since 4.0.0
  *
@@ -272,7 +230,7 @@ function _readPath(path)
  * @param defer object
  */
 
-function _openPage(url, page, defer)
+function _setUrl(url, page, defer)
 {
 	page.goto(url)
 		.then(() => _processPage(page, defer))
@@ -280,7 +238,7 @@ function _openPage(url, page, defer)
 }
 
 /**
- * parse the html
+ * set the content
  *
  * @since 4.0.0
  *
@@ -289,7 +247,7 @@ function _openPage(url, page, defer)
  * @param defer object
  */
 
-function _parseHTML(content, page, defer)
+function _setContent(content, page, defer)
 {
 	page.setContent(content)
 		.then(() => _processPage(page, defer))
@@ -353,22 +311,22 @@ async function init()
 		if (option.get('html'))
 		{
 			reporter.header();
-			_parseHTML(option.get('html'), page, defer);
+			_setContent(option.get('html'), page, defer);
 		}
 		else if (option.get('path'))
 		{
 			reporter.header();
-			_readPath(option.get('path'))
+			helper.walkPath(option.get('path'))
 				.then(content =>
 				{
-					_parseHTML(content, page, defer);
+					_setContent(content, page, defer);
 				})
 				.catch(() => defer.reject());
 		}
 		else if (option.get('url'))
 		{
 			reporter.header();
-			_openPage(option.get('url'), page, defer);
+			_setUrl(option.get('url'), page, defer);
 		}
 		else
 		{
@@ -398,9 +356,10 @@ function construct(dependency)
 
 	/* inject dependency */
 
-	if (dependency.reporter && dependency.ruleset && dependency.option)
+	if (dependency.reporter && dependency.reporter && dependency.ruleset && dependency.option)
 	{
 		reporter = dependency.reporter;
+		helper = dependency.helper;
 		ruleset = dependency.ruleset;
 		option = dependency.option;
 	}
