@@ -191,6 +191,7 @@ async function init()
 		]
 	});
 	const page = await browser.newPage();
+
 	let defer;
 
 	return new Promise((resolve, reject) =>
