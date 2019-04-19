@@ -158,15 +158,13 @@ function _setContent(content, page, defer)
 function _processPage(page, defer)
 {
 	const selector = option.get('selector');
-	const thresholdError = option.get('thresholdError');
-	const thresholdWarn = option.get('thresholdWarn');
 
 	_getElement(page, selector)
 		.then(elementArray =>
 		{
 			_processElement(elementArray);
-			reporter.result(thresholdError, thresholdWarn);
-			reporter.summary(thresholdError, thresholdWarn);
+			reporter.summary();
+			reporter.result();
 			defer.resolve();
 		})
 		.catch(() => defer.reject());

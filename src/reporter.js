@@ -165,13 +165,14 @@ function end(counter, total)
  * result
  *
  * @since 1.0.0
- *
- * @param thresholdError number
- * @param thresholdWarn number
  */
 
-function result(thresholdError, thresholdWarn)
+function result()
 {
+	const thresholdError = option.get('thresholdError');
+	const thresholdWarn = option.get('thresholdWarn');
+	const haltOnError = option.get('haltOnError');
+	const haltOnWarn = option.get('haltOnWarn');
 	const logLevel = _getLogLevel();
 
 	if (reportArray.error.length === 0 && reportArray.warn.length === 0 && reportArray.info.length === 3)
@@ -181,10 +182,18 @@ function result(thresholdError, thresholdWarn)
 	else if (reportArray.error.length > thresholdError && logLevel > 0)
 	{
 		_log('\n' + colors.red(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark) + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
+		if (haltOnError)
+		{
+			process.exit(1);
+		}
 	}
 	else if (reportArray.warn.length > thresholdWarn && logLevel > 1)
 	{
 		_log('\n' + colors.yellow(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark) + ' (' + reportArray.warn.length + ' ' + wordingArray.warnings_found + ')\n');
+		if (haltOnWarn)
+		{
+			process.exit(1);
+		}
 	}
 	else
 	{
@@ -205,13 +214,13 @@ function result(thresholdError, thresholdWarn)
  * summary
  *
  * @since 1.0.0
- *
- * @param thresholdError number
- * @param thresholdWarn number
  */
 
-function summary(thresholdError, thresholdWarn)
+function summary()
 {
+	const thresholdError = option.get('thresholdError');
+	const thresholdWarn = option.get('thresholdWarn');
+
 	if (reportArray.error.length > thresholdError)
 	{
 		_logError('\n');
@@ -285,15 +294,10 @@ function _log(message)
 function _logError(message)
 {
 	const logLevel = _getLogLevel();
-	const haltOnError = option.get('haltOnError');
 
 	if (logLevel > 0)
 	{
 		process.stderr.write(message);
-		if (haltOnError)
-		{
-			process.exit(1);
-		}
 	}
 }
 
@@ -308,15 +312,10 @@ function _logError(message)
 function _logWarn(message)
 {
 	const logLevel = _getLogLevel();
-	const haltOnWarn = option.get('haltOnWarn');
 
 	if (logLevel > 1)
 	{
 		process.stdout.write(message);
-		if (haltOnWarn)
-		{
-			process.exit(1);
-		}
 	}
 }
 
