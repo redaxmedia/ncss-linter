@@ -224,7 +224,7 @@ function summary()
 	if (reportArray.error.length > thresholdError)
 	{
 		_logError('\n');
-		reportArray.error.forEach(function (reportValue)
+		reportArray.error.forEach(reportValue =>
 		{
 			if (reportValue.type === 'invalid-namespace')
 			{
@@ -251,7 +251,7 @@ function summary()
 	if (reportArray.warn.length > thresholdWarn)
 	{
 		_logWarn('\n');
-		reportArray.warn.forEach(function (reportValue)
+		reportArray.warn.forEach(reportValue =>
 		{
 			if (reportValue.type === 'invalid-character')
 			{
