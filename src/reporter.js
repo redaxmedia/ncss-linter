@@ -289,11 +289,11 @@ function _logError(message)
 
 	if (logLevel > 0)
 	{
+		process.stderr.write(message);
 		if (haltOnError)
 		{
 			process.exit(1);
 		}
-		process.stderr.write(message);
 	}
 }
 
@@ -312,11 +312,11 @@ function _logWarn(message)
 
 	if (logLevel > 1)
 	{
+		process.stdout.write(message);
 		if (haltOnWarn)
 		{
 			process.exit(1);
 		}
-		process.stdout.write(message);
 	}
 }
 
