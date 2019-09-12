@@ -180,14 +180,16 @@ function _processPage(page, defer)
 
 async function init()
 {
-	const browser = await puppeteer.launch(
-	{
-		ignoreHTTPSErrors: true,
-		args:
-		[
-			'--no-sandbox'
-		]
-	});
+	const browser = await puppeteer
+		.launch(
+		{
+			ignoreHTTPSErrors: true,
+			args:
+			[
+				'--no-sandbox'
+			]
+		})
+		.catch(() => process.exit(1));
 	const page = await browser.newPage();
 
 	let defer;
