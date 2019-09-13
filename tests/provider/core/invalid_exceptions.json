@@ -2,7 +2,7 @@
 	{
 		"optionArray":
 		{
-			"html": "<header class=\"wrapper-wrapper\"></header>",
+			"html": "<div class=\"wrapper-wrapper\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
@@ -13,7 +13,7 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.wrapper-wrapper"
+					"selector": "div.wrapper-wrapper"
 				}
 			],
 			"warn": [],
@@ -23,7 +23,7 @@
 	{
 		"optionArray":
 		{
-			"html": "<header class=\"wrapper-invalid-wrapper\"></header>",
+			"html": "<div class=\"wrapper-invalid-wrapper\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
@@ -34,7 +34,7 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.wrapper-invalid-wrapper"
+					"selector": "div.wrapper-invalid-wrapper"
 				}
 			],
 			"warn": [],
@@ -44,7 +44,7 @@
 	{
 		"optionArray":
 		{
-			"html": "<header class=\"wrapper-fn\"></header>",
+			"html": "<div class=\"wrapper-fn\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
@@ -55,7 +55,7 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.wrapper-fn"
+					"selector": "div.wrapper-fn"
 				}
 			],
 			"warn": [],
