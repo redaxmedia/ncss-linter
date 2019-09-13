@@ -23,6 +23,27 @@
 	{
 		"optionArray":
 		{
+			"html": "<div class=\"component-invalid-component\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"logLevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "div.component-invalid-component"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
 			"html": "<div class=\"component-box\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",

@@ -2,27 +2,6 @@
 	{
 		"optionArray":
 		{
-			"html": "<header class=\"wrapper-fn\"></header>",
-			"namespace": null,
-			"selector": "*:not(html):not(head):not(body)",
-			"logLevel": "silent"
-		},
-		"reportArray":
-		{
-			"error":
-			[
-				{
-					"type": "invalid-variation",
-					"selector": "header.wrapper-fn"
-				}
-			],
-			"warn": [],
-			"info": []
-		}
-	},
-	{
-		"optionArray":
-		{
 			"html": "<header class=\"wrapper-wrapper\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
@@ -35,6 +14,48 @@
 				{
 					"type": "invalid-variation",
 					"selector": "header.wrapper-wrapper"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"wrapper-invalid-wrapper\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"logLevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "header.wrapper-invalid-wrapper"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"wrapper-fn\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"logLevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "header.wrapper-fn"
 				}
 			],
 			"warn": [],

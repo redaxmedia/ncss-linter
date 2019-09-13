@@ -2,7 +2,7 @@
 	{
 		"optionArray":
 		{
-			"html": "<header class=\"header-footer\"></header>",
+			"html": "<header class=\"header-header\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
@@ -13,7 +13,28 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.header-footer"
+					"selector": "header.header-header"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
+			"html": "<header class=\"header-invalid-header\"></header>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"logLevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "header.header-invalid-header"
 				}
 			],
 			"warn": [],

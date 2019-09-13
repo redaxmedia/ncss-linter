@@ -35,17 +35,18 @@ function getValidateArray(elementValue)
 
 		/* validate variation */
 
-		validateArray.variation = !rulesetArray.functional.hasOwnProperty(fragmentArray.variation) && !rulesetArray.exception.hasOwnProperty(fragmentArray.variation);
+		validateArray.variation = !Object.keys(rulesetArray.functional).some(value => fragmentArray.variationArray.includes(value));
+		validateArray.variation &= !Object.keys(rulesetArray.exception).some(value => fragmentArray.variationArray.includes(value));
 		if (rulesetArray.structural[fragmentArray.root])
 		{
-			validateArray.variation &= !rulesetArray.structural.hasOwnProperty(fragmentArray.variation);
+			validateArray.variation &= !Object.keys(rulesetArray.structural).some(value => fragmentArray.variationArray.includes(value))
 		}
 		if (!rulesetArray.exception[fragmentArray.root])
 		{
-			validateArray.variation &= !rulesetArray.component.hasOwnProperty(fragmentArray.variation);
+			validateArray.variation &= !Object.keys(rulesetArray.component).some(value => fragmentArray.variationArray.includes(value));
 			if (!rulesetArray.functional[fragmentArray.root])
 			{
-				validateArray.variation &= !rulesetArray.type.hasOwnProperty(fragmentArray.variation);
+				validateArray.variation &= !Object.keys(rulesetArray.type).some(value => fragmentArray.variationArray.includes(value))
 			}
 		}
 
@@ -102,7 +103,7 @@ function _getFragmentArray(classValue)
 	{
 		namespace: namespace ? splitArray[0] : null,
 		root: namespace ? splitArray[1] : splitArray[0],
-		variation: namespace ? splitArray[2] : splitArray[1]
+		variationArray: splitArray.slice(namespace ? 2 : 1)
 	};
 
 	return fragmentArray;

@@ -23,6 +23,27 @@
 	{
 		"optionArray":
 		{
+			"html": "<div class=\"fn-invalid-fn\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"logLevel": "silent"
+		},
+		"reportArray":
+		{
+			"error":
+			[
+				{
+					"type": "invalid-variation",
+					"selector": "div.fn-invalid-fn"
+				}
+			],
+			"warn": [],
+			"info": []
+		}
+	},
+	{
+		"optionArray":
+		{
 			"html": "<div class=\"fn-wrapper\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
