@@ -30,8 +30,32 @@ npm install
 ```
 
 
+Setup
+-----
+
+Create a `.ncsslintrc` file to define your global options:
+
+```json
+{
+	"html": null,
+	"path": null,
+	"url": null,
+	"namespace": null,
+	"separator": "-",
+	"selector": "*",
+	"logLevel": "warn",
+	"thresholdError": 0,
+	"thresholdWarn": 0,
+	"haltOnError": false,
+	"haltOnWarn": false
+}
+```
+
+
 Usage
 -----
+
+Run the command:
 
 ```
 bin/ncss-linter [options]
