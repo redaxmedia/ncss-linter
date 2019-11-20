@@ -26,7 +26,7 @@
 	"dependencies":
 	{
 		"colors": "1.4.0",
-		"commander": "4.0.0",
+		"commander": "4.0.1",
 		"extend": "3.0.2",
 		"glob": "7.1.6",
 		"puppeteer": "2.0.0"
@@ -35,12 +35,13 @@
 	{
 		"chai": "4.2.0",
 		"eslint": "6.6.0",
-		"eslint-config-redaxmedia": "1.1.0",
+		"eslint-config-redaxmedia": "1.2.0",
 		"mocha": "6.2.2"
 	},
 	"scripts":
 	{
 		"lint": "eslint bin/ncss-linter src tests",
+		"fix": "eslint bin/ncss-linter src tests --fix",
 		"test": "mocha tests/*Test.js"
 	},
 	"bin":

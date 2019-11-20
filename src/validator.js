@@ -39,14 +39,14 @@ function getValidateArray(elementValue)
 		validateArray.variation &= !Object.keys(rulesetArray.exception).some(value => fragmentArray.variationArray.includes(value));
 		if (rulesetArray.structural[fragmentArray.root])
 		{
-			validateArray.variation &= !Object.keys(rulesetArray.structural).some(value => fragmentArray.variationArray.includes(value))
+			validateArray.variation &= !Object.keys(rulesetArray.structural).some(value => fragmentArray.variationArray.includes(value));
 		}
 		if (!rulesetArray.exception[fragmentArray.root])
 		{
 			validateArray.variation &= !Object.keys(rulesetArray.component).some(value => fragmentArray.variationArray.includes(value));
 			if (!rulesetArray.functional[fragmentArray.root])
 			{
-				validateArray.variation &= !Object.keys(rulesetArray.type).some(value => fragmentArray.variationArray.includes(value))
+				validateArray.variation &= !Object.keys(rulesetArray.type).some(value => fragmentArray.variationArray.includes(value));
 			}
 		}
 

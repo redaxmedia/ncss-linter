@@ -43,7 +43,7 @@ function clearReport()
 function header()
 {
 	_log(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author.name + wordingArray.point + '\n');
-	_logInfo('\n')
+	_logInfo('\n');
 }
 
 /**
