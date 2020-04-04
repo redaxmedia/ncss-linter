@@ -17,23 +17,17 @@ Preview
 Installation
 ------------
 
-Clone the repository:
+Install on your system:
 
 ```
-git clone https://github.com/redaxmedia/ncss-linter.git
-```
-
-Install the dependencies:
-
-```
-npm install
+npm install ncss-linter --global --unsafe-perm=true
 ```
 
 
 Setup
 -----
 
-Create a `.ncsslintrc` file to define your global options:
+Create a config file:
 
 ```json
 {
@@ -58,7 +52,7 @@ Usage
 Run the command:
 
 ```
-bin/ncss-linter [options]
+ncss-linter [options]
 
 -V, --version
 -C, --config <config>
@@ -99,28 +93,28 @@ Options
 Examples
 --------
 
-Validate using a configuration file:
+Validate using a config file:
 
 ```
-bin/ncss-linter --config=.ncsslintrc
+ncss-linter --config=.ncsslintrc
 ```
 
 Validate a `HTML` string:
 
 ```
-bin/ncss-linter --html='<div class="box-content"></div>'
+ncss-linter --html='<div class="box-content"></div>'
 ```
 
 Validate a local path:
 
 ```
-bin/ncss-linter --path=templates/**/*.html --namespace=foo
+ncss-linter --path=templates/**/*.html --namespace=foo
 ```
 
 Validate a remote URL:
 
 ```
-bin/ncss-linter --url=https://redaxmedia.com --namespace=rs --log-level=info
+ncss-linter --url=https://redaxmedia.com --namespace=rs --log-level=info
 ```
 
 
