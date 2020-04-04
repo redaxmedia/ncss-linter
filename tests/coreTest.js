@@ -117,7 +117,7 @@ function test(optionArray, reportArray)
 				expect(REPORTER.getReport()).to.deep.equal(reportArray);
 				done();
 			})
-			.catch(error => error);
+			.catch(() => done('error'));
 	})
 	.timeout(1000);
 }
