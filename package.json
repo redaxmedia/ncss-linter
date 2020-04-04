@@ -1,7 +1,7 @@
 {
 	"name": "ncss-linter",
 	"description": "Linter for NCSS",
-	"version": "5.2.0",
+	"version": "5.2.1",
 	"homepage": "https://ncss.io",
 	"license": "GPL-3.0",
 	"keywords":
@@ -27,7 +27,6 @@
 	{
 		"colors": "1.4.0",
 		"commander": "5.0.0",
-		"extend": "3.0.2",
 		"glob": "7.1.6",
 		"puppeteer": "2.1.1"
 	},

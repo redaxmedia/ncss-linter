@@ -1,5 +1,4 @@
 const fs = require('fs');
-const extend = require('extend');
 
 let optionArray = require('../option.json');
 let configArray = {};
@@ -31,13 +30,18 @@ function init(initArray)
 {
 	if (fs.existsSync(optionArray.config))
 	{
-		configArray = JSON.parse(fs.readFileSync(optionArray.config, 'utf-8'));
+		configArray = JSON.parse(fs.readFileSync(optionArray.config));
 	}
 	if (fs.existsSync(initArray.config))
 	{
-		configArray = JSON.parse(fs.readFileSync(initArray.config, 'utf-8'));
+		configArray = JSON.parse(fs.readFileSync(initArray.config));
 	}
-	optionArray = extend(optionArray, configArray, initArray);
+	optionArray =
+	{
+		...optionArray,
+		...configArray,
+		...initArray
+	};
 }
 
 module.exports =
