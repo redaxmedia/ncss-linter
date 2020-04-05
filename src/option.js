@@ -1,5 +1,5 @@
 const fs = require('fs');
-const option = require('utility-redaxmedia').option('option.json');
+const option = require('utility-redaxmedia').option(__dirname + '/../option.json');
 
 let configArray = {};
 
