@@ -1,51 +1,31 @@
 const fs = require('fs');
+const option = require('utility-redaxmedia').option('option.json');
 
-let optionArray = require('../option.json');
 let configArray = {};
 
 /**
- * get
- *
- * @since 1.0.0
- *
- * @param name string
- *
- * @return string
- */
-
-function get(name)
-{
-	return optionArray[name];
-}
-
-/**
- * init
+ * init with config
  *
  * @since 1.0.0
  *
  * @param initArray array
  */
 
-function init(initArray)
+option.initWithConfig = initArray =>
 {
-	if (fs.existsSync(optionArray.config))
+	if (fs.existsSync(option.get('config')))
 	{
-		configArray = JSON.parse(fs.readFileSync(optionArray.config));
+		configArray = JSON.parse(fs.readFileSync(option.get('config')));
 	}
 	if (fs.existsSync(initArray.config))
 	{
 		configArray = JSON.parse(fs.readFileSync(initArray.config));
 	}
-	optionArray =
+	option.init(
 	{
-		...optionArray,
 		...configArray,
 		...initArray
-	};
-}
-
-module.exports =
-{
-	get,
-	init
+	});
 };
+
+module.exports = option;

@@ -4,9 +4,9 @@ const option = ncss.option;
 
 describe('option', () =>
 {
-	it('init', () =>
+	it('init with config', () =>
 	{
-		option.init(
+		option.initWithConfig(
 		{
 			config: 'tests/provider/option/.ncsslintrc',
 			url: 'https://ncss.io'
