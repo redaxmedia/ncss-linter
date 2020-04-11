@@ -11,13 +11,14 @@ let option;
  * @since 4.0.0
  *
  * @param {Promise} page
- * @param {string} selector
  *
  * @return {Promise}
  */
 
-async function _getElement(page, selector)
+async function _getElement(page)
 {
+	const selector = option.get('selector');
+
 	return await page.$$eval(selector, element => element.map(elementValue =>
 	{
 		const element =
@@ -165,9 +166,7 @@ function _setContent(content, page, defer)
 
 function _processPage(page, defer)
 {
-	const selector = option.get('selector');
-
-	_getElement(page, selector)
+	_getElement(page)
 		.then(elementArray =>
 		{
 			_processElement(elementArray);

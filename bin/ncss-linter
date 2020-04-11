@@ -8,14 +8,14 @@ const validator = ncss.validator;
 const helper = ncss.helper;
 const ruleset = ncss.ruleset;
 const option = ncss.option;
-const packageArray = require('../package.json');
+const packageObject = require('../package.json');
 
 let REPORTER;
 let VALIDATOR;
 let CORE;
 
 program
-	.version(packageArray.name + ' ' + packageArray.version)
+	.version(packageObject.name + ' ' + packageObject.version)
 	.option('-C, --config <config>')
 	.option('-H, --html <html>')
 	.option('-P, --path <path>')
