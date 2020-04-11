@@ -84,16 +84,18 @@ let CORE;
  *
  * @since 1.3.0
  *
- * @param optionArray object
- * @param reportArray object
+ * @param {object} optionObject
+ * @param {object} reportObject
+ *
+ * @return {void}
  */
 
-function test(optionArray, reportArray)
+function test(optionObject, reportObject)
 {
 	events.EventEmitter.defaultMaxListeners++;
-	it(optionArray.html, done =>
+	it(optionObject.html, done =>
 	{
-		option.init(optionArray);
+		option.init(optionObject);
 		REPORTER = new reporter(
 		{
 			option
@@ -114,7 +116,7 @@ function test(optionArray, reportArray)
 			.init()
 			.then(() =>
 			{
-				expect(REPORTER.getReport()).to.deep.equal(reportArray);
+				expect(REPORTER.getReport()).to.deep.equal(reportObject);
 				done();
 			})
 			.catch(() => done('error'));
@@ -124,7 +126,7 @@ function test(optionArray, reportArray)
 
 describe('core', () =>
 {
-	providerArray.forEach(providerValue =>
+	providerArray.map(providerValue =>
 	{
 		describe(providerValue.describe, () =>
 		{

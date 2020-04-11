@@ -6,9 +6,9 @@ let option;
  *
  * @since 4.0.9
  *
- * @param elementValue array
+ * @param {object} elementValue
  *
- * @return array
+ * @return {Array}
  */
 
 function getValidateArray(elementValue)
@@ -78,9 +78,9 @@ function getValidateArray(elementValue)
  *
  * @since 4.0.0
  *
- * @param classValue string
+ * @param {string} classValue
  *
- * @return array
+ * @return {object}
  */
 
 function _getFragmentArray(classValue)
@@ -99,14 +99,14 @@ function _getFragmentArray(classValue)
 	/* split into fragment */
 
 	const splitArray = classValue.split(separator);
-	const fragmentArray =
+	const fragmentObject =
 	{
 		namespace: namespace ? splitArray[0] : null,
 		root: namespace ? splitArray[1] : splitArray[0],
 		variationArray: splitArray.slice(namespace ? 2 : 1)
 	};
 
-	return fragmentArray;
+	return fragmentObject;
 }
 
 /**
@@ -114,17 +114,17 @@ function _getFragmentArray(classValue)
  *
  * @since 4.0.0
  *
- * @param value string
+ * @param {string} value
  *
- * @return array
+ * @return {string}
  */
 
 function _maskSeparator(value)
 {
 	const separator = option.get('separator');
-	const separatorRegex = new RegExp(separator, 'g');
+	const pattern = new RegExp(separator, 'g');
 
-	return value.replace(separatorRegex, '@@@');
+	return value.replace(pattern, '@@@');
 }
 
 /**
@@ -132,12 +132,12 @@ function _maskSeparator(value)
  *
  * @since 4.0.0
  *
- * @param injector object
+ * @param {object} injectorObject
  *
- * @return object
+ * @return {object}
  */
 
-function construct(injector)
+function construct(injectorObject)
 {
 	const exports =
 	{
@@ -146,10 +146,10 @@ function construct(injector)
 
 	/* handle injector */
 
-	if (injector.ruleset && injector.option)
+	if (injectorObject.ruleset && injectorObject.option)
 	{
-		ruleset = injector.ruleset;
-		option = injector.option;
+		ruleset = injectorObject.ruleset;
+		option = injectorObject.option;
 	}
 	return exports;
 }

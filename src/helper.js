@@ -6,9 +6,9 @@ const fs = require('fs');
  *
  * @since 1.3.0
  *
- * @param path string
+ * @param {string} path
  *
- * @return Promise
+ * @return {Promise}
  */
 
 function walkPath(path)

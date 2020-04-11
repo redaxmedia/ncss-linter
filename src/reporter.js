@@ -1,32 +1,34 @@
 const colors = require('colors');
-const wordingArray = require('../wording.json');
-const packageArray = require('../package.json');
+const wordingObject = require('../wording.json');
+const packageObject = require('../package.json');
 
 let option;
-let reportArray = {};
+let reportObject = {};
 
 /**
  * get the report
  *
  * @since 1.0.0
  *
- * return array
+ * @return {object}
  */
 
 function getReport()
 {
-	return reportArray;
+	return reportObject;
 }
 
 /**
  * clear the report
  *
  * @since 1.0.0
+ *
+ * @return {void}
  */
 
 function clearReport()
 {
-	reportArray =
+	reportObject =
 	{
 		error: [],
 		warn: [],
@@ -38,11 +40,13 @@ function clearReport()
  * header
  *
  * @since 1.0.0
+ *
+ * @return {void}
  */
 
 function header()
 {
-	_log(packageArray.name + ' ' + packageArray.version + ' ' + wordingArray.by + ' ' + packageArray.author.name + wordingArray.point + '\n');
+	_log(packageObject.name + ' ' + packageObject.version + ' ' + wordingObject.by + ' ' + packageObject.author.name + wordingObject.point + '\n');
 	_logInfo('\n');
 }
 
@@ -51,18 +55,20 @@ function header()
  *
  * @since 1.0.0
  *
- * @param passArray array
+ * @param {object} passObject
+ *
+ * @return {void}
  */
 
-function pass(passArray)
+function pass(passObject)
 {
 	_logInfo('.');
-	if (passArray.type && passArray.selector)
+	if (passObject.type && passObject.selector)
 	{
-		reportArray.info.push(
+		reportObject.info.push(
 		{
-			type: passArray.type,
-			selector: passArray.selector
+			type: passObject.type,
+			selector: passObject.selector
 		});
 	}
 }
@@ -72,21 +78,23 @@ function pass(passArray)
  *
  * @since 1.0.0
  *
- * @param warnArray array
+ * @param {object} warnObject
+ *
+ * @return {void}
  */
 
-function warn(warnArray)
+function warn(warnObject)
 {
-	if (warnArray.type === 'invalid-character')
+	if (warnObject.type === 'invalid-character')
 	{
 		_logInfo('W');
 	}
-	if (warnArray.type && warnArray.selector)
+	if (warnObject.type && warnObject.selector)
 	{
-		reportArray.warn.push(
+		reportObject.warn.push(
 		{
-			type: warnArray.type,
-			selector: warnArray.selector
+			type: warnObject.type,
+			selector: warnObject.selector
 		});
 	}
 }
@@ -96,21 +104,23 @@ function warn(warnArray)
  *
  * @since 1.0.0
  *
- * @param failArray array
+ * @param {object} failObject
+ *
+ * @return {void}
  */
 
-function fail(failArray)
+function fail(failObject)
 {
-	if (failArray.type === 'invalid-namespace' || failArray.type === 'invalid-class' || failArray.type === 'invalid-variation' || failArray.type === 'invalid-tag')
+	if (failObject.type === 'invalid-namespace' || failObject.type === 'invalid-class' || failObject.type === 'invalid-variation' || failObject.type === 'invalid-tag')
 	{
 		_logInfo('E');
 	}
-	if (failArray.type && failArray.selector)
+	if (failObject.type && failObject.selector)
 	{
-		reportArray.error.push(
+		reportObject.error.push(
 		{
-			type: failArray.type,
-			selector: failArray.selector
+			type: failObject.type,
+			selector: failObject.selector
 		});
 	}
 }
@@ -120,18 +130,20 @@ function fail(failArray)
  *
  * @since 1.0.0
  *
- * @param skipArray array
+ * @param {object} skipObject
+ *
+ * @return {void}
  */
 
-function skip(skipArray)
+function skip(skipObject)
 {
 	_logInfo('.');
-	if (skipArray.type && skipArray.selector)
+	if (skipObject.type && skipObject.selector)
 	{
-		reportArray.info.push(
+		reportObject.info.push(
 		{
-			type: skipArray.type,
-			selector: skipArray.selector
+			type: skipObject.type,
+			selector: skipObject.selector
 		});
 	}
 }
@@ -141,8 +153,10 @@ function skip(skipArray)
  *
  * @since 1.0.0
  *
- * @param counter number
- * @param total number
+ * @param {number} counter
+ * @param {number} total
+ *
+ * @return {void}
  */
 
 function end(counter, total)
@@ -165,6 +179,8 @@ function end(counter, total)
  * result
  *
  * @since 1.0.0
+ *
+ * @return {void}
  */
 
 function result()
@@ -175,21 +191,21 @@ function result()
 	const haltOnWarn = option.get('haltOnWarn');
 	const logLevel = _getLogLevel();
 
-	if (reportArray.error.length === 0 && reportArray.warn.length === 0 && reportArray.info.length === 3)
+	if (reportObject.error.length === 0 && reportObject.warn.length === 0 && reportObject.info.length === 3)
 	{
-		_log('\n' + colors.yellow(wordingArray.something_wrong.toUpperCase() + wordingArray.exclamation_mark) + '\n');
+		_log('\n' + colors.yellow(wordingObject.something_wrong.toUpperCase() + wordingObject.exclamation_mark) + '\n');
 	}
-	else if (reportArray.error.length > thresholdError && logLevel > 0)
+	else if (reportObject.error.length > thresholdError && logLevel > 0)
 	{
-		_log('\n' + colors.red(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark) + ' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')\n');
+		_log('\n' + colors.red(wordingObject.failed.toUpperCase() + wordingObject.exclamation_mark) + ' (' + reportObject.error.length + ' ' + wordingObject.errors_found + ')\n');
 		if (haltOnError)
 		{
 			process.exit(1);
 		}
 	}
-	else if (reportArray.warn.length > thresholdWarn && logLevel > 1)
+	else if (reportObject.warn.length > thresholdWarn && logLevel > 1)
 	{
-		_log('\n' + colors.yellow(wordingArray.failed.toUpperCase() + wordingArray.exclamation_mark) + ' (' + reportArray.warn.length + ' ' + wordingArray.warnings_found + ')\n');
+		_log('\n' + colors.yellow(wordingObject.failed.toUpperCase() + wordingObject.exclamation_mark) + ' (' + reportObject.warn.length + ' ' + wordingObject.warnings_found + ')\n');
 		if (haltOnWarn)
 		{
 			process.exit(1);
@@ -197,14 +213,14 @@ function result()
 	}
 	else
 	{
-		_log('\n' + colors.green(wordingArray.passed.toUpperCase() + wordingArray.exclamation_mark));
-		if (reportArray.error.length && logLevel > 0)
+		_log('\n' + colors.green(wordingObject.passed.toUpperCase() + wordingObject.exclamation_mark));
+		if (reportObject.error.length && logLevel > 0)
 		{
-			_log(' (' + reportArray.error.length + ' ' + wordingArray.errors_found + ')');
+			_log(' (' + reportObject.error.length + ' ' + wordingObject.errors_found + ')');
 		}
-		else if (reportArray.warn.length && logLevel > 1)
+		else if (reportObject.warn.length && logLevel > 1)
 		{
-			_log(' (' + reportArray.warn.length + ' ' + wordingArray.warnings_found + ')');
+			_log(' (' + reportObject.warn.length + ' ' + wordingObject.warnings_found + ')');
 		}
 		_log('\n');
 	}
@@ -214,6 +230,8 @@ function result()
  * summary
  *
  * @since 1.0.0
+ *
+ * @return {void}
  */
 
 function summary()
@@ -221,45 +239,45 @@ function summary()
 	const thresholdError = option.get('thresholdError');
 	const thresholdWarn = option.get('thresholdWarn');
 
-	if (reportArray.error.length > thresholdError)
+	if (reportObject.error.length > thresholdError)
 	{
 		_logError('\n');
-		reportArray.error.forEach(reportValue =>
+		reportObject.error.forEach(reportValue =>
 		{
 			if (reportValue.type === 'invalid-namespace')
 			{
-				_logError(colors.red(wordingArray.error) + wordingArray.colon + ' ' + wordingArray.invalid_namespace);
+				_logError(colors.red(wordingObject.error) + wordingObject.colon + ' ' + wordingObject.invalid_namespace);
 			}
 			if (reportValue.type === 'invalid-class')
 			{
-				_logError(colors.red(wordingArray.error) + wordingArray.colon + ' ' + wordingArray.invalid_class);
+				_logError(colors.red(wordingObject.error) + wordingObject.colon + ' ' + wordingObject.invalid_class);
 			}
 			if (reportValue.type === 'invalid-variation')
 			{
-				_logError(colors.red(wordingArray.error) + wordingArray.colon + ' ' + wordingArray.invalid_variation);
+				_logError(colors.red(wordingObject.error) + wordingObject.colon + ' ' + wordingObject.invalid_variation);
 			}
 			if (reportValue.type === 'invalid-tag')
 			{
-				_logError(colors.red(wordingArray.error) + wordingArray.colon + ' ' + wordingArray.invalid_tag);
+				_logError(colors.red(wordingObject.error) + wordingObject.colon + ' ' + wordingObject.invalid_tag);
 			}
 			if (reportValue.selector)
 			{
-				_logError(' ' + wordingArray.divider + ' ' + reportValue.selector + '\n');
+				_logError(' ' + wordingObject.divider + ' ' + reportValue.selector + '\n');
 			}
 		});
 	}
-	if (reportArray.warn.length > thresholdWarn)
+	if (reportObject.warn.length > thresholdWarn)
 	{
 		_logWarn('\n');
-		reportArray.warn.forEach(reportValue =>
+		reportObject.warn.forEach(reportValue =>
 		{
 			if (reportValue.type === 'invalid-character')
 			{
-				_logWarn(colors.yellow(wordingArray.warning) + wordingArray.colon + ' ' + wordingArray.invalid_character);
+				_logWarn(colors.yellow(wordingObject.warning) + wordingObject.colon + ' ' + wordingObject.invalid_character);
 			}
 			if (reportValue.selector)
 			{
-				_logWarn(' ' + wordingArray.divider + ' ' + reportValue.selector + '\n');
+				_logWarn(' ' + wordingObject.divider + ' ' + reportValue.selector + '\n');
 			}
 		});
 	}
@@ -270,7 +288,9 @@ function summary()
  *
  * @since 1.0.0
  *
- * @param message string
+ * @param {string} message
+ *
+ * @return {void}
  */
 
 function _log(message)
@@ -288,7 +308,9 @@ function _log(message)
  *
  * @since 1.0.0
  *
- * @param message string
+ * @param {string} message
+ *
+ * @return {void}
  */
 
 function _logError(message)
@@ -306,7 +328,9 @@ function _logError(message)
  *
  * @since 1.0.0
  *
- * @param message string
+ * @param {string} message
+ *
+ * @return {void}
  */
 
 function _logWarn(message)
@@ -324,7 +348,9 @@ function _logWarn(message)
  *
  * @since 1.0.0
  *
- * @param message string
+ * @param {string} message
+ *
+ * @return {void}
  */
 
 function _logInfo(message)
@@ -338,11 +364,11 @@ function _logInfo(message)
 }
 
 /**
- * get the logLevel
+ * get the log level
  *
  * @since 1.4.0
  *
- * @return number
+ * @return {number}
  */
 
 function _getLogLevel()
@@ -373,12 +399,12 @@ function _getLogLevel()
  *
  * @since 1.0.0
  *
- * @param injector object
+ * @param {object} injectorObject
  *
- * @return object
+ * @return {object}
  */
 
-function construct(injector)
+function construct(injectorObject)
 {
 	const exports =
 	{
@@ -400,9 +426,9 @@ function construct(injector)
 
 	/* handle injector */
 
-	if (injector.option)
+	if (injectorObject.option)
 	{
-		option = injector.option;
+		option = injectorObject.option;
 	}
 	return exports;
 }

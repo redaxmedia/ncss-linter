@@ -1,16 +1,16 @@
-const rulesetArray = require('../ruleset.json');
+const rulesetObject = require('../ruleset.json');
 
 /**
  * get
  *
  * @since 1.0.0
  *
- * @return array
+ * @return {object}
  */
 
 function get()
 {
-	return rulesetArray;
+	return rulesetObject;
 }
 
 module.exports =

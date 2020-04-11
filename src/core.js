@@ -10,10 +10,10 @@ let option;
  *
  * @since 4.0.0
  *
- * @param page object
- * @param selector string
+ * @param {Promise} page
+ * @param {string} selector
  *
- * @return Promise
+ * @return {Promise}
  */
 
 async function _getElement(page, selector)
@@ -35,7 +35,9 @@ async function _getElement(page, selector)
  *
  * @since 1.4.0
  *
- * @param elementArray array
+ * @param {Array} elementArray
+ *
+ * @return {void}
  */
 
 function _processElement(elementArray)
@@ -117,9 +119,11 @@ function _processElement(elementArray)
  *
  * @since 4.0.0
  *
- * @param url string
- * @param page object
- * @param defer object
+ * @param {string} url
+ * @param {Promise} page
+ * @param {Promise} defer
+ *
+ * @return {void}
  */
 
 function _setUrl(url, page, defer)
@@ -134,9 +138,11 @@ function _setUrl(url, page, defer)
  *
  * @since 4.0.0
  *
- * @param content string
- * @param page object
- * @param defer object
+ * @param {string} content
+ * @param {Promise} page
+ * @param {Promise} defer
+ *
+ * @return {void}
  */
 
 function _setContent(content, page, defer)
@@ -151,8 +157,10 @@ function _setContent(content, page, defer)
  *
  * @since 1.3.0
  *
- * @param page object
- * @param defer object
+ * @param {Promise} page
+ * @param {Promise} defer
+ *
+ * @return {void}
  */
 
 function _processPage(page, defer)
@@ -175,7 +183,7 @@ function _processPage(page, defer)
  *
  * @since 4.0.0
  *
- * @return Promise
+ * @return {Promise}
  */
 
 async function init()
@@ -235,12 +243,12 @@ async function init()
  *
  * @since 1.0.0
  *
- * @param injector object
+ * @param {object} injectorObject
  *
- * @return object
+ * @return {object}
  */
 
-function construct(injector)
+function construct(injectorObject)
 {
 	const exports =
 	{
@@ -249,12 +257,12 @@ function construct(injector)
 
 	/* handle injector */
 
-	if (injector.reporter && injector.validator && injector.reporter && injector.option)
+	if (injectorObject.reporter && injectorObject.validator && injectorObject.reporter && injectorObject.option)
 	{
-		reporter = injector.reporter;
-		validator = injector.validator;
-		helper = injector.helper;
-		option = injector.option;
+		reporter = injectorObject.reporter;
+		validator = injectorObject.validator;
+		helper = injectorObject.helper;
+		option = injectorObject.option;
 	}
 	return exports;
 }
