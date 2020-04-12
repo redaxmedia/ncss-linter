@@ -1,5 +1,6 @@
 const fs = require('fs');
 const option = require('utility-redaxmedia').option(__dirname + '/../option.json');
+const helper = require('utility-redaxmedia').helper;
 
 let configObject = {};
 
@@ -26,7 +27,7 @@ option.initWithConfig = initObject =>
 	option.init(
 	{
 		...configObject,
-		...initObject
+		...helper.object.tidy(initObject)
 	});
 };
 

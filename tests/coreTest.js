@@ -95,7 +95,7 @@ function test(optionObject, reportObject)
 	events.EventEmitter.defaultMaxListeners++;
 	it(optionObject.html, done =>
 	{
-		option.init(optionObject);
+		option.initWithConfig(optionObject);
 		REPORTER = new reporter(
 		{
 			option
