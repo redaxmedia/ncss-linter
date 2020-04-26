@@ -1,13 +1,13 @@
 [
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"component\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error": [],
 			"warn": [],
@@ -21,14 +21,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"component-valid\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error": [],
 			"warn": [],
@@ -42,14 +42,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"component-header\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error": [],
 			"warn": [],

@@ -3,5 +3,6 @@
 	[
 		"js"
 	],
-	"spec": "tests/*Test.js"
+	"spec": "tests/*Test.js",
+	"timeout": 1000
 }

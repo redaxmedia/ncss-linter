@@ -1,13 +1,13 @@
 [
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"box-box\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -21,14 +21,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"box-invalid-box\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -42,14 +42,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"box-component\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -63,14 +63,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"box-fn\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -84,14 +84,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"box-wrapper\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[

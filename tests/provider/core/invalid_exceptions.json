@@ -1,13 +1,13 @@
 [
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"wrapper-wrapper\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -21,14 +21,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"wrapper-invalid-wrapper\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -42,14 +42,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"wrapper-fn\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[

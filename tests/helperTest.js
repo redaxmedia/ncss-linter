@@ -16,7 +16,6 @@ describe('helper', () =>
 				});
 				done();
 			})
-			.catch(() => null);
-	})
-	.timeout(1000);
+			.catch(() => done('error'));
+	});
 });

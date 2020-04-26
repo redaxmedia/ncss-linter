@@ -1,13 +1,13 @@
 [
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"wrapper\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error": [],
 			"warn": [],
@@ -21,14 +21,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"wrapper-valid\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error": [],
 			"warn": [],
@@ -42,14 +42,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"wrapper-header\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error": [],
 			"warn": [],
@@ -63,14 +63,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"wrapper-component\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error": [],
 			"warn": [],
@@ -84,14 +84,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<div class=\"wrapper-box\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error": [],
 			"warn": [],

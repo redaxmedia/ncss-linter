@@ -1,13 +1,13 @@
 [
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<header class=\"header-header\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -21,14 +21,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<header class=\"header-invalid-header\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -42,14 +42,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<header class=\"header-component\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -63,14 +63,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<header class=\"header-box\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -84,14 +84,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<header class=\"header-fn\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[
@@ -105,14 +105,14 @@
 		}
 	},
 	{
-		"optionArray":
+		"optionObject":
 		{
 			"html": "<header class=\"header-wrapper\"></header>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
 		},
-		"reportArray":
+		"reportObject":
 		{
 			"error":
 			[

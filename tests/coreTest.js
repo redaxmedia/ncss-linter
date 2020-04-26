@@ -1,5 +1,4 @@
 const expect = require('chai').expect;
-const events = require('events');
 const ncss = require('../');
 const core = ncss.core;
 const reporter = ncss.reporter;
@@ -92,7 +91,6 @@ let CORE;
 
 function test(optionObject, reportObject)
 {
-	events.EventEmitter.defaultMaxListeners++;
 	it(optionObject.html, done =>
 	{
 		option.initWithConfig(optionObject);
@@ -120,8 +118,7 @@ function test(optionObject, reportObject)
 				done();
 			})
 			.catch(() => done('error'));
-	})
-	.timeout(1000);
+	});
 }
 
 describe('core', () =>
@@ -132,7 +129,7 @@ describe('core', () =>
 		{
 			providerValue.data.forEach(dataValue =>
 			{
-				test(dataValue.optionArray, dataValue.reportArray);
+				test(dataValue.optionObject, dataValue.reportObject);
 			});
 		});
 	});

@@ -4,7 +4,6 @@ NCSS Linter
 > Linter for [NCSS](https://ncss.io).
 
 [![Build Status](https://img.shields.io/travis/redaxmedia/ncss-linter.svg)](https://travis-ci.org/redaxmedia/ncss-linter)
-[![Coverage Status](https://coveralls.io/repos/github/redaxmedia/ncss-linter/badge.svg)](https://coveralls.io/github/redaxmedia/ncss-linter)
 [![NPM Version](https://img.shields.io/npm/v/ncss-linter.svg)](https://npmjs.com/package/ncss-linter)
 [![License](https://img.shields.io/npm/l/ncss-linter.svg)](https://npmjs.com/package/ncss-linter)
 
