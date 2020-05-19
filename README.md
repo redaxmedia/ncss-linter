@@ -27,7 +27,7 @@ npm install ncss-linter --global --unsafe-perm=true
 Setup
 -----
 
-Create a `.ncsslintrc` file:
+Create a `.ncsslintrc` file to override configuration:
 
 ```json
 {
