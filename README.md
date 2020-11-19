@@ -3,7 +3,7 @@ NCSS Linter
 
 > Linter for [NCSS](https://ncss.io).
 
-[![Build Status](https://img.shields.io/travis/redaxmedia/ncss-linter.svg)](https://travis-ci.org/redaxmedia/ncss-linter)
+[![Build Status](https://img.shields.io/github/workflow/status/redaxmedia/ncss-linter/ci.svg)](https://github.com/redaxmedia/ncss-linter/actions?query=workflow:ci)
 [![NPM Version](https://img.shields.io/npm/v/ncss-linter.svg)](https://npmjs.com/package/ncss-linter)
 [![License](https://img.shields.io/npm/l/ncss-linter.svg)](https://npmjs.com/package/ncss-linter)
 
