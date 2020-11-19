@@ -118,7 +118,8 @@ function test(optionObject, reportObject)
 				done();
 			})
 			.catch(() => done('error'));
-	});
+	})
+	.timeout(2000);
 }
 
 describe('core', () =>
