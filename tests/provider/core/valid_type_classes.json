@@ -61,5 +61,26 @@
 				}
 			]
 		}
+	},
+	{
+		"optionObject":
+		{
+			"html": "<svg class=\"image-vector\"></svg>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"logLevel": "silent"
+		},
+		"reportObject":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "pass",
+					"selector": "svg.image-vector"
+				}
+			]
+		}
 	}
 ]

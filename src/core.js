@@ -24,7 +24,7 @@ async function _getElement(page)
 		const element =
 		{
 			tagName: elementValue.tagName.toLowerCase(),
-			classArray: elementValue.className.toLowerCase().split(' ').filter(value => value)
+			classArray: elementValue.classList.value.toLowerCase().split(' ').filter(value => value)
 		};
 
 		return element;
@@ -131,7 +131,7 @@ function _setUrl(url, page, defer)
 {
 	page.goto(url)
 		.then(() => _processPage(page, defer))
-		.catch(() => defer.reject());
+		.catch(error => defer.reject(error));
 }
 
 /**
@@ -150,7 +150,7 @@ function _setContent(content, page, defer)
 {
 	page.setContent(content)
 		.then(() => _processPage(page, defer))
-		.catch(() => defer.reject());
+		.catch(error => defer.reject(error));
 }
 
 /**
@@ -174,7 +174,7 @@ function _processPage(page, defer)
 			reporter.result();
 			defer.resolve();
 		})
-		.catch(() => defer.reject());
+		.catch(error => defer.reject(error));
 }
 
 /**
@@ -221,7 +221,7 @@ async function init()
 				{
 					_setContent(contentArray.map(item => item.content), page, defer);
 				})
-				.catch(() => defer.reject());
+				.catch(error => defer.reject(error));
 		}
 		else if (option.get('url'))
 		{

@@ -1,9 +1,9 @@
 {
 	"name": "ncss-linter",
 	"description": "Linter for NCSS",
-	"version": "5.5.0",
+	"version": "5.6.0",
 	"homepage": "https://ncss.io",
-	"license": "GPL-3.0",
+	"license": "MIT",
 	"keywords":
 	[
 		"css",
@@ -26,9 +26,9 @@
 	"dependencies":
 	{
 		"colors": "1.4.0",
-		"commander": "6.0.0",
+		"commander": "6.2.0",
 		"glob": "7.1.6",
-		"puppeteer": "5.2.1",
+		"puppeteer": "5.5.0",
 		"utility-redaxmedia": "1.0.0"
 	},
 	"devDependencies":
@@ -36,7 +36,7 @@
 		"chai": "4.2.0",
 		"eslint": "7.5.0",
 		"eslint-config-redaxmedia": "2.1.0",
-		"mocha": "8.0.1"
+		"mocha": "8.2.1"
 	},
 	"scripts":
 	{
