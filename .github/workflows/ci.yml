@@ -18,7 +18,7 @@ jobs:
   runs-on: ubuntu-latest
   strategy:
    matrix:
-    node-version: [ 14, 15 ]
+    node-version: [ 13, 14, 15 ]
   steps:
   - name: Checkout
     uses: actions/checkout@v2
@@ -34,13 +34,13 @@ jobs:
   steps:
   - name: Checkout
     uses: actions/checkout@v2
-  - name: Set up Node 14
+  - name: Set up Node 15
     uses: actions/setup-node@v1
     with:
-     node-version: 14
+     node-version: 15
   - run: npm install
   - run: npm install nyc  
-  - run: node_modules/.bin/nyc node_modules/.bin/mocha
+  - run: node_modules/.bin/nyc & node_modules/.bin/mocha
   - run: node_modules/.bin/nyc report --reporter=lcov
   - name: Report to Coveralls
     uses: coverallsapp/github-action@v1.1.2
