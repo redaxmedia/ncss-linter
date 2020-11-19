@@ -119,7 +119,7 @@ function test(optionObject, reportObject)
 			})
 			.catch(() => done('error'));
 	})
-	.timeout(2000);
+	.timeout(5000);
 }
 
 describe('core', () =>
