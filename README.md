@@ -41,7 +41,8 @@ Create a `.ncsslintrc` file to override configuration:
 	"thresholdError": 0,
 	"thresholdWarn": 0,
 	"haltOnError": false,
-	"haltOnWarn": false
+	"haltOnWarn": false,
+	"rules": null
 }
 ```
 

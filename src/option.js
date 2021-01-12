@@ -24,11 +24,7 @@ option.initWithConfig = initObject =>
 	{
 		configObject = JSON.parse(fs.readFileSync(initObject.config));
 	}
-	option.init(
-	{
-		...configObject,
-		...helper.object.tidy(initObject)
-	});
+	option.init(helper.object.mergeDeep(configObject, helper.object.tidy(initObject)));
 };
 
 module.exports = option;

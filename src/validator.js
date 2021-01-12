@@ -1,4 +1,3 @@
-let ruleset;
 let option;
 
 /**
@@ -13,7 +12,7 @@ let option;
 
 function getValidateArray(elementValue)
 {
-	const rulesetArray = ruleset.get();
+	const ruleObject = option.get('rules');
 	const namespace = option.get('namespace') ? _maskSeparator(option.get('namespace')) : null;
 	const namespaceArray = namespace ? namespace.split(',') : [];
 
@@ -35,26 +34,26 @@ function getValidateArray(elementValue)
 
 		/* validate variation */
 
-		validateArray.variation = !Object.keys(rulesetArray.functional).some(value => fragmentArray.variationArray.includes(value));
-		validateArray.variation &= !Object.keys(rulesetArray.exception).some(value => fragmentArray.variationArray.includes(value));
-		if (rulesetArray.structural[fragmentArray.root])
+		validateArray.variation = !Object.keys(ruleObject.functional).some(value => fragmentArray.variationArray.includes(value));
+		validateArray.variation &= !Object.keys(ruleObject.exception).some(value => fragmentArray.variationArray.includes(value));
+		if (ruleObject.structural[fragmentArray.root])
 		{
-			validateArray.variation &= !Object.keys(rulesetArray.structural).some(value => fragmentArray.variationArray.includes(value));
+			validateArray.variation &= !Object.keys(ruleObject.structural).some(value => fragmentArray.variationArray.includes(value));
 		}
-		if (!rulesetArray.exception[fragmentArray.root])
+		if (!ruleObject.exception[fragmentArray.root])
 		{
-			validateArray.variation &= !Object.keys(rulesetArray.component).some(value => fragmentArray.variationArray.includes(value));
-			if (!rulesetArray.functional[fragmentArray.root])
+			validateArray.variation &= !Object.keys(ruleObject.component).some(value => fragmentArray.variationArray.includes(value));
+			if (!ruleObject.functional[fragmentArray.root])
 			{
-				validateArray.variation &= !Object.keys(rulesetArray.type).some(value => fragmentArray.variationArray.includes(value));
+				validateArray.variation &= !Object.keys(ruleObject.type).some(value => fragmentArray.variationArray.includes(value));
 			}
 		}
 
 		/* process ruleset */
 
-		Object.keys(rulesetArray).forEach(rulesetValue =>
+		Object.keys(ruleObject).forEach(ruleValue =>
 		{
-			Object.keys(rulesetArray[rulesetValue]).forEach(childrenValue =>
+			Object.keys(ruleObject[ruleValue]).forEach(childrenValue =>
 			{
 				/* validate class and tag */
 
@@ -62,9 +61,9 @@ function getValidateArray(elementValue)
 				{
 					validateArray.class = true;
 					validateArray.tag = true;
-					if (rulesetArray[rulesetValue][childrenValue] !== '*')
+					if (ruleObject[ruleValue][childrenValue] !== '*')
 					{
-						validateArray.tag = rulesetArray[rulesetValue][childrenValue].includes(elementValue.tagName);
+						validateArray.tag = ruleObject[ruleValue][childrenValue].includes(elementValue.tagName);
 					}
 				}
 			});
@@ -146,9 +145,8 @@ function construct(injectorObject)
 
 	/* handle injector */
 
-	if (injectorObject.ruleset && injectorObject.option)
+	if (injectorObject.option)
 	{
-		ruleset = injectorObject.ruleset;
 		option = injectorObject.option;
 	}
 	return exports;

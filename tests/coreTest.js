@@ -4,7 +4,6 @@ const core = ncss.core;
 const reporter = ncss.reporter;
 const validator = ncss.validator;
 const helper = ncss.helper;
-const ruleset = ncss.ruleset;
 const option = ncss.option;
 const providerArray =
 [
@@ -100,7 +99,6 @@ function test(optionObject, reportObject)
 		});
 		VALIDATOR = new validator(
 		{
-			ruleset,
 			option
 		});
 		CORE = new core(

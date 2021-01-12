@@ -6,8 +6,8 @@ const core = ncss.core;
 const reporter = ncss.reporter;
 const validator = ncss.validator;
 const helper = ncss.helper;
-const ruleset = ncss.ruleset;
 const option = ncss.option;
+const ruleObject = require('../rules.json');
 const packageObject = require('../package.json');
 
 let REPORTER;
@@ -43,7 +43,8 @@ option.initWithConfig(
 	thresholdError: program.thresholdError,
 	thresholdWarn: program.thresholdWarn,
 	haltOnError: program.haltOnError,
-	haltOnWarn: program.haltOnWarn
+	haltOnWarn: program.haltOnWarn,
+	rules: ruleObject
 });
 REPORTER = new reporter(
 {
@@ -51,7 +52,6 @@ REPORTER = new reporter(
 });
 VALIDATOR = new validator(
 {
-	ruleset,
 	option
 });
 CORE = new core(
