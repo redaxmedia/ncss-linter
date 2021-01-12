@@ -7,7 +7,6 @@ const reporter = ncss.reporter;
 const validator = ncss.validator;
 const helper = ncss.helper;
 const option = ncss.option;
-const ruleObject = require('../rules.json');
 const packageObject = require('../package.json');
 
 let REPORTER;
@@ -44,7 +43,7 @@ option.initWithConfig(
 	thresholdWarn: program.thresholdWarn,
 	haltOnError: program.haltOnError,
 	haltOnWarn: program.haltOnWarn,
-	rules: ruleObject
+	rules: option.get('rules')
 });
 REPORTER = new reporter(
 {
