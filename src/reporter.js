@@ -85,7 +85,7 @@ function pass(passObject)
 
 function warn(warnObject)
 {
-	if (warnObject.type === 'invalid-character')
+	if (warnObject.type === 'invalid-attribute')
 	{
 		_logInfo('W');
 	}
@@ -271,9 +271,9 @@ function summary()
 		_logWarn('\n');
 		reportObject.warn.forEach(reportValue =>
 		{
-			if (reportValue.type === 'invalid-character')
+			if (reportValue.type === 'invalid-attribute')
 			{
-				_logWarn(colors.yellow(wordingObject.warning) + wordingObject.colon + ' ' + wordingObject.invalid_character);
+				_logWarn(colors.yellow(wordingObject.warning) + wordingObject.colon + ' ' + wordingObject.invalid_attribute);
 			}
 			if (reportValue.selector)
 			{

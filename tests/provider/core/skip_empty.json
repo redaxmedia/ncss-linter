@@ -1,0 +1,27 @@
+[
+	{
+		"optionObject":
+		{
+			"html": "<div><span></span></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"logLevel": "silent"
+		},
+		"reportObject":
+		{
+			"error": [],
+			"warn": [],
+			"info":
+			[
+				{
+					"type": "skip",
+					"selector": "div"
+				},
+				{
+					"type": "skip",
+					"selector": "span"
+				}
+			]
+		}
+	}
+]

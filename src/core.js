@@ -24,6 +24,7 @@ async function _getElement(page)
 		const element =
 		{
 			tagName: elementValue.tagName.toLowerCase(),
+			attrArray: Object.values(elementValue.attributes).map(value => value.name.toLowerCase()).filter(value => value),
 			classArray: elementValue.classList.value.toLowerCase().split(' ').filter(value => value)
 		};
 
@@ -45,18 +46,18 @@ function _processElement(elementArray)
 {
 	elementArray.forEach((elementValue, elementIndex) =>
 	{
-		if (elementValue.classArray.length)
+		if (elementValue.attrArray.length || elementValue.classArray.length)
 		{
 			const validateArray = validator.getValidateArray(elementValue);
 
 			/* report as needed */
 
-			if (!validateArray.character)
+			if (!validateArray.attribute)
 			{
 				reporter.warn(
 				{
-					type: 'invalid-character',
-					selector: elementValue.tagName
+					type: 'invalid-attribute',
+					selector: elementValue.tagName + '[' + elementValue.attrArray.join('][') + ']'
 				});
 			}
 			else if (!validateArray.namespace)

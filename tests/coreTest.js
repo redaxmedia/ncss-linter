@@ -8,8 +8,8 @@ const option = ncss.option;
 const providerArray =
 [
 	{
-		describe: 'skip empty classes',
-		data: require('./provider/core/skip_empty_classes.json')
+		describe: 'skip empty',
+		data: require('./provider/core/skip_empty.json')
 	},
 	{
 		describe: 'valid namespaces',
@@ -36,8 +36,8 @@ const providerArray =
 		data: require('./provider/core/valid_exceptions.json')
 	},
 	{
-		describe: 'invalid characters',
-		data: require('./provider/core/invalid_characters.json')
+		describe: 'invalid attributes',
+		data: require('./provider/core/invalid_attributes.json')
 	},
 	{
 		describe: 'invalid namespaces',

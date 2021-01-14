@@ -3,7 +3,7 @@ let option;
 /**
  * get the validate array
  *
- * @since 4.0.9
+ * @since 6.1.0
  *
  * @param {object} elementValue
  *
@@ -14,9 +14,24 @@ function getValidateArray(elementValue)
 {
 	const ruleObject = option.get('rules');
 	const namespace = option.get('namespace') ? _maskSeparator(option.get('namespace')) : null;
-	const namespaceArray = namespace ? namespace.split(',') : [];
+	const namespaceArray = namespace ? namespace.split(',').filter(value => value) : [];
 
-	let validateArray = [];
+	let validateObject = {};
+
+	/* process attr */
+
+	validateObject.attribute = !elementValue.attrArray.includes('style');
+	if (elementValue.attrArray.includes('class'))
+	{
+		validateObject.attribute = elementValue.classArray.length;
+	}
+	else
+	{
+		validateObject.namespace = true;
+		validateObject.class = true;
+		validateObject.variation = 1;
+		validateObject.tag = true;
+	}
 
 	/* process class */
 
@@ -24,28 +39,24 @@ function getValidateArray(elementValue)
 	{
 		const fragmentArray = _getFragmentArray(classValue);
 
-		/* validate character */
-
-		validateArray.character = classValue.match(/[\w-_]/g);
-
 		/* validate namespace */
 
-		validateArray.namespace = namespaceArray.length ? namespaceArray.includes(fragmentArray.namespace) : true;
+		validateObject.namespace = !namespaceArray.length || namespaceArray.includes(fragmentArray.namespace);
 
 		/* validate variation */
 
-		validateArray.variation = !Object.keys(ruleObject.functional).some(value => fragmentArray.variationArray.includes(value));
-		validateArray.variation &= !Object.keys(ruleObject.exception).some(value => fragmentArray.variationArray.includes(value));
+		validateObject.variation = !Object.keys(ruleObject.functional).some(value => fragmentArray.variationArray.includes(value));
+		validateObject.variation &= !Object.keys(ruleObject.exception).some(value => fragmentArray.variationArray.includes(value));
 		if (ruleObject.structural[fragmentArray.root])
 		{
-			validateArray.variation &= !Object.keys(ruleObject.structural).some(value => fragmentArray.variationArray.includes(value));
+			validateObject.variation &= !Object.keys(ruleObject.structural).some(value => fragmentArray.variationArray.includes(value));
 		}
 		if (!ruleObject.exception[fragmentArray.root])
 		{
-			validateArray.variation &= !Object.keys(ruleObject.component).some(value => fragmentArray.variationArray.includes(value));
+			validateObject.variation &= !Object.keys(ruleObject.component).some(value => fragmentArray.variationArray.includes(value));
 			if (!ruleObject.functional[fragmentArray.root])
 			{
-				validateArray.variation &= !Object.keys(ruleObject.type).some(value => fragmentArray.variationArray.includes(value));
+				validateObject.variation &= !Object.keys(ruleObject.type).some(value => fragmentArray.variationArray.includes(value));
 			}
 		}
 
@@ -59,17 +70,17 @@ function getValidateArray(elementValue)
 
 				if (fragmentArray.root === childrenValue)
 				{
-					validateArray.class = true;
-					validateArray.tag = true;
+					validateObject.class = true;
+					validateObject.tag = true;
 					if (ruleObject[ruleValue][childrenValue] !== '*')
 					{
-						validateArray.tag = ruleObject[ruleValue][childrenValue].includes(elementValue.tagName);
+						validateObject.tag = ruleObject[ruleValue][childrenValue].includes(elementValue.tagName);
 					}
 				}
 			});
 		});
 	});
-	return validateArray;
+	return validateObject;
 }
 
 /**

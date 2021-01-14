@@ -2,7 +2,7 @@
 	{
 		"optionObject":
 		{
-			"html": "<div class=\"{{ class }}\"></div>",
+			"html": "<div class=\"\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
@@ -13,8 +13,8 @@
 			"warn":
 			[
 				{
-					"type": "invalid-character",
-					"selector": "div"
+					"type": "invalid-attribute",
+					"selector": "div[class]"
 				}
 			],
 			"info": []
@@ -23,7 +23,7 @@
 	{
 		"optionObject":
 		{
-			"html": "<div class=\"<?php echo $class; ?>\"></div>",
+			"html": "<div style=\"padding: 1em\"></div>",
 			"namespace": null,
 			"selector": "*:not(html):not(head):not(body)",
 			"logLevel": "silent"
@@ -34,8 +34,8 @@
 			"warn":
 			[
 				{
-					"type": "invalid-character",
-					"selector": "div"
+					"type": "invalid-attribute",
+					"selector": "div[style]"
 				}
 			],
 			"info": []
