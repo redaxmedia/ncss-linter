@@ -97,7 +97,7 @@ function _getFragmentArray(classValue)
 {
 	const separator = option.get('separator');
 	const namespace = option.get('namespace');
-	const namespaceArray = namespace ? namespace.split(',') : [];
+	const namespaceArray = namespace ? namespace.split(',').filter(value => value) : [];
 
 	/* process namespace */
 
