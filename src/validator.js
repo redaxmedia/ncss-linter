@@ -35,7 +35,7 @@ function getValidateArray(elementValue)
 
 	/* process class */
 
-	elementValue.classArray.forEach(classValue =>
+	elementValue.classArray.map(classValue =>
 	{
 		const fragmentArray = _getFragmentArray(classValue);
 
@@ -62,9 +62,9 @@ function getValidateArray(elementValue)
 
 		/* process ruleset */
 
-		Object.keys(ruleObject).forEach(ruleValue =>
+		Object.keys(ruleObject).map(ruleValue =>
 		{
-			Object.keys(ruleObject[ruleValue]).forEach(childrenValue =>
+			Object.keys(ruleObject[ruleValue]).map(childrenValue =>
 			{
 				/* validate class and tag */
 
@@ -101,7 +101,7 @@ function _getFragmentArray(classValue)
 
 	/* process namespace */
 
-	namespaceArray.forEach(namespaceValue =>
+	namespaceArray.map(namespaceValue =>
 	{
 		classValue = classValue.replace(namespaceValue, _maskSeparator(namespaceValue));
 	});

@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const { Page } = puppeteer;
 
 let reporter;
 let validator;
@@ -10,16 +11,16 @@ let option;
  *
  * @since 4.0.0
  *
- * @param {Promise} page
+ * @param {Page} page
  *
  * @return {Promise}
  */
 
-async function _getElement(page)
+function _getElement(page)
 {
 	const selector = option.get('selector');
 
-	return await page.$$eval(selector, element => element.map(elementValue =>
+	return page.$$eval(selector, element => element.map(elementValue =>
 	{
 		const element =
 		{
@@ -44,7 +45,7 @@ async function _getElement(page)
 
 function _processElement(elementArray)
 {
-	elementArray.forEach((elementValue, elementIndex) =>
+	elementArray.map((elementValue, elementIndex) =>
 	{
 		if (elementValue.attrArray.length || elementValue.classArray.length)
 		{
@@ -122,8 +123,8 @@ function _processElement(elementArray)
  * @since 4.0.0
  *
  * @param {string} url
- * @param {Promise} page
- * @param {Promise} defer
+ * @param {Page} page
+ * @param {object} defer
  *
  * @return {void}
  */
@@ -141,8 +142,8 @@ function _setUrl(url, page, defer)
  * @since 4.0.0
  *
  * @param {string} content
- * @param {Promise} page
- * @param {Promise} defer
+ * @param {Page} page
+ * @param {object} defer
  *
  * @return {void}
  */
@@ -159,8 +160,8 @@ function _setContent(content, page, defer)
  *
  * @since 1.3.0
  *
- * @param {Promise} page
- * @param {Promise} defer
+ * @param {Page} page
+ * @param {object} defer
  *
  * @return {void}
  */
@@ -218,9 +219,9 @@ async function init()
 		{
 			reporter.header();
 			helper.walkPath(option.get('path'))
-				.then(contentArray =>
+				.then(walkArray =>
 				{
-					_setContent(contentArray.map(item => item.content), page, defer);
+					_setContent(walkArray.map(walkValue => walkValue.content), page, defer);
 				})
 				.catch(error => defer.reject(error));
 		}

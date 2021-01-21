@@ -13,7 +13,7 @@ const fs = require('fs');
 
 function walkPath(path)
 {
-	let contentArray = [];
+	let walkArray = [];
 	let counter = 0;
 
 	return new Promise((resolve, reject) =>
@@ -22,18 +22,18 @@ function walkPath(path)
 		{
 			if (pathArray.length)
 			{
-				pathArray.forEach(pathValue =>
+				pathArray.map(pathValue =>
 				{
 					fs.readFile(pathValue, 'utf-8', (fileError, fileContent) =>
 					{
-						contentArray.push(
+						walkArray.push(
 						{
 							path: pathValue,
 							content: fileContent
 						});
 						if (++counter === pathArray.length)
 						{
-							resolve(contentArray);
+							resolve(walkArray);
 						}
 					});
 				});

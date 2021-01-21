@@ -8,11 +8,11 @@ describe('helper', () =>
 	{
 		helper
 			.walkPath('./tests/provider/helper/*.html')
-			.then(contentArray =>
+			.then(walkArray =>
 			{
-				contentArray.forEach(contentValue =>
+				walkArray.map(walkArray =>
 				{
-					expect(contentValue.path).to.equal('./tests/provider/helper/' + contentValue.content + '.html');
+					expect(walkArray.path).to.equal('./tests/provider/helper/' + walkArray.content + '.html');
 				});
 				done();
 			})

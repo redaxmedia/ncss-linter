@@ -125,7 +125,7 @@ describe('core', () =>
 	{
 		describe(providerValue.describe, () =>
 		{
-			providerValue.data.forEach(dataValue =>
+			providerValue.data.map(dataValue =>
 			{
 				test(dataValue.optionObject, dataValue.reportObject);
 			});

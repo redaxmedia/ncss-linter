@@ -1,3 +1,4 @@
+const os = require('os');
 const colors = require('colors');
 const wordingObject = require('../wording.json');
 const packageObject = require('../package.json');
@@ -46,8 +47,8 @@ function clearReport()
 
 function header()
 {
-	_log(packageObject.name + ' ' + packageObject.version + ' ' + wordingObject.by + ' ' + packageObject.author.name + wordingObject.point + '\n');
-	_logInfo('\n');
+	_log(packageObject.name + ' ' + packageObject.version + ' ' + wordingObject.by + ' ' + packageObject.author.name + wordingObject.point + os.EOL);
+	_logInfo(os.EOL);
 }
 
 /**
@@ -167,11 +168,11 @@ function end(counter, total)
 		{
 			_logInfo(' ');
 		}
-		_logInfo(' ' + counter + ' / ' + total + ' (' + Math.ceil(counter / total * 100) + '%)\n');
+		_logInfo(' ' + counter + ' / ' + total + ' (' + Math.ceil(counter / total * 100) + '%)' + os.EOL);
 	}
 	if (counter === total)
 	{
-		_logInfo('\n');
+		_logInfo(os.EOL);
 	}
 }
 
@@ -193,11 +194,11 @@ function result()
 
 	if (reportObject.error.length === 0 && reportObject.warn.length === 0 && reportObject.info.length === 3)
 	{
-		_log('\n' + colors.yellow(wordingObject.something_wrong.toUpperCase() + wordingObject.exclamation_mark) + '\n');
+		_log(os.EOL + colors.yellow(wordingObject.something_wrong.toUpperCase() + wordingObject.exclamation_mark) + os.EOL);
 	}
 	else if (reportObject.error.length > thresholdError && logLevel > 0)
 	{
-		_log('\n' + colors.red(wordingObject.failed.toUpperCase() + wordingObject.exclamation_mark) + ' (' + reportObject.error.length + ' ' + wordingObject.errors_found + ')\n');
+		_log(os.EOL + colors.red(wordingObject.failed.toUpperCase() + wordingObject.exclamation_mark) + ' (' + reportObject.error.length + ' ' + wordingObject.errors_found + ')' + os.EOL);
 		if (haltOnError)
 		{
 			process.exit(1);
@@ -205,7 +206,7 @@ function result()
 	}
 	else if (reportObject.warn.length > thresholdWarn && logLevel > 1)
 	{
-		_log('\n' + colors.yellow(wordingObject.failed.toUpperCase() + wordingObject.exclamation_mark) + ' (' + reportObject.warn.length + ' ' + wordingObject.warnings_found + ')\n');
+		_log(os.EOL + colors.yellow(wordingObject.failed.toUpperCase() + wordingObject.exclamation_mark) + ' (' + reportObject.warn.length + ' ' + wordingObject.warnings_found + ')' + os.EOL);
 		if (haltOnWarn)
 		{
 			process.exit(1);
@@ -213,7 +214,7 @@ function result()
 	}
 	else
 	{
-		_log('\n' + colors.green(wordingObject.passed.toUpperCase() + wordingObject.exclamation_mark));
+		_log(os.EOL + colors.green(wordingObject.passed.toUpperCase() + wordingObject.exclamation_mark));
 		if (reportObject.error.length && logLevel > 0)
 		{
 			_log(' (' + reportObject.error.length + ' ' + wordingObject.errors_found + ')');
@@ -222,7 +223,7 @@ function result()
 		{
 			_log(' (' + reportObject.warn.length + ' ' + wordingObject.warnings_found + ')');
 		}
-		_log('\n');
+		_log(os.EOL);
 	}
 }
 
@@ -241,8 +242,8 @@ function summary()
 
 	if (reportObject.error.length > thresholdError)
 	{
-		_logError('\n');
-		reportObject.error.forEach(reportValue =>
+		_logError(os.EOL);
+		reportObject.error.map(reportValue =>
 		{
 			if (reportValue.type === 'invalid-namespace')
 			{
@@ -262,14 +263,14 @@ function summary()
 			}
 			if (reportValue.selector)
 			{
-				_logError(' ' + wordingObject.divider + ' ' + reportValue.selector + '\n');
+				_logError(' ' + wordingObject.divider + ' ' + reportValue.selector + os.EOL);
 			}
 		});
 	}
 	if (reportObject.warn.length > thresholdWarn)
 	{
-		_logWarn('\n');
-		reportObject.warn.forEach(reportValue =>
+		_logWarn(os.EOL);
+		reportObject.warn.map(reportValue =>
 		{
 			if (reportValue.type === 'invalid-attribute')
 			{
@@ -277,7 +278,7 @@ function summary()
 			}
 			if (reportValue.selector)
 			{
-				_logWarn(' ' + wordingObject.divider + ' ' + reportValue.selector + '\n');
+				_logWarn(' ' + wordingObject.divider + ' ' + reportValue.selector + os.EOL);
 			}
 		});
 	}
