@@ -64,14 +64,11 @@ function header()
 function pass(passObject)
 {
 	_logInfo('.');
-	if (passObject.type && passObject.selector)
+	reportObject.info.push(
 	{
-		reportObject.info.push(
-		{
-			type: passObject.type,
-			selector: passObject.selector
-		});
-	}
+		type: passObject.type,
+		selector: passObject.selector
+	});
 }
 
 /**
@@ -90,14 +87,11 @@ function warn(warnObject)
 	{
 		_logInfo('W');
 	}
-	if (warnObject.type && warnObject.selector)
+	reportObject.warn.push(
 	{
-		reportObject.warn.push(
-		{
-			type: warnObject.type,
-			selector: warnObject.selector
-		});
-	}
+		type: warnObject.type,
+		selector: warnObject.selector
+	});
 }
 
 /**
@@ -116,14 +110,11 @@ function fail(failObject)
 	{
 		_logInfo('E');
 	}
-	if (failObject.type && failObject.selector)
+	reportObject.error.push(
 	{
-		reportObject.error.push(
-		{
-			type: failObject.type,
-			selector: failObject.selector
-		});
-	}
+		type: failObject.type,
+		selector: failObject.selector
+	});
 }
 
 /**
@@ -139,14 +130,11 @@ function fail(failObject)
 function skip(skipObject)
 {
 	_logInfo('.');
-	if (skipObject.type && skipObject.selector)
+	reportObject.info.push(
 	{
-		reportObject.info.push(
-		{
-			type: skipObject.type,
-			selector: skipObject.selector
-		});
-	}
+		type: skipObject.type,
+		selector: skipObject.selector
+	});
 }
 
 /**
@@ -245,26 +233,24 @@ function summary()
 		_logError(os.EOL);
 		reportObject.error.map(reportValue =>
 		{
+			_logError(colors.red(wordingObject.cross + ' ' + reportValue.selector).padEnd(65, ' '));
 			if (reportValue.type === 'invalid-namespace')
 			{
-				_logError(colors.red(wordingObject.error) + wordingObject.colon + ' ' + wordingObject.invalid_namespace);
+				_logError(' '.repeat(5) + wordingObject.invalid_namespace.padEnd(30, ' '));
 			}
 			if (reportValue.type === 'invalid-class')
 			{
-				_logError(colors.red(wordingObject.error) + wordingObject.colon + ' ' + wordingObject.invalid_class);
+				_logError(' '.repeat(5) + wordingObject.invalid_class.padEnd(30, ' '));
 			}
 			if (reportValue.type === 'invalid-variation')
 			{
-				_logError(colors.red(wordingObject.error) + wordingObject.colon + ' ' + wordingObject.invalid_variation);
+				_logError(' '.repeat(5) + wordingObject.invalid_variation.padEnd(30, ' '));
 			}
 			if (reportValue.type === 'invalid-tag')
 			{
-				_logError(colors.red(wordingObject.error) + wordingObject.colon + ' ' + wordingObject.invalid_tag);
+				_logError(' '.repeat(5) + wordingObject.invalid_tag.padEnd(30, ' '));
 			}
-			if (reportValue.selector)
-			{
-				_logError(' ' + wordingObject.divider + ' ' + reportValue.selector + os.EOL);
-			}
+			_logError(colors.gray(reportValue.type) + os.EOL);
 		});
 	}
 	if (reportObject.warn.length > thresholdWarn)
@@ -272,14 +258,12 @@ function summary()
 		_logWarn(os.EOL);
 		reportObject.warn.map(reportValue =>
 		{
+			_logWarn(colors.yellow(wordingObject.cross + ' ' + reportValue.selector).padEnd(65, ' '));
 			if (reportValue.type === 'invalid-attribute')
 			{
-				_logWarn(colors.yellow(wordingObject.warning) + wordingObject.colon + ' ' + wordingObject.invalid_attribute);
+				_logWarn(' '.repeat(5) + wordingObject.invalid_attribute.padEnd(30, ' '));
 			}
-			if (reportValue.selector)
-			{
-				_logWarn(' ' + wordingObject.divider + ' ' + reportValue.selector + os.EOL);
-			}
+			_logWarn(colors.gray(reportValue.type) + os.EOL);
 		});
 	}
 }
