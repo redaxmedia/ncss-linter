@@ -53,15 +53,16 @@ function _processElement(elementArray)
 
 			/* report as needed */
 
-			if (!validateArray.attribute)
+			if (validateArray.invalidAttribute.status)
 			{
 				reporter.warn(
 				{
 					type: 'invalid-attribute',
-					selector: elementValue.tagName + '[' + elementValue.attrArray.join('][') + ']'
+					selector: elementValue.tagName + '[' + elementValue.attrArray.join('][') + ']',
+					context: validateArray.invalidAttribute.contextArray.join('/')
 				});
 			}
-			else if (!validateArray.namespace)
+			else if (validateArray.invalidNamespace.status)
 			{
 				reporter.fail(
 				{
@@ -69,27 +70,28 @@ function _processElement(elementArray)
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}
-			else if (!validateArray.class)
-			{
-				reporter.fail(
-				{
-					type: 'invalid-class',
-					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
-				});
-			}
-			else if (!validateArray.variation)
+			else if (validateArray.invalidVariation.status)
 			{
 				reporter.fail(
 				{
 					type: 'invalid-variation',
-					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.'),
+					context: validateArray.invalidVariation.contextArray.join('/')
 				});
 			}
-			else if (!validateArray.tag)
+			else if (validateArray.invalidTag.status)
 			{
 				reporter.fail(
 				{
 					type: 'invalid-tag',
+					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
+				});
+			}
+			else if (validateArray.invalidClass.status)
+			{
+				reporter.fail(
+				{
+					type: 'invalid-class',
 					selector: elementValue.tagName + '.' + elementValue.classArray.join('.')
 				});
 			}

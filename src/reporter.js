@@ -90,7 +90,8 @@ function warn(warnObject)
 	reportObject.warn.push(
 	{
 		type: warnObject.type,
-		selector: warnObject.selector
+		selector: warnObject.selector,
+		context: warnObject.context
 	});
 }
 
@@ -110,11 +111,23 @@ function fail(failObject)
 	{
 		_logInfo('E');
 	}
-	reportObject.error.push(
+	if (failObject.context)
 	{
-		type: failObject.type,
-		selector: failObject.selector
-	});
+		reportObject.error.push(
+		{
+			type: failObject.type,
+			selector: failObject.selector,
+			context: failObject.context
+		});
+	}
+	else
+	{
+		reportObject.error.push(
+		{
+			type: failObject.type,
+			selector: failObject.selector
+		});
+	}
 }
 
 /**
@@ -250,7 +263,12 @@ function summary()
 			{
 				_logError(' '.repeat(5) + wordingObject.invalid_tag.padEnd(30, ' '));
 			}
-			_logError(colors.gray(reportValue.type) + os.EOL);
+			_logError(' '.repeat(5) + colors.gray(reportValue.type));
+			if (reportValue.context)
+			{
+				_logError(colors.gray(' ['  + reportValue.context + ']'));
+			}
+			_logError(os.EOL);
 		});
 	}
 	if (reportObject.warn.length > thresholdWarn)
@@ -263,7 +281,12 @@ function summary()
 			{
 				_logWarn(' '.repeat(5) + wordingObject.invalid_attribute.padEnd(30, ' '));
 			}
-			_logWarn(colors.gray(reportValue.type) + os.EOL);
+			_logWarn(' '.repeat(5) + colors.gray(reportValue.type));
+			if (reportValue.context)
+			{
+				_logWarn(colors.gray(' ['  + reportValue.context + ']'));
+			}
+			_logWarn(os.EOL);
 		});
 	}
 }

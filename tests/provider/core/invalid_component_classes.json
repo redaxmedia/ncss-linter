@@ -13,7 +13,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.component-component"
+					"selector": "div.component-component",
+					"context": "component"
 				}
 			],
 			"warn": [],
@@ -34,7 +35,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.component-invalid-component"
+					"selector": "div.component-invalid-component",
+					"context": "component"
 				}
 			],
 			"warn": [],
@@ -55,7 +57,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.component-box"
+					"selector": "div.component-box",
+					"context": "type"
 				}
 			],
 			"warn": [],
@@ -76,7 +79,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.component-fn"
+					"selector": "div.component-fn",
+					"context": "functional"
 				}
 			],
 			"warn": [],
@@ -97,7 +101,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.component-wrapper"
+					"selector": "div.component-wrapper",
+					"context": "exception"
 				}
 			],
 			"warn": [],

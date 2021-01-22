@@ -13,7 +13,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.header-header"
+					"selector": "header.header-header",
+					"context": "structural"
 				}
 			],
 			"warn": [],
@@ -34,7 +35,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.header-invalid-header"
+					"selector": "header.header-invalid-header",
+					"context": "structural"
 				}
 			],
 			"warn": [],
@@ -55,7 +57,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.header-component"
+					"selector": "header.header-component",
+					"context": "component"
 				}
 			],
 			"warn": [],
@@ -76,7 +79,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.header-box"
+					"selector": "header.header-box",
+					"context": "type"
 				}
 			],
 			"warn": [],
@@ -97,7 +101,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.header-fn"
+					"selector": "header.header-fn",
+					"context": "functional"
 				}
 			],
 			"warn": [],
@@ -118,7 +123,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "header.header-wrapper"
+					"selector": "header.header-wrapper",
+					"context": "exception"
 				}
 			],
 			"warn": [],

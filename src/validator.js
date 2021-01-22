@@ -16,21 +16,46 @@ function getValidateArray(elementValue)
 	const namespace = option.get('namespace') ? _maskSeparator(option.get('namespace')) : null;
 	const namespaceArray = namespace ? namespace.split(',').filter(value => value) : [];
 
-	let validateObject = {};
+	const validateObject =
+	{
+		invalidAttribute:
+		{
+			status: false,
+			contextArray: []
+		},
+		invalidNamespace:
+		{
+			status: false,
+			contextArray: []
+		},
+		invalidClass:
+		{
+			status: false,
+			contextArray: []
+		},
+		invalidVariation:
+		{
+			status: false,
+			contextArray: []
+		},
+		invalidTag:
+		{
+			status: false,
+			contextArray: []
+		}
+	};
 
 	/* process attr */
 
-	validateObject.attribute = !elementValue.attrArray.includes('style');
-	if (elementValue.attrArray.includes('class'))
+	if (elementValue.attrArray.includes('style'))
 	{
-		validateObject.attribute = elementValue.classArray.length;
+		validateObject.invalidAttribute.status = true;
+		validateObject.invalidAttribute.contextArray.push('inline-style');
 	}
-	else
+	if (elementValue.attrArray.includes('class') && !elementValue.classArray.length)
 	{
-		validateObject.namespace = true;
-		validateObject.class = true;
-		validateObject.variation = 1;
-		validateObject.tag = true;
+		validateObject.invalidAttribute.status = true;
+		validateObject.invalidAttribute.contextArray.push('empty-class');
 	}
 
 	/* process class */
@@ -41,27 +66,45 @@ function getValidateArray(elementValue)
 
 		/* validate namespace */
 
-		validateObject.namespace = !namespaceArray.length || namespaceArray.includes(fragmentArray.namespace);
+		if (namespaceArray.length && !namespaceArray.includes(fragmentArray.namespace))
+		{
+			validateObject.invalidNamespace.status = true;
+		}
 
 		/* validate variation */
 
-		validateObject.variation = !Object.keys(ruleObject.functional).some(value => fragmentArray.variationArray.includes(value));
-		validateObject.variation &= !Object.keys(ruleObject.exception).some(value => fragmentArray.variationArray.includes(value));
-		if (ruleObject.structural[fragmentArray.root])
+		if (Object.keys(ruleObject.functional).some(value => fragmentArray.variationArray.includes(value)))
 		{
-			validateObject.variation &= !Object.keys(ruleObject.structural).some(value => fragmentArray.variationArray.includes(value));
+			validateObject.invalidVariation.status = true;
+			validateObject.invalidVariation.contextArray.push('functional');
+		}
+		if (Object.keys(ruleObject.exception).some(value => fragmentArray.variationArray.includes(value)))
+		{
+			validateObject.invalidVariation.status = true;
+			validateObject.invalidVariation.contextArray.push('exception');
+		}
+		if (ruleObject.structural[fragmentArray.root] && Object.keys(ruleObject.structural).some(value => fragmentArray.variationArray.includes(value)))
+		{
+			validateObject.invalidVariation.status = true;
+			validateObject.invalidVariation.contextArray.push('structural');
 		}
 		if (!ruleObject.exception[fragmentArray.root])
 		{
-			validateObject.variation &= !Object.keys(ruleObject.component).some(value => fragmentArray.variationArray.includes(value));
-			if (!ruleObject.functional[fragmentArray.root])
+			if (Object.keys(ruleObject.component).some(value => fragmentArray.variationArray.includes(value)))
 			{
-				validateObject.variation &= !Object.keys(ruleObject.type).some(value => fragmentArray.variationArray.includes(value));
+				validateObject.invalidVariation.status = true;
+				validateObject.invalidVariation.contextArray.push('component');
+			}
+			if (!ruleObject.functional[fragmentArray.root] && Object.keys(ruleObject.type).some(value => fragmentArray.variationArray.includes(value)))
+			{
+				validateObject.invalidVariation.status = true;
+				validateObject.invalidVariation.contextArray.push('type');
 			}
 		}
 
-		/* process ruleset */
+		/* process rules */
 
+		validateObject.invalidClass.status = true;
 		Object.keys(ruleObject).map(ruleValue =>
 		{
 			Object.keys(ruleObject[ruleValue]).map(childrenValue =>
@@ -70,11 +113,10 @@ function getValidateArray(elementValue)
 
 				if (fragmentArray.root === childrenValue)
 				{
-					validateObject.class = true;
-					validateObject.tag = true;
-					if (ruleObject[ruleValue][childrenValue] !== '*')
+					validateObject.invalidClass.status = false;
+					if (!ruleObject[ruleValue][childrenValue].includes('*') && !ruleObject[ruleValue][childrenValue].includes(elementValue.tagName))
 					{
-						validateObject.tag = ruleObject[ruleValue][childrenValue].includes(elementValue.tagName);
+						validateObject.invalidTag.status = true;
 					}
 				}
 			});

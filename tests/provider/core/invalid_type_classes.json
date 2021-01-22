@@ -13,7 +13,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.box-box"
+					"selector": "div.box-box",
+					"context": "type"
 				}
 			],
 			"warn": [],
@@ -34,7 +35,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.box-invalid-box"
+					"selector": "div.box-invalid-box",
+					"context": "type"
 				}
 			],
 			"warn": [],
@@ -55,7 +57,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.box-component"
+					"selector": "div.box-component",
+					"context": "component"
 				}
 			],
 			"warn": [],
@@ -76,7 +79,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.box-fn"
+					"selector": "div.box-fn",
+					"context": "functional"
 				}
 			],
 			"warn": [],
@@ -97,7 +101,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.box-wrapper"
+					"selector": "div.box-wrapper",
+					"context": "exception"
 				}
 			],
 			"warn": [],

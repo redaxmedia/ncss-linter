@@ -13,7 +13,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.wrapper-wrapper"
+					"selector": "div.wrapper-wrapper",
+					"context": "exception"
 				}
 			],
 			"warn": [],
@@ -34,7 +35,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.wrapper-invalid-wrapper"
+					"selector": "div.wrapper-invalid-wrapper",
+					"context": "exception"
 				}
 			],
 			"warn": [],
@@ -55,7 +57,8 @@
 			[
 				{
 					"type": "invalid-variation",
-					"selector": "div.wrapper-fn"
+					"selector": "div.wrapper-fn",
+					"context": "functional"
 				}
 			],
 			"warn": [],

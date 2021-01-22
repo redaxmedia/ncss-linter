@@ -14,7 +14,8 @@
 			[
 				{
 					"type": "invalid-attribute",
-					"selector": "div[class]"
+					"selector": "div[class]",
+					"context": "empty-class"
 				}
 			],
 			"info": []
@@ -35,7 +36,30 @@
 			[
 				{
 					"type": "invalid-attribute",
-					"selector": "div[style]"
+					"selector": "div[style]",
+					"context": "inline-style"
+				}
+			],
+			"info": []
+		}
+	},
+	{
+		"optionObject":
+		{
+			"html": "<div class=\"\" style=\"padding: 1em\"></div>",
+			"namespace": null,
+			"selector": "*:not(html):not(head):not(body)",
+			"logLevel": "silent"
+		},
+		"reportObject":
+		{
+			"error": [],
+			"warn":
+			[
+				{
+					"type": "invalid-attribute",
+					"selector": "div[class][style]",
+					"context": "inline-style/empty-class"
 				}
 			],
 			"info": []

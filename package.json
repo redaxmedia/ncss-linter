@@ -1,7 +1,7 @@
 {
 	"name": "ncss-linter",
 	"description": "Linter for NCSS",
-	"version": "6.2.0-beta.1",
+	"version": "6.2.0-beta.2",
 	"homepage": "https://ncss.io",
 	"license": "MIT",
 	"keywords":
