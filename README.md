@@ -115,7 +115,7 @@ ncss-linter --path=templates/**/*.html --namespace=foo
 Validate a remote URL:
 
 ```
-ncss-linter --url=https://redaxmedia.com --namespace=rs --log-level=info
+ncss-linter --url=https://ncss.io --namespace=rs --log-level=info
 ```
 
 
@@ -128,4 +128,3 @@ Loggers
 | Error   | 1     | error |
 | Warning | 2     | warn  |
 | Info    | 3     | info  |
-| Debug   | 4     | debug |

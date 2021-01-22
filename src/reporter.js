@@ -383,10 +383,6 @@ function _getLogLevel()
 {
 	const logLevel = option.get('logLevel');
 
-	if (logLevel === 'debug')
-	{
-		return 4;
-	}
 	if (logLevel === 'info')
 	{
 		return 3;
