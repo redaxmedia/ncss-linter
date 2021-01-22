@@ -249,19 +249,19 @@ function summary()
 			_logError(colors.red(wordingObject.cross + ' ' + reportValue.selector).padEnd(65, ' '));
 			if (reportValue.type === 'invalid-namespace')
 			{
-				_logError(' '.repeat(5) + wordingObject.invalid_namespace.padEnd(30, ' '));
+				_logError(' '.repeat(5) + wordingObject.invalid_namespace.padEnd(25, ' '));
 			}
 			if (reportValue.type === 'invalid-class')
 			{
-				_logError(' '.repeat(5) + wordingObject.invalid_class.padEnd(30, ' '));
+				_logError(' '.repeat(5) + wordingObject.invalid_class.padEnd(25, ' '));
 			}
 			if (reportValue.type === 'invalid-variation')
 			{
-				_logError(' '.repeat(5) + wordingObject.invalid_variation.padEnd(30, ' '));
+				_logError(' '.repeat(5) + wordingObject.invalid_variation.padEnd(25, ' '));
 			}
 			if (reportValue.type === 'invalid-tag')
 			{
-				_logError(' '.repeat(5) + wordingObject.invalid_tag.padEnd(30, ' '));
+				_logError(' '.repeat(5) + wordingObject.invalid_tag.padEnd(25, ' '));
 			}
 			_logError(' '.repeat(5) + colors.gray(reportValue.type));
 			if (reportValue.context)
@@ -279,7 +279,7 @@ function summary()
 			_logWarn(colors.yellow(wordingObject.cross + ' ' + reportValue.selector).padEnd(65, ' '));
 			if (reportValue.type === 'invalid-attribute')
 			{
-				_logWarn(' '.repeat(5) + wordingObject.invalid_attribute.padEnd(30, ' '));
+				_logWarn(' '.repeat(5) + wordingObject.invalid_attribute.padEnd(25, ' '));
 			}
 			_logWarn(' '.repeat(5) + colors.gray(reportValue.type));
 			if (reportValue.context)
