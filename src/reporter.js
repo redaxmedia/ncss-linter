@@ -163,14 +163,6 @@ function skip(skipObject)
 
 function end(counter, total)
 {
-	if (counter % 60 === 0)
-	{
-		if (counter === 60)
-		{
-			_logInfo(' ');
-		}
-		_logInfo(' ' + counter + ' / ' + total + ' (' + Math.ceil(counter / total * 100) + '%)' + os.EOL);
-	}
 	if (counter === total)
 	{
 		_logInfo(os.EOL);
