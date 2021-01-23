@@ -7,7 +7,8 @@
 		<pre xmlns="http://www.w3.org/1999/xhtml" class="code-terminal-session"><span class="is-success">redaxmedia@local</span>:<span class="is-info">~</span>$ ncss-linter --url=https://ncss.io --namespace=rs --log-level=info
 ncss-linter 6.2.0 by Henry Ruhs.
 
-........................................................................................................................................
+..........................................................................................
+...............................................
 
 <span class="is-success">PASSED!</span>
 		</pre>
